@@ -198,7 +198,7 @@ namespace ShopTool.Comm
             return resultSubstring;
         }
 
-        private static List<string> UploadPictureToWebsite(List<Image> pictureImages)
+        public static List<string> UploadPictureToWebsite(List<Image> pictureImages)
         {
             List<string> list = new List<string>();
             foreach (Image pictureImage in pictureImages)
