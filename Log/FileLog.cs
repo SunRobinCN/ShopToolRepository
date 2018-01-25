@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Log
 {
-    public enum LogType
+    public enum LogType 
     {
         Error = 1,
         Info = 2,
