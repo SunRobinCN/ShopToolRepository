@@ -19,97 +19,97 @@ namespace ShopTool.Comm
             list.Add(c1_0_0);
 
             ConnectedComboInfo c1_1_0 = new ConnectedComboInfo();
-            c1_1_0.ID = "";
+            c1_1_0.ID = "1";
             c1_1_0.Name = "トップス";
             c1_0_0.Children.Add(c1_1_0);
 
             ConnectedComboInfo c1_2_0 = new ConnectedComboInfo();
-            c1_2_0.ID = "";
+            c1_2_0.ID = "2";
             c1_2_0.Name = "アウター";
             c1_0_0.Children.Add(c1_2_0);
 
             ConnectedComboInfo c1_3_0 = new ConnectedComboInfo();
-            c1_3_0.ID = "";
+            c1_3_0.ID = "3";
             c1_3_0.Name = "ワンピース";
             c1_0_0.Children.Add(c1_3_0);
 
             ConnectedComboInfo c1_4_0 = new ConnectedComboInfo();
-            c1_4_0.ID = "";
+            c1_4_0.ID = "4";
             c1_4_0.Name = "シューズ";
             c1_0_0.Children.Add(c1_4_0);
 
             ConnectedComboInfo c1_5_0 = new ConnectedComboInfo();
-            c1_5_0.ID = "";
+            c1_5_0.ID = "5";
             c1_5_0.Name = "パンツ";
             c1_0_0.Children.Add(c1_5_0);
 
             ConnectedComboInfo c1_6_0 = new ConnectedComboInfo();
-            c1_6_0.ID = "";
+            c1_6_0.ID = "6";
             c1_6_0.Name = "スカート";
             c1_0_0.Children.Add(c1_6_0);
 
             ConnectedComboInfo c1_7_0 = new ConnectedComboInfo();
-            c1_7_0.ID = "";
+            c1_7_0.ID = "7";
             c1_7_0.Name = "セット / コーデ";
             c1_0_0.Children.Add(c1_7_0);
 
             ConnectedComboInfo c1_8_0 = new ConnectedComboInfo();
-            c1_8_0.ID = "";
+            c1_8_0.ID = "8";
             c1_8_0.Name = "バッグ";
             c1_0_0.Children.Add(c1_8_0);
 
             ConnectedComboInfo c1_9_0 = new ConnectedComboInfo();
-            c1_9_0.ID = "";
+            c1_9_0.ID = "9";
             c1_9_0.Name = "アクセサリー";
             c1_0_0.Children.Add(c1_9_0);
 
             ConnectedComboInfo c1_10_0 = new ConnectedComboInfo();
-            c1_10_0.ID = "";
+            c1_10_0.ID = "10";
             c1_10_0.Name = "ヘアアクセサリー";
             c1_0_0.Children.Add(c1_10_0);
 
             ConnectedComboInfo c1_11_0 = new ConnectedComboInfo();
-            c1_11_0.ID = "";
+            c1_11_0.ID = "11";
             c1_11_0.Name = "ルームウェア / パジャマ";
             c1_0_0.Children.Add(c1_11_0);
 
             ConnectedComboInfo c1_12_0 = new ConnectedComboInfo();
-            c1_12_0.ID = "";
+            c1_12_0.ID = "12";
             c1_12_0.Name = "レッグウェア";
             c1_0_0.Children.Add(c1_12_0);
 
             ConnectedComboInfo c1_13_0 = new ConnectedComboInfo();
-            c1_13_0.ID = "";
+            c1_13_0.ID = "13";
             c1_13_0.Name = "帽子";
             c1_0_0.Children.Add(c1_13_0);
 
             ConnectedComboInfo c1_14_0 = new ConnectedComboInfo();
-            c1_14_0.ID = "";
+            c1_14_0.ID = "14";
             c1_14_0.Name = "ハンドメイド";
             c1_0_0.Children.Add(c1_14_0);
 
             ConnectedComboInfo c1_15_0 = new ConnectedComboInfo();
-            c1_15_0.ID = "";
+            c1_15_0.ID = "15";
             c1_15_0.Name = "小物";
             c1_0_0.Children.Add(c1_15_0);
 
             ConnectedComboInfo c1_16_0 = new ConnectedComboInfo();
-            c1_16_0.ID = "";
+            c1_16_0.ID = "16";
             c1_16_0.Name = "ウィッグ / エクステ";
             c1_0_0.Children.Add(c1_16_0);
 
             ConnectedComboInfo c1_17_0 = new ConnectedComboInfo();
-            c1_17_0.ID = "";
+            c1_17_0.ID = "17";
             c1_17_0.Name = "コスメ / ネイル";
             c1_0_0.Children.Add(c1_17_0);
 
             ConnectedComboInfo c1_18_0 = new ConnectedComboInfo();
-            c1_18_0.ID = "";
+            c1_18_0.ID = "18";
             c1_18_0.Name = "水着 / 浴衣";
             c1_0_0.Children.Add(c1_18_0);
 
             ConnectedComboInfo c1_19_0 = new ConnectedComboInfo();
-            c1_19_0.ID = "";
+            c1_19_0.ID = "19";
             c1_19_0.Name = "フォーマル / ドレス";
             c1_0_0.Children.Add(c1_19_0);
 
@@ -999,32 +999,32 @@ namespace ShopTool.Comm
             List<Info> list = new List<Info>();
             list.Add(new Info()
             {
-                ID = "1",
+                ID = "1Status",
                 Name = "新品、未使用"
             });
             list.Add(new Info()
             {
-                ID = "2",
+                ID = "2Status",
                 Name = "未使用に近い"
             });
             list.Add(new Info()
             {
-                ID = "3",
+                ID = "3Status",
                 Name = "目立った傷や汚れなし"
             });
             list.Add(new Info()
             {
-                ID = "4",
+                ID = "4Status",
                 Name = "やや傷や汚れあり"
             });
             list.Add(new Info()
             {
-                ID = "5",
+                ID = "5Status",
                 Name = "傷や汚れあり"
             });
             list.Add(new Info()
             {
-                ID = "6",
+                ID = "6Status",
                 Name = "全面的に状態が悪い"
             });
             return list;
@@ -1035,83 +1035,83 @@ namespace ShopTool.Comm
             List<LogisticLiaoInfo> list = new List<LogisticLiaoInfo>();
             LogisticLiaoInfo liao1 = new LogisticLiaoInfo()
             {
-                ID = "1",
+                ID = "carry1",
                 Name = "商品価格に込み"
             };
             List<Info> logisticWayFor1 = new List<Info>();
             logisticWayFor1.Add(new Info()
             {
-                ID = "0",
+                ID = "sendMethod0",
                 Name = "未定"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "1",
+                ID = "sendMethod1",
                 Name = "普通郵便(定形/定形外)"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "2",
+                ID = "sendMethod2",
                 Name = "ゆうパック"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "3",
+                ID = "sendMethod3",
                 Name = "レターパックプラス"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "4",
+                ID = "sendMethod4",
                 Name = "レターパックライト"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "6",
+                ID = "sendMethod6",
                 Name = "ヤマト宅急便"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "8",
+                ID = "sendMethod8",
                 Name = "はこBOON"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "81",
+                ID = "sendMethod81",
                 Name = "クリックポスト"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "82",
+                ID = "sendMethod82",
                 Name = "飛脚メール便"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "83",
+                ID = "sendMethod83",
                 Name = "飛脚宅急便"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "84",
+                ID = "sendMethod84",
                 Name = "カンガルーミニ便"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "85",
+                ID = "sendMethod85",
                 Name = "宅急便コンパクト"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "86",
+                ID = "sendMethod86",
                 Name = "ゆうメール"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "87",
+                ID = "sendMethod87",
                 Name = "スマートレター"
             });
             logisticWayFor1.Add(new Info()
             {
-                ID = "88",
+                ID = "sendMethod88",
                 Name = "ゆうパケット"
             });
             liao1.ChildrenLogisticWay = logisticWayFor1;
@@ -1119,38 +1119,38 @@ namespace ShopTool.Comm
 
             LogisticLiaoInfo liao2 = new LogisticLiaoInfo()
             {
-                ID = "0",
+                ID = "carry0",
                 Name = "商品価格とは別途"
             };
             List<Info> logisticWayFor2 = new List<Info>();
             logisticWayFor2.Add(new Info()
             {
-                ID = "0",
+                ID = "sendMethod0",
                 Name = "未定"
             });
             logisticWayFor2.Add(new Info()
             {
-                ID = "11",
+                ID = "sendMethod11",
                 Name = "ゆうパック着払い"
             });
             logisticWayFor2.Add(new Info()
             {
-                ID = "12",
+                ID = "sendMethod12",
                 Name = "ヤマト宅急便"
             });
             logisticWayFor2.Add(new Info()
             {
-                ID = "17",
+                ID = "sendMethod17",
                 Name = "飛脚宅急便"
             });
             logisticWayFor2.Add(new Info()
             {
-                ID = "19",
+                ID = "sendMethod19",
                 Name = "ゆうメール着払い"
             });
             logisticWayFor2.Add(new Info()
             {
-                ID = "20",
+                ID = "sendMethod20",
                 Name = "ゆうパケット着払い"
             });
             liao2.ChildrenLogisticWay = logisticWayFor2;
@@ -1174,7 +1174,7 @@ namespace ShopTool.Comm
                 string area = areas[i];
                 Info info = new Info()
                 {
-                    ID = (i+1).ToString(),
+                    ID = "area" + (i+1).ToString() + "SendData",
                     Name = area
                 };
                 list.Add(info);

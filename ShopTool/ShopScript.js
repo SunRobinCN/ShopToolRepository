@@ -36,6 +36,13 @@ $('#area8SendData').click();
 $('#tes').click();
 
 
+//选择二级类别
+$("#mCSB_2_container .tempLinkWrap.subCategory >  .tempArrowLink.cateLinks.categoryInput2.noArrow").eq(2).click();
+//选择三级类别
+$("nav [alt = '0102']").click();
+
+
+
 
 
 
