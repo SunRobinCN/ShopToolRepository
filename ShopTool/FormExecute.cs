@@ -24,21 +24,12 @@ namespace ShopTool
             InitializeComponent();
         }
 
-        void OnIsBrowserInitializedChanged(object sender, EventArgs e)
-        {
-            ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
-            if (browser.IsBrowserInitialized)
-            {
-                browser.ShowDevTools();
-            }
-        }
-
         void OnLoadEnd(object sender, EventArgs e)
         {
-            ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
-            //string jscript = "$(\'#id_sams_login_login_accountName\').val(\'robin.sun\');";
-            string jscript = "$('#changeLogin').click()";
-            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            //ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
+            ////string jscript = "$(\'#id_sams_login_login_accountName\').val(\'robin.sun\');";
+            //string jscript = "$('#changeLogin').click()";
+            //browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
 
         }
 
@@ -48,8 +39,14 @@ namespace ShopTool
             ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
             if (browser.IsBrowserInitialized)
             {
-                browser.LoadHtml(r, "https://shoppies.jp/");
+                var mngr = Cef.GetGlobalCookieManager();
+                Cookie Ac = new Cookie();
+                Ac.Name = "ss";
+                Ac.Value = "xxxxxxxxxxx";
+                Task<bool>  a =mngr.SetCookieAsync("https://shoppies.jp", Ac);
+                Task.WaitAll(a);
                 browser.ShowDevTools();
+                browser.LoadHtml(r, "https://shoppies.jp/");
             }
         }
 
@@ -114,7 +111,7 @@ namespace ShopTool
                 Name = ""
             };
 
-            System.Drawing.Image image = Image.FromFile(@"C:\Users\robin.sun\Desktop\t.jpg");
+            System.Drawing.Image image = Image.FromFile(@"C:\Users\Administrator\Desktop\t.jpg");
             product.Pictures.Add(image);
             product.Pictures.Add(image.Clone() as Image);
             product.Pictures.Add(image.Clone() as Image);
@@ -130,7 +127,4 @@ namespace ShopTool
             return r;
         }
     }
-
-    
-
 }

@@ -93,6 +93,8 @@ namespace ShopTool
         public void OnResourceLoadComplete(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request,
             IResponse response, UrlRequestStatus status, long receivedContentLength)
         {
+            CookieVisitor _cookieVisitor = new CookieVisitor();
+            Cef.GetGlobalCookieManager().VisitAllCookies(_cookieVisitor);
         }
     }
 }

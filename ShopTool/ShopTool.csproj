@@ -20,7 +20,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CookieVisitor.cs" />
     <Compile Include="FormDone.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\Newtonsoft.Json.dll" />
+    <Content Include="ShopScript.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Log\Log.csproj">
