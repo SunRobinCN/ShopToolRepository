@@ -102,11 +102,13 @@
             // 
             // rtxtConfirmInfo
             // 
+            this.rtxtConfirmInfo.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rtxtConfirmInfo.Location = new System.Drawing.Point(45, 88);
             this.rtxtConfirmInfo.Name = "rtxtConfirmInfo";
             this.rtxtConfirmInfo.Size = new System.Drawing.Size(630, 446);
             this.rtxtConfirmInfo.TabIndex = 35;
             this.rtxtConfirmInfo.Text = "";
+            this.rtxtConfirmInfo.TextChanged += new System.EventHandler(this.rtxtConfirmInfo_TextChanged);
             // 
             // FormConfirm
             // 

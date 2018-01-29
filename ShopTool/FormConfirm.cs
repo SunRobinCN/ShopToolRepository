@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
 using ShopTool.Comm;
 using ShopTool.Model;
 
@@ -40,17 +35,19 @@ namespace ShopTool
                     {
                         AddImage(image);
                     }
+                    this.rtxtConfirmInfo.AppendText("\r\n");
                     this.rtxtConfirmInfo.AppendText("产品名称：" + product.Name);
                     
                 }
-                
             }
+            this.rtxtConfirmInfo.ReadOnly = true;
         }
 
         private void AddImage(Image picture)
         {
             Bitmap bmp = new Bitmap(picture);
-            Bitmap resizedBmp = GetResizeImage(bmp, 3);
+            double resizeTimes = bmp.Height / 130d;
+            Bitmap resizedBmp = GetResizeImage(bmp, resizeTimes);
             var obj = Clipboard.GetDataObject();
             Clipboard.SetDataObject(resizedBmp);
             DataFormats.Format format = DataFormats.GetFormat(DataFormats.Bitmap);
@@ -61,24 +58,25 @@ namespace ShopTool
 
         private Bitmap GetResizeImage(Bitmap bm, double times)
         {
-            int nowWidth = (int)(bm.Width / times);
-            int nowHeight = (int)(bm.Height / times);
-            Bitmap newbm = new Bitmap(nowWidth, nowHeight);//新建一个放大后大小的图片
-
-            if (times >= 1 && times <= 1.1)
+            Bitmap newbm = null;
+            try
             {
-                newbm = bm;
-            }
-            else
-            {
+                int nowWidth = (int)(bm.Width / times);
+                int nowHeight = (int)(bm.Height / times);
+                newbm = new Bitmap(nowWidth, nowHeight);//新建一个放大后大小的图片
                 System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(newbm);
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-
                 g.DrawImage(bm, new System.Drawing.Rectangle(0, 0, nowWidth, nowHeight), new System.Drawing.Rectangle(0, 0, bm.Width, bm.Height), GraphicsUnit.Pixel);
                 g.Dispose();
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
             return newbm;
         }
 
@@ -138,6 +136,11 @@ namespace ShopTool
             product.Pictures.Add(image.Clone() as Image);
             product.Pictures.Add(image.Clone() as Image);
             return HttpUtil.UploadBatchesToWebsite(batches);
+        }
+
+        private void rtxtConfirmInfo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
