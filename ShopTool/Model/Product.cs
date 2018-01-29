@@ -14,7 +14,7 @@ namespace ShopTool.Model
         public ConnectedComboInfo Category { get; set; }
         public Info Status { get; set; }
         public Info LogisticLiao { get; set; }
-        public Info LogisticWay { get; set; }
+        public List<Info> LogisticWay { get; set; }
         public Info Area { get; set; }
         public Info LogisticDay { get; set; }
         public List<Image> Pictures { get; set; }

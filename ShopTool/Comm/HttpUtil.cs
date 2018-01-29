@@ -65,7 +65,7 @@ namespace ShopTool.Comm
             parameters.Add("category_name", product.Category.Name);
             parameters.Add("atr_status", product.Status.ID);
             parameters.Add("send_date_standard", product.LogisticDay.ID);
-            parameters.Add("carry_method", product.LogisticWay.ID);
+            //parameters.Add("carry_method", product.LogisticWay.ID);
             parameters.Add("carry_method_flag", "1");
             parameters.Add("carry_fee_type", product.LogisticLiao.ID);
             parameters.Add("area", product.Area.Name);

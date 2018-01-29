@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -47,13 +48,13 @@ namespace ShopTool
             this.cmbProductSatus.DataSource = ComboUtil.GetDatatSourceForStatus();
             this.cmbProductSatus.SelectedIndex = 2;
 
-            this.cmbLogisticWay.ValueMember = "Id";
-            this.cmbLogisticWay.DisplayMember = "Name";
-
             this.cmbLogisticLiao.ValueMember = "Id";
             this.cmbLogisticLiao.DisplayMember = "Name";
             this.cmbLogisticLiao.DataSource = ComboUtil.GetDatatSourceForLoggisticLiao();
             this.cmbLogisticLiao.SelectedIndex = 0;
+
+            this.cmbLogisticWay.ValueMember = "Id";
+            this.cmbLogisticWay.DisplayMember = "Name";
 
             this.cmbProductArea.ValueMember = "Id";
             this.cmbProductArea.DisplayMember = "Name";
@@ -121,7 +122,7 @@ namespace ShopTool
                 Price = this.txtProductPrice.Text,
                 Category = GetProductCategory(),
                 Status = cmbProductSatus.SelectedItem as Info,
-                LogisticWay = cmbLogisticWay.SelectedItem as Info,
+                LogisticWay = GetLogisticWay(),
                 LogisticLiao = cmbLogisticLiao.SelectedItem as Info,
                 LogisticDay = cmbLogisticDay.SelectedItem as Info
             };
@@ -146,6 +147,18 @@ namespace ShopTool
                 result = infoLevel2;
             }
             return result;
+        }
+
+        private List<Info> GetLogisticWay()
+        {
+            List<Info> list = new List<Info>();
+            IEnumerator enumerator = cmbLogisticWay.CheckedItems.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                Info item = (Info)(enumerator.Current);
+                list.Add(item);
+            }
+            return list;
         }
 
         private void SaveUser()
@@ -253,7 +266,18 @@ namespace ShopTool
         private void cmbLogisticLiao_SelectedIndexChanged(object sender, EventArgs e)
         {
             LogisticLiaoInfo info = this.cmbLogisticLiao.SelectedItem as LogisticLiaoInfo;
+            this.cmbLogisticWay.ClearSelected();
+            this.cmbLogisticWay.ValueMember = "Id";
+            this.cmbLogisticWay.DisplayMember = "Name";
             this.cmbLogisticWay.DataSource = info.ChildrenLogisticWay;
+            this.cmbLogisticWay.ValueMember = "Id";
+            this.cmbLogisticWay.DisplayMember = "Name";
         }
+
+        private void cmbLogisticWay_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

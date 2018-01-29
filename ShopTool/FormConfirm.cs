@@ -36,11 +36,53 @@ namespace ShopTool
                         AddImage(image);
                     }
                     this.rtxtConfirmInfo.AppendText("\r\n");
-                    this.rtxtConfirmInfo.AppendText("产品名称：" + product.Name);
-                    
+                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n"); 
+                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
+
+                    this.rtxtConfirmInfo.AppendText("\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
+
+                    this.rtxtConfirmInfo.AppendText("\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
+
+                    this.rtxtConfirmInfo.AppendText("\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
                 }
             }
             this.rtxtConfirmInfo.ReadOnly = true;
+        }
+
+        private string GetDetailedProductCategory(Product p)
+        {
+            string result = "";
+            return result;
         }
 
         private void AddImage(Image picture)
@@ -115,11 +157,6 @@ namespace ShopTool
                 Name = ""
             };
             product.LogisticLiao = new Info()
-            {
-                ID = "1",
-                Name = ""
-            };
-            product.LogisticWay = new Info()
             {
                 ID = "1",
                 Name = ""

@@ -100,11 +100,6 @@ namespace ShopTool
                 ID = "1",
                 Name = ""
             };
-            product.LogisticWay = new Info()
-            {
-                ID = "1",
-                Name = ""
-            };
             product.LogisticDay = new Info()
             {
                 ID = "0",

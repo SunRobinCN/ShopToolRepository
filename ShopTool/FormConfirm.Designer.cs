@@ -120,6 +120,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label1);
             this.Name = "FormConfirm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormConfirm";
             this.Load += new System.EventHandler(this.FormConfirm_Load);
             this.menuStrip1.ResumeLayout(false);

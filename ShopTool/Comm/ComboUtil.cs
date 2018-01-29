@@ -736,7 +736,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c2_0_0 = new ConnectedComboInfo();
             c2_0_0.ID = "";
             c2_0_0.Name = "マタニティ/ベビー/キッズ";
-            list.Add(c2_0_0);
+            //list.Add(c2_0_0);
             ConnectedComboInfo c2_1_0 = new ConnectedComboInfo();
             c2_1_0.ID = "2001";
             c2_1_0.Name = "マタニティウェア";
@@ -789,7 +789,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c3_0_0 = new ConnectedComboInfo();
             c3_0_0.ID = "";
             c3_0_0.Name = "本・CD・DVD・ゲーム";
-            list.Add(c3_0_0);
+            //list.Add(c3_0_0);
             ConnectedComboInfo c3_1_0 = new ConnectedComboInfo();
             c3_1_0.ID = "9101";
             c3_1_0.Name = "本・雑誌";
@@ -814,7 +814,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c4_0_0 = new ConnectedComboInfo();
             c4_0_0.ID = "";
             c4_0_0.Name = "ぬいぐるみ・キャラクターグッズ・おもちゃ";
-            list.Add(c4_0_0);
+            //list.Add(c4_0_0);
             ConnectedComboInfo c4_1_0 = new ConnectedComboInfo();
             c4_1_0.ID = "9201";
             c4_1_0.Name = "おもちゃ";
@@ -831,7 +831,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c5_0_0 = new ConnectedComboInfo();
             c5_0_0.ID = "";
             c5_0_0.Name = "コミック、アニメ、タレントグッズ";
-            list.Add(c5_0_0);
+            //list.Add(c5_0_0);
             ConnectedComboInfo c5_1_0 = new ConnectedComboInfo();
             c5_1_0.ID = "9301";
             c5_1_0.Name = "アイドル関連";
@@ -876,7 +876,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c6_0_0 = new ConnectedComboInfo();
             c6_0_0.ID = "";
             c6_0_0.Name = "インテリア・住まい・雑貨";
-            list.Add(c6_0_0);
+            //list.Add(c6_0_0);
             ConnectedComboInfo c6_1_0 = new ConnectedComboInfo();
             c6_1_0.ID = "9401";
             c6_1_0.Name = "キッチン / 食器";
@@ -905,7 +905,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c7_0_0 = new ConnectedComboInfo();
             c7_0_0.ID = "";
             c7_0_0.Name = "家電・スマホ";
-            list.Add(c7_0_0);
+            //list.Add(c7_0_0);
             ConnectedComboInfo c7_1_0 = new ConnectedComboInfo();
             c7_1_0.ID = "9501";
             c7_1_0.Name = "携帯電話 / スマートフォン";
@@ -939,7 +939,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c8_0_0 = new ConnectedComboInfo();
             c8_0_0.ID = "";
             c8_0_0.Name = "文房具";
-            list.Add(c8_0_0);
+            //list.Add(c8_0_0);
             ConnectedComboInfo c8_1_0 = new ConnectedComboInfo();
             c8_1_0.ID = "9601";
             c8_1_0.Name = "筆記用具";
@@ -961,7 +961,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c9_0_0 = new ConnectedComboInfo();
             c9_0_0.ID = "";
             c9_0_0.Name = "その他";
-            list.Add(c9_0_0);
+            //list.Add(c9_0_0);
             ConnectedComboInfo c9_1_0 = new ConnectedComboInfo();
             c9_1_0.ID = "9901";
             c9_1_0.Name = "カルチャー";
