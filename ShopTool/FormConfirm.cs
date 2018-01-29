@@ -36,17 +36,50 @@ namespace ShopTool
                 builder.AppendLine(oneUserBatch.Username + ":");
                 foreach (Product product in oneUserBatch.Products)
                 {
+                    foreach (Image image in product.Pictures)
+                    {
+                        AddImage(image);
+                    }
                     this.rtxtConfirmInfo.AppendText("产品名称：" + product.Name);
-                    Bitmap bmp = new Bitmap(product.Pictures[0]);
-                    var obj = Clipboard.GetDataObject();
-                    Clipboard.SetDataObject(bmp);
-                    DataFormats.Format format = DataFormats.GetFormat(DataFormats.Bitmap);
-                    if (rtxtConfirmInfo.CanPaste(format))
-                        rtxtConfirmInfo.Paste();
-                    Clipboard.SetDataObject(obj);
+                    
                 }
                 
             }
+        }
+
+        private void AddImage(Image picture)
+        {
+            Bitmap bmp = new Bitmap(picture);
+            Bitmap resizedBmp = GetResizeImage(bmp, 3);
+            var obj = Clipboard.GetDataObject();
+            Clipboard.SetDataObject(resizedBmp);
+            DataFormats.Format format = DataFormats.GetFormat(DataFormats.Bitmap);
+            if (rtxtConfirmInfo.CanPaste(format))
+                rtxtConfirmInfo.Paste();
+            Clipboard.SetDataObject(obj);
+        }
+
+        private Bitmap GetResizeImage(Bitmap bm, double times)
+        {
+            int nowWidth = (int)(bm.Width / times);
+            int nowHeight = (int)(bm.Height / times);
+            Bitmap newbm = new Bitmap(nowWidth, nowHeight);//新建一个放大后大小的图片
+
+            if (times >= 1 && times <= 1.1)
+            {
+                newbm = bm;
+            }
+            else
+            {
+                System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(newbm);
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+
+                g.DrawImage(bm, new System.Drawing.Rectangle(0, 0, nowWidth, nowHeight), new System.Drawing.Rectangle(0, 0, bm.Width, bm.Height), GraphicsUnit.Pixel);
+                g.Dispose();
+            }
+            return newbm;
         }
 
         private void FormConfirm_Load(object sender, EventArgs e)

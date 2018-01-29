@@ -92,7 +92,7 @@
             // btnUpload
             // 
             this.btnUpload.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUpload.Location = new System.Drawing.Point(248, 383);
+            this.btnUpload.Location = new System.Drawing.Point(244, 581);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(205, 48);
             this.btnUpload.TabIndex = 34;
@@ -104,7 +104,7 @@
             // 
             this.rtxtConfirmInfo.Location = new System.Drawing.Point(45, 88);
             this.rtxtConfirmInfo.Name = "rtxtConfirmInfo";
-            this.rtxtConfirmInfo.Size = new System.Drawing.Size(630, 262);
+            this.rtxtConfirmInfo.Size = new System.Drawing.Size(630, 446);
             this.rtxtConfirmInfo.TabIndex = 35;
             this.rtxtConfirmInfo.Text = "";
             // 
@@ -112,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 725);
+            this.ClientSize = new System.Drawing.Size(728, 646);
             this.Controls.Add(this.rtxtConfirmInfo);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.menuStrip1);
