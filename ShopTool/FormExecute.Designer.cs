@@ -38,6 +38,7 @@
             this.Name = "FormExecute";
             this.Text = "FormExecute";
             this.Load += new System.EventHandler(this.FormExecute_Load);
+            this.Shown += new System.EventHandler(this.FormExecute_Shown);
             this.ResumeLayout(false);
 
         }

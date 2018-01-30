@@ -36,7 +36,8 @@ namespace ShopTool.Model
                 {
                     builder.Append(info.Name + ", ");
                 }
-                builder.Remove(builder.Length - 1, 2);
+                builder.Remove(builder.Length - 1, 1);
+                builder.Remove(builder.Length - 1, 1);
                 return builder.ToString();
             }
         }

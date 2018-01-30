@@ -114,13 +114,14 @@ namespace ShopTool
         {
             Product product = new Product
             {
-                Username = this.cmbUsername.SelectedText,
+                Username = this.cmbUsername.Text,
                 Password = this.txtPassword.Text,
                 Name = this.txtProductName.Text,
                 Description = this.txtProductDesc.Text,
                 Price = this.txtProductPrice.Text,
                 Category = GetProductCategory(),
                 Status = cmbProductSatus.SelectedItem as Info,
+                Area = this.cmbProductArea.SelectedItem as Info,
                 LogisticWay = GetLogisticWay(),
                 LogisticLiao = cmbLogisticLiao.SelectedItem as Info,
                 LogisticDay = cmbLogisticDay.SelectedItem as Info
@@ -216,6 +217,8 @@ namespace ShopTool
                 if (batch == null)
                 {
                     OneUserBatch newBatch = new OneUserBatch();
+                    newBatch.Username = product.Username;
+                    newBatch.Password = product.Password;
                     newBatch.Products.Add(product);
                     batches.Add(newBatch);
                 }
