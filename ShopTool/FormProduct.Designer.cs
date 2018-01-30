@@ -384,13 +384,13 @@
             // 
             // cmbLogisticWay
             // 
+            this.cmbLogisticWay.CheckOnClick = true;
             this.cmbLogisticWay.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbLogisticWay.FormattingEnabled = true;
             this.cmbLogisticWay.Location = new System.Drawing.Point(881, 303);
             this.cmbLogisticWay.Name = "cmbLogisticWay";
             this.cmbLogisticWay.Size = new System.Drawing.Size(322, 166);
             this.cmbLogisticWay.TabIndex = 45;
-            this.cmbLogisticWay.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cmbLogisticWay_ItemCheck);
             this.cmbLogisticWay.SelectedIndexChanged += new System.EventHandler(this.cmbLogisticWay_SelectedIndexChanged);
             // 
             // cmbLogisticLiao

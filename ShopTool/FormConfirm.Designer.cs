@@ -108,7 +108,6 @@
             this.rtxtConfirmInfo.Size = new System.Drawing.Size(630, 446);
             this.rtxtConfirmInfo.TabIndex = 35;
             this.rtxtConfirmInfo.Text = "";
-            this.rtxtConfirmInfo.TextChanged += new System.EventHandler(this.rtxtConfirmInfo_TextChanged);
             // 
             // FormConfirm
             // 

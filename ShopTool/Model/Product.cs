@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using ShopTool.Comm;
 
 namespace ShopTool.Model
@@ -24,6 +25,20 @@ namespace ShopTool.Model
         {
             this.Pictures = new List<Image>();
             this.PictureUrls = new List<string>();
+        }
+
+        public string FinalLogisticWay
+        {
+            get
+            {
+                StringBuilder builder = new StringBuilder();
+                foreach (Info info in LogisticWay)
+                {
+                    builder.Append(info.Name + ", ");
+                }
+                builder.Remove(builder.Length - 1, 2);
+                return builder.ToString();
+            }
         }
     }
 }

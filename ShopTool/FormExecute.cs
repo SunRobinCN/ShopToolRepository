@@ -19,10 +19,14 @@ namespace ShopTool
     {
         public static string Url = "https://shoppies.jp/write-item_sp";
 
+        public List<OneUserBatch> Batches { get; set; }
+
         public FormExecute()
         {
             InitializeComponent();
         }
+
+
 
         void OnLoadEnd(object sender, EventArgs e)
         {
@@ -35,10 +39,21 @@ namespace ShopTool
 
         private void OnIsBrowserInitializedChanged(object sender, IsBrowserInitializedChangedEventArgs args)
         {
-            string r = GetContent();
+            //string r = GetContent();
             ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
             if (browser.IsBrowserInitialized)
             {
+
+                foreach (OneUserBatch oneUserBatch in this.Batches)
+                {
+                    HttpUtil.LoginToShopWebsite(oneUserBatch.Username, oneUserBatch.Password);
+                    foreach (Product product in oneUserBatch.Products)
+                    {
+                        List<string> uploadPicturesResult = HttpUtil.UploadPictureToWebsite(product.Pictures);
+                        product.PictureUrls = uploadPicturesResult;
+                    }
+                }
+
                 var mngr = Cef.GetGlobalCookieManager();
                 Cookie Ac = new Cookie();
                 Ac.Name = "ss";
@@ -46,7 +61,7 @@ namespace ShopTool
                 Task<bool>  a =mngr.SetCookieAsync("https://shoppies.jp", Ac);
                 Task.WaitAll(a);
                 browser.ShowDevTools();
-                browser.LoadHtml(r, "https://shoppies.jp/");
+                //browser.LoadHtml(r, "https://shoppies.jp/");
             }
         }
 

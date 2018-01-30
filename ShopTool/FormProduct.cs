@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using ShopTool.Comm;
 using ShopTool.Model;
+using ShopTool.Properties;
 
 namespace ShopTool
 {
@@ -82,9 +83,7 @@ namespace ShopTool
             ConnectedComboInfo result = this.cmbCategory1.SelectedItem as ConnectedComboInfo;
             this.cmbCategory2.ValueMember = "Id";
             this.cmbCategory2.DisplayMember = "Name";
-            this.cmbCategory2.DataSource = result.Children;
-
-            this.cmbCategory3.DataSource = null;
+            this.cmbCategory2.DataSource = (result.Children);
         }
 
         private void cmbCategory2_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,7 +91,7 @@ namespace ShopTool
             ConnectedComboInfo result = this.cmbCategory2.SelectedItem as ConnectedComboInfo;
             this.cmbCategory3.ValueMember = "Id";
             this.cmbCategory3.DisplayMember = "Name";
-            this.cmbCategory3.DataSource = result.Children;
+            this.cmbCategory3.DataSource = (result.Children);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -177,11 +176,11 @@ namespace ShopTool
             }
             if (existed == false)
             {
-                 User newUser = new User()
-                 {
-                     Username = username,
-                     Password = password
-                 };
+                User newUser = new User()
+                {
+                    Username = username,
+                    Password = password
+                };
                 users.Add(newUser);
             }
             TextUtil.ArchiveUsers(users);
@@ -197,6 +196,10 @@ namespace ShopTool
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
+            if (CheckInput() == false)
+            {
+                return;
+            }
             SaveProduct();
             List<OneUserBatch> batches = AssebleBatches();
             FormConfirm frmConfirm = new FormConfirm();
@@ -266,27 +269,127 @@ namespace ShopTool
         private void cmbLogisticLiao_SelectedIndexChanged(object sender, EventArgs e)
         {
             LogisticLiaoInfo info = this.cmbLogisticLiao.SelectedItem as LogisticLiaoInfo;
-            this.cmbLogisticWay.ClearSelected();
             this.cmbLogisticWay.ValueMember = "Id";
             this.cmbLogisticWay.DisplayMember = "Name";
             this.cmbLogisticWay.DataSource = info.ChildrenLogisticWay;
             this.cmbLogisticWay.ValueMember = "Id";
             this.cmbLogisticWay.DisplayMember = "Name";
-            this.cmbLogisticWay.SelectedIndex = -1;
+            foreach (int i in this.cmbLogisticWay.CheckedIndices)
+            {
+                this.cmbLogisticWay.SetItemChecked(i, false);
+            }
         }
 
         private void cmbLogisticWay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //List<Info> list = GetLogisticWay();
-            //if (list.)
-            //{
-                
-            //}
+            CheckedListBox cb = sender as CheckedListBox;
+            if ((cb.SelectedItem as Info) != null)
+            {
+                if ((cb.SelectedItem as Info).Name == "未定")
+                {
+                    foreach (int i in cb.CheckedIndices)
+                    {
+                        if (i != 0)
+                        {
+                            cb.SetItemChecked(i, false);
+                        }
+                    }
+                }
+                else
+                {
+                    cb.SetItemChecked(0, false);
+                }
+            }
         }
 
-        private void cmbLogisticWay_ItemCheck(object sender, ItemCheckEventArgs e)
+        private bool CheckInput()
         {
-            sender.Text
+            Image originalImage1 = Resources.embedbyrobin1;
+            Image originalImage2 = Resources.embedbyrobin2;
+            Image originalImage3 = Resources.embedbyrobin2;
+            Image originalImage4 = Resources.embedbyrobin2;
+            if (ImageEquals(originalImage1, this.pictureBox1.Image) ||
+                ImageEquals(originalImage2, this.pictureBox2.Image) ||
+                ImageEquals(originalImage3, this.pictureBox3.Image) ||
+                ImageEquals(originalImage4, this.pictureBox4.Image))
+            {
+                //MessageBox.Show("请输入4张图片！");
+                //return false;
+            }
+            if (this.cmbCategory3.SelectedItem == null)
+            {
+                MessageBox.Show("请输入カテゴリ！");
+                return false;
+            }
+            if (this.cmbUsername.Text.Trim() == "")
+            {
+                MessageBox.Show("请输入用户名！");
+                return false;
+            }
+            if (this.txtPassword.Text.Trim() == "")
+            {
+                MessageBox.Show("请输入密码！");
+                return false;
+            }
+            if (this.txtProductName.Text.Trim() == "")
+            {
+                MessageBox.Show("请输入商品説明！");
+                return false;
+            }
+            if (this.txtProductDesc.Text.Trim() == "")
+            {
+                MessageBox.Show("请输入商品説明！");
+                return false;
+            }
+            if (this.txtProductPrice.Text.Trim() == "")
+            {
+                MessageBox.Show("请输入价格！");
+                return false;
+            }
+            int price;
+            if (int.TryParse(txtProductPrice.Text.Trim(), out price) == false)
+            {
+                MessageBox.Show("请输入价格为数字！");
+                return false;
+            }
+            if (price < 300 || price > 50000)
+            {
+                MessageBox.Show("请输入价格在规定的区间内！");
+                return false;
+            }
+            if ((this.cmbProductArea.SelectedItem as Info).Name == "選択してください")
+            {
+                MessageBox.Show("请选择出品地域！");
+                return false;
+            }
+            if (this.cmbLogisticWay.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("请选择配送方法!");
+                return false;
+            }
+            return true;
         }
+
+        private bool ImageEquals(Image img1, Image img2)
+        {
+            Bitmap bmp1 = new Bitmap(img1);
+            Bitmap bmp2 = new Bitmap(img2);
+            if (!bmp1.Size.Equals(bmp2.Size))
+            {
+                return false;
+            }
+            for (int x = 0; x < bmp1.Width; ++x)
+            {
+                for (int y = 0; y < bmp1.Height; ++y)
+                {
+                    if (bmp1.GetPixel(x, y) != bmp2.GetPixel(x, y))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
     }
 }

@@ -20,7 +20,9 @@ namespace ShopTool
 
         private void btnUploadProduct_Click(object sender, EventArgs e)
         {
-            
+            FormExecute formExecute = new FormExecute();
+            formExecute.Batches = this.Batches;
+            formExecute.Show();
         }
 
         private void InitializeBatchesInfo()
@@ -37,58 +39,22 @@ namespace ShopTool
                     }
                     this.rtxtConfirmInfo.AppendText("\r\n");
                     this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n"); 
-                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
-
-                    this.rtxtConfirmInfo.AppendText("\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
-
-                    this.rtxtConfirmInfo.AppendText("\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
-
-                    this.rtxtConfirmInfo.AppendText("\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + GetDetailedProductCategory(product) + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.LogisticWay + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Description + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + (product).Category.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.FinalLogisticWay + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area.Name + "\r\n"); 
+                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay.Name + "\r\n");
                 }
             }
             this.rtxtConfirmInfo.ReadOnly = true;
         }
 
-        private string GetDetailedProductCategory(Product p)
-        {
-            string result = "";
-            return result;
-        }
-
         private void AddImage(Image picture)
         {
             Bitmap bmp = new Bitmap(picture);
-            double resizeTimes = bmp.Height / 130d;
+            double resizeTimes = bmp.Height / 110d;
             Bitmap resizedBmp = GetResizeImage(bmp, resizeTimes);
             var obj = Clipboard.GetDataObject();
             Clipboard.SetDataObject(resizedBmp);
@@ -125,59 +91,6 @@ namespace ShopTool
         private void FormConfirm_Load(object sender, EventArgs e)
         {
             InitializeBatchesInfo();
-        }
-
-        private string test()
-        {
-            List<OneUserBatch> batches = new List<OneUserBatch>();
-            OneUserBatch batch = new OneUserBatch()
-            {
-                Username = "outam1984@yahoo.co.jp",
-                Password = "X8u813"
-            };
-            Product product = new Product();
-            batches.Add(batch);
-            batch.Products.Add(product);
-
-            product.Name = "test12";
-            product.Description = "test1 desc";
-            product.Price = "3333";
-            product.Area = new Info()
-            {
-                Name = "秋田県"
-            };
-            product.Category = new ConnectedComboInfo()
-            {
-                ID = "9105",
-                Name = "ゲーム"
-            };
-            product.Status = new Info()
-            {
-                ID = "6",
-                Name = ""
-            };
-            product.LogisticLiao = new Info()
-            {
-                ID = "1",
-                Name = ""
-            };
-            product.LogisticDay = new Info()
-            {
-                ID = "0",
-                Name = ""
-            };
-
-            System.Drawing.Image image = Image.FromFile(@"C:\Users\robin.sun\Desktop\t.jpg");
-            product.Pictures.Add(image);
-            product.Pictures.Add(image.Clone() as Image);
-            product.Pictures.Add(image.Clone() as Image);
-            product.Pictures.Add(image.Clone() as Image);
-            return HttpUtil.UploadBatchesToWebsite(batches);
-        }
-
-        private void rtxtConfirmInfo_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

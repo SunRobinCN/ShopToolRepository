@@ -118,8 +118,8 @@ namespace ShopTool.Comm
             c1_1_1.Name = "Tシャツ(半袖/ノースリーブ)";
             c1_1_0.Children.Add(c1_1_1);
             ConnectedComboInfo c1_1_2 = new ConnectedComboInfo();
-            c1_1_1.ID = "0102";
-            c1_1_1.Name = "Tシャツ(長袖 / 五丈 / 七丈)";
+            c1_1_2.ID = "0102";
+            c1_1_2.Name = "Tシャツ(長袖 / 五丈 / 七丈)";
             c1_1_0.Children.Add(c1_1_2);
             ConnectedComboInfo c1_1_3 = new ConnectedComboInfo();
             c1_1_3.ID = "0103";
