@@ -390,6 +390,8 @@
             this.cmbLogisticWay.Name = "cmbLogisticWay";
             this.cmbLogisticWay.Size = new System.Drawing.Size(322, 166);
             this.cmbLogisticWay.TabIndex = 45;
+            this.cmbLogisticWay.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cmbLogisticWay_ItemCheck);
+            this.cmbLogisticWay.SelectedIndexChanged += new System.EventHandler(this.cmbLogisticWay_SelectedIndexChanged);
             // 
             // cmbLogisticLiao
             // 

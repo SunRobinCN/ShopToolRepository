@@ -272,12 +272,21 @@ namespace ShopTool
             this.cmbLogisticWay.DataSource = info.ChildrenLogisticWay;
             this.cmbLogisticWay.ValueMember = "Id";
             this.cmbLogisticWay.DisplayMember = "Name";
+            this.cmbLogisticWay.SelectedIndex = -1;
         }
 
         private void cmbLogisticWay_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //List<Info> list = GetLogisticWay();
+            //if (list.)
+            //{
+                
+            //}
         }
 
+        private void cmbLogisticWay_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            sender.Text
+        }
     }
 }
