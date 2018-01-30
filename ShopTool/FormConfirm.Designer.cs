@@ -91,6 +91,7 @@
             // 
             // btnUpload
             // 
+            this.btnUpload.Enabled = false;
             this.btnUpload.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnUpload.Location = new System.Drawing.Point(244, 581);
             this.btnUpload.Name = "btnUpload";
@@ -122,6 +123,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormConfirm";
             this.Load += new System.EventHandler(this.FormConfirm_Load);
+            this.Shown += new System.EventHandler(this.FormConfirm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -20,9 +20,15 @@ namespace ShopTool
 
         private void btnUploadProduct_Click(object sender, EventArgs e)
         {
-            FormExecute formExecute = new FormExecute();
-            formExecute.Batches = this.Batches;
-            formExecute.Show();
+            foreach (OneUserBatch oneUserBatch in this.Batches)
+            {
+                foreach (Product product in oneUserBatch.Products)
+                {
+                    FormExecute formExecute = new FormExecute();
+                    formExecute.product = product;
+                    formExecute.Show();
+                }
+            }
         }
 
         private void InitializeBatchesInfo()
@@ -91,6 +97,20 @@ namespace ShopTool
         private void FormConfirm_Load(object sender, EventArgs e)
         {
             InitializeBatchesInfo();
+        }
+
+        private void FormConfirm_Shown(object sender, EventArgs e)
+        {
+            foreach (OneUserBatch oneUserBatch in this.Batches)
+            {
+                HttpUtil.LoginToShopWebsite(oneUserBatch.Username, oneUserBatch.Password);
+                foreach (Product product in oneUserBatch.Products)
+                {
+                    List<string> uploadPicturesResult = HttpUtil.UploadPictureToWebsite(product.Pictures);
+                    product.PictureUrls = uploadPicturesResult;
+                }
+                this.btnUpload.Enabled = true;
+            }
         }
     }
 }

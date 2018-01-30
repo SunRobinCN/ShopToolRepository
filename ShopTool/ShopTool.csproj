@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CefFilters\FindReplaceResponseFilter.cs" />
     <Compile Include="CookieVisitor.cs" />
     <Compile Include="FormDone.cs">
       <SubType>Form</SubType>

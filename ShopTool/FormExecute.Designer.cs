@@ -34,8 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1055, 717);
+            this.ClientSize = new System.Drawing.Size(939, 567);
             this.Name = "FormExecute";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormExecute";
             this.Load += new System.EventHandler(this.FormExecute_Load);
             this.Shown += new System.EventHandler(this.FormExecute_Shown);

@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using CefSharp;
+using ShopTool.CefFilters;
 
 namespace ShopTool
 {
@@ -34,10 +35,6 @@ namespace ShopTool
         public CefReturnValue OnBeforeResourceLoad(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request,
             IRequestCallback callback)
         {
-            //var headers = request.Headers;
-            //headers.Add("Accept-Language", "zh,zh-cn");
-            //CefCookieManager.
-            //request.Headers = headers;
             return CefReturnValue.Continue;
         }
 
@@ -86,7 +83,20 @@ namespace ShopTool
         public IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request,
             IResponse response)
         {
-            
+            try
+            {
+                if (request.Url == "https://shoppies.jp/write-item_sp" 
+                    || request.Url == "https://shoppies.jp/?jb=write-item_sp")
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    dictionary.Add("https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
+                        "https://libs.baidu.com/jquery/1.10.2/jquery.min.js");
+                    return new FindReplaceResponseFilter(dictionary);
+                }
+            }
+            catch (Exception e)
+            {
+            }
             return null;
         }
 
