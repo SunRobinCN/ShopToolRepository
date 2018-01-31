@@ -51,6 +51,7 @@ namespace ShopTool
                     this.rtxtConfirmInfo.AppendText("配送方法：" + product.FinalLogisticWay + "\r\n");
                     this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area.Name + "\r\n"); 
                     this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay.Name + "\r\n");
+                    this.rtxtConfirmInfo.AppendText("\r\n\r\n");
                 }
             }
             this.rtxtConfirmInfo.ReadOnly = true;
@@ -76,7 +77,7 @@ namespace ShopTool
             {
                 int nowWidth = (int)(bm.Width / times);
                 int nowHeight = (int)(bm.Height / times);
-                newbm = new Bitmap(nowWidth, nowHeight);//新建一个放大后大小的图片
+                newbm = new Bitmap(nowWidth, nowHeight);
                 System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(newbm);
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;

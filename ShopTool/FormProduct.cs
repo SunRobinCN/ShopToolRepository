@@ -278,7 +278,7 @@ namespace ShopTool
             ConnectedComboInfo info2 = this.cmbCategory2.SelectedItem as ConnectedComboInfo;
             ConnectedComboInfo info3 = this.cmbCategory3.SelectedItem as ConnectedComboInfo;
             CategoryDetailInfo.LevelOne = info1.ID;
-            CategoryDetailInfo.LevelTwo = info2.ID;
+            CategoryDetailInfo.LevelTwo = (Convert.ToInt32(info2.ID)-1).ToString();
             CategoryDetailInfo.LevelThree = info3.ID;
         }
 

@@ -1187,32 +1187,32 @@ namespace ShopTool.Comm
             List<Info> list = new List<Info>();
             list.Add(new Info()
             {
-                ID = "0",
+                ID = "0SendData",
                 Name = "指定なし"
             });
             list.Add(new Info()
             {
-                ID = "1",
+                ID = "1SendData",
                 Name = "1～2日で発送"
             });
             list.Add(new Info()
             {
-                ID = "2",
+                ID = "2SendData",
                 Name = "2～3日で発送"
             });
             list.Add(new Info()
             {
-                ID = "3",
+                ID = "3SendData",
                 Name = "4～7日で発送"
             });
             list.Add(new Info()
             {
-                ID = "4",
+                ID = "4SendData",
                 Name = "発送は週末のみ"
             });
             list.Add(new Info()
             {
-                ID = "5",
+                ID = "5SendData",
                 Name = "発送は平日のみ"
             });
             return list;

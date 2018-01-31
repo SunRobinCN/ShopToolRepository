@@ -86,11 +86,17 @@ namespace ShopTool
             try
             {
                 if (request.Url == "https://shoppies.jp/write-item_sp" 
-                    || request.Url == "https://shoppies.jp/?jb=write-item_sp")
+                    || request.Url == "https://shoppies.jp/?jb=write-item_sp"
+                    || request.Url == "https://shoppies.jp/write-item_conf"
+                    || request.Url.StartsWith("https://shoppies.jp/index_pc.php?ses_id"))
                 {
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    dictionary.Add("https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
-                        "https://libs.baidu.com/jquery/1.10.2/jquery.min.js");
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>
+                    {
+                        {
+                            "https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
+                            "https://libs.baidu.com/jquery/1.10.2/jquery.min.js"
+                        }
+                    };
                     return new FindReplaceResponseFilter(dictionary);
                 }
             }

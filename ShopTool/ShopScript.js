@@ -38,7 +38,13 @@ $('#sendMethodFin').click();
 $('#areaChoice').click();
 $('#area8SendData').click();
 
+$('#sendDateChoice').click();
+$('#2SendData').click();
+
+
 $('#tes').click();
+
+$('.gbl-submitBtnMini').click();
 
 
 
