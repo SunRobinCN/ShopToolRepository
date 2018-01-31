@@ -13,6 +13,7 @@ namespace ShopTool.Model
         public string Description { get; set; }
         public string Price { get; set; }
         public ConnectedComboInfo Category { get; set; }
+        public ConnectedComboInfo CategoryDetailInfo { get; set; }
         public Info Status { get; set; }
         public Info LogisticLiao { get; set; }
         public List<Info> LogisticWay { get; set; }

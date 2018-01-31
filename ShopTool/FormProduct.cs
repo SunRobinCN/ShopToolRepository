@@ -17,6 +17,7 @@ namespace ShopTool
     {
 
         private List<Product> _products = new List<Product>();
+        public ConnectedComboInfo CategoryDetailInfo { get; set; }
 
         public FormProduct()
         {
@@ -124,7 +125,8 @@ namespace ShopTool
                 Area = this.cmbProductArea.SelectedItem as Info,
                 LogisticWay = GetLogisticWay(),
                 LogisticLiao = cmbLogisticLiao.SelectedItem as Info,
-                LogisticDay = cmbLogisticDay.SelectedItem as Info
+                LogisticDay = cmbLogisticDay.SelectedItem as Info,
+                CategoryDetailInfo = CategoryDetailInfo
             };
             product.Pictures.Add(this.pictureBox1.Image);
             product.Pictures.Add(this.pictureBox2.Image);
@@ -267,6 +269,17 @@ namespace ShopTool
             {
                 pictureBox4.Image = Image.FromFile(d.FileName);
             }
+        }
+
+        private void cmbCategory3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CategoryDetailInfo = new ConnectedComboInfo();
+            ConnectedComboInfo info1 = this.cmbCategory1.SelectedItem as ConnectedComboInfo;
+            ConnectedComboInfo info2 = this.cmbCategory2.SelectedItem as ConnectedComboInfo;
+            ConnectedComboInfo info3 = this.cmbCategory3.SelectedItem as ConnectedComboInfo;
+            CategoryDetailInfo.LevelOne = info1.ID;
+            CategoryDetailInfo.LevelTwo = info2.ID;
+            CategoryDetailInfo.LevelThree = info3.ID;
         }
 
         private void cmbLogisticLiao_SelectedIndexChanged(object sender, EventArgs e)

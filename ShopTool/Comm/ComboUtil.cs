@@ -1231,6 +1231,10 @@ namespace ShopTool.Comm
         public string ID { get; set; }
         public string Name { get; set; }
 
+        public string LevelOne { get; set; }
+        public string LevelTwo { get; set; }
+        public string LevelThree { get; set; }
+
         public List<ConnectedComboInfo> Children { get; set; }
 
         public ConnectedComboInfo()

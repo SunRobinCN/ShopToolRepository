@@ -312,6 +312,7 @@
             this.cmbCategory3.Name = "cmbCategory3";
             this.cmbCategory3.Size = new System.Drawing.Size(323, 24);
             this.cmbCategory3.TabIndex = 35;
+            this.cmbCategory3.SelectedIndexChanged += new System.EventHandler(this.cmbCategory3_SelectedIndexChanged);
             // 
             // label10
             // 

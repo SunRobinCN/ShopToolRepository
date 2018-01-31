@@ -15,9 +15,14 @@ $('#inputPrice').val('2222');
 $('#titleInput').val('222222');
 $('#explanation').val('2222222222');
 
+$('#categoryChoice').click(); 
+//选择一级类别
+$("#mCSB_1_container .tempArrowLink").eq(0).click();
+//选择二级类别
+$("#mCSB_2_container .tempLinkWrap.subCategory >  .tempArrowLink.cateLinks.categoryInput2.noArrow").eq(2).click();
+//选择三级类别
+$("nav [alt = '0102']").click();
 
-$('.writeItemCategory .tempArrowLink').click();
-$('#area5SendData').click();
 
 $('.writeItemStatus .tempArrowLink').click();
 $('#4Status').click();
@@ -36,10 +41,7 @@ $('#area8SendData').click();
 $('#tes').click();
 
 
-//选择二级类别
-$("#mCSB_2_container .tempLinkWrap.subCategory >  .tempArrowLink.cateLinks.categoryInput2.noArrow").eq(2).click();
-//选择三级类别
-$("nav [alt = '0102']").click();
+
 
 
 

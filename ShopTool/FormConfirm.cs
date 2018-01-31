@@ -24,8 +24,7 @@ namespace ShopTool
             {
                 foreach (Product product in oneUserBatch.Products)
                 {
-                    FormExecute formExecute = new FormExecute();
-                    formExecute.product = product;
+                    FormExecute formExecute = new FormExecute {product = product};
                     formExecute.Show();
                 }
             }

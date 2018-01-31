@@ -17,8 +17,8 @@ namespace ShopTool
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmStart());
-            //Application.Run(new FormProduct());
-            Application.Run(new FormConfirm());
+            Application.Run(new FormProduct());
+            //Application.Run(new FormConfirm());
             //Application.Run(new FormExecute());
         }
     }

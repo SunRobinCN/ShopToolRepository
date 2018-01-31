@@ -36,7 +36,7 @@ namespace ShopTool
                               "$(\"input[name=\'loginid\']\").val(\'outam1984@yahoo.co.jp\');" +
                               "$(\"input[name=\'password\']\").val(\'X8u813\');";
                     browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
                     jscript = "$(\"input[name=\'loginbtn\']\").click();";
                     browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
                 }
@@ -51,6 +51,20 @@ namespace ShopTool
                               $"$(\'#titleInput\').val(\'{product.Name}\');" +
                               $"$(\'#explanation\').val(\'{product.Description}\');";
                     browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                    Thread.Sleep(10000);
+                    jscript = "$(\'.writeItemCategory .tempArrowLink\').click();";
+                    browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                    Thread.Sleep(10000);
+                    jscript = "$(\"#mCSB_1_container .tempArrowLink\").eq(0).click();";
+                    browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                    Thread.Sleep(10000);
+                    jscript = string.Format("$(\"#mCSB_2_container .tempLinkWrap.subCategory >  .tempArrowLink.cateLinks.categoryInput2.noArrow\").eq({0}).click();", product.CategoryDetailInfo.LevelTwo);
+                    browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                    Thread.Sleep(10000);
+                    jscript = string.Format("$(\"nav [alt = \'{0}\']\").click();", product.CategoryDetailInfo.LevelThree);
+                    browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                    jscript = "";
+                    jscript = "";
                 }
             }
             
