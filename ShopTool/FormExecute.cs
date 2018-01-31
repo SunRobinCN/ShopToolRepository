@@ -21,6 +21,7 @@ namespace ShopTool
         public FormExecute()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
 
@@ -95,7 +96,7 @@ namespace ShopTool
                         jscript = string.Format("$(\'.writeItemCarry .tempArrowLink\').click();");
                         browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
                         Thread.Sleep(INTERVAL);
-                        jscript = $"$(\'#{product.LogisticLiao}\').click();";
+                        jscript = $"$(\'#{product.LogisticLiao.ID}\').click();";
                         browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
                         Thread.Sleep(INTERVAL);
 
@@ -136,6 +137,7 @@ namespace ShopTool
                     }
                     if (p.Url == "https://shoppies.jp/write-item_conf")
                     {
+                        Thread.Sleep(INTERVAL * 5);
                         jscript = "$(\'.gbl-submitBtnMini\').click();";
                         browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
                     }
