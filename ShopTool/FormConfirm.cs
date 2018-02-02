@@ -22,9 +22,12 @@ namespace ShopTool
         {
             foreach (Product product in Products)
             {
-                FormExecute formExecute = new FormExecute { product = product };
+                FormExecute formExecute = new FormExecute { Product = product };
                 formExecute.Show();
             }
+
+            FormDone formDone = new FormDone();
+            formDone.Show();
         }
 
         private void InitializeBatchesInfo()

@@ -22,6 +22,9 @@ namespace ShopTool.Model
         public List<Image> Pictures { get; set; }
         public List<string> PictureUrls { get; set; }
 
+        public string UploadResult { get; set; }
+        public string UploadFailedReson { get; set; }
+
         public Product()
         {
             this.Pictures = new List<Image>();

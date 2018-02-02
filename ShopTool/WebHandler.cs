@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -111,6 +112,35 @@ namespace ShopTool
         {
             CookieVisitor _cookieVisitor = new CookieVisitor();
             Cef.GetGlobalCookieManager().VisitAllCookies(_cookieVisitor);
+        }
+    }
+
+    public class JsDialogHandler : IJsDialogHandler
+    {
+        //当一个JS alert窗口等在显示的时候，会先调用这个方法，如果返回true，则停止显示窗口，如果返回false，则继续显示窗口
+        public bool OnJSDialog(IWebBrowser browserControl, IBrowser browser, string originUrl, CefJsDialogType dialogType,
+            string messageText, string defaultPromptText, IJsDialogCallback callback, ref bool suppressMessage)
+        {
+            Debug.WriteLine(messageText);
+
+            //callback.Continue(true);
+            //return true;
+
+            return false;
+        }
+
+        public bool OnJSBeforeUnload(IWebBrowser browserControl, IBrowser browser, string message, bool isReload,
+            IJsDialogCallback callback)
+        {
+            return true;
+        }
+
+        public void OnResetDialogState(IWebBrowser browserControl, IBrowser browser)
+        {
+        }
+
+        public void OnDialogClosed(IWebBrowser browserControl, IBrowser browser)
+        {
         }
     }
 }

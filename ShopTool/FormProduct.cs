@@ -209,41 +209,6 @@ namespace ShopTool
             frmConfirm.Show();
         }
 
-        private List<OneUserBatch> AssebleBatches()
-        {
-            List<OneUserBatch> batches = new List<OneUserBatch>();
-            foreach (Product product in _products)
-            {
-                OneUserBatch batch = GetBatchByUsername(product.Username, batches);
-                if (batch == null)
-                {
-                    OneUserBatch newBatch = new OneUserBatch();
-                    newBatch.Username = product.Username;
-                    newBatch.Password = product.Password;
-                    newBatch.Products.Add(product);
-                    batches.Add(newBatch);
-                }
-                else
-                {
-                    batch.Products.Add(product);
-                    batches.Add(batch);
-                }
-            }
-            return batches;
-        }
-
-        private OneUserBatch GetBatchByUsername(string username, List<OneUserBatch> batches)
-        {
-            OneUserBatch batch = null;
-            foreach (OneUserBatch oneUserBatch in batches ?? new List<OneUserBatch>())
-            {
-                if (oneUserBatch.Username == username)
-                {
-                    batch = oneUserBatch;
-                }
-            }
-            return batch;
-        }
 
         private void cmbUsername_SelectedIndexChanged(object sender, EventArgs e)
         {

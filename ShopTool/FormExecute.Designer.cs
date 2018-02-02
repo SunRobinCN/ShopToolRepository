@@ -28,13 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.myTransparentPanel = new ShopTool.MyControl();
             this.SuspendLayout();
+            // 
+            // myTransparentPanel
+            // 
+            this.myTransparentPanel.BackColor = System.Drawing.Color.Transparent;
+            this.myTransparentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.myTransparentPanel.Location = new System.Drawing.Point(0, 0);
+            this.myTransparentPanel.Name = "myTransparentPanel";
+            this.myTransparentPanel.Size = new System.Drawing.Size(939, 567);
+            this.myTransparentPanel.TabIndex = 1;
             // 
             // FormExecute
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 567);
+            this.Controls.Add(this.myTransparentPanel);
             this.Name = "FormExecute";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormExecute";
@@ -44,5 +55,7 @@
         }
 
         #endregion
+
+        private MyControl myTransparentPanel;
     }
 }
