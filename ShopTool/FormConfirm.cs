@@ -11,7 +11,7 @@ namespace ShopTool
 {
     public partial class FormConfirm : Form
     {
-        public List<OneUserBatch> Batches { get; set; }
+        public List<Product> Products { get; set; }
 
         public FormConfirm()
         {
@@ -20,39 +20,33 @@ namespace ShopTool
 
         private void btnUploadProduct_Click(object sender, EventArgs e)
         {
-            foreach (OneUserBatch oneUserBatch in this.Batches)
+            foreach (Product product in Products)
             {
-                foreach (Product product in oneUserBatch.Products)
-                {
-                    FormExecute formExecute = new FormExecute {product = product};
-                    formExecute.Show();
-                }
+                FormExecute formExecute = new FormExecute { product = product };
+                formExecute.Show();
             }
         }
 
         private void InitializeBatchesInfo()
         {
-            foreach (OneUserBatch oneUserBatch in Batches)
+            foreach (Product product in Products)
             {
-                StringBuilder builder = new StringBuilder();
-                builder.AppendLine(oneUserBatch.Username + ":");
-                foreach (Product product in oneUserBatch.Products)
+                foreach (Image image in product.Pictures)
                 {
-                    foreach (Image image in product.Pictures)
-                    {
-                        AddImage(image);
-                    }
-                    this.rtxtConfirmInfo.AppendText("\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("商品説明：" + product.Description + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("カテゴリ：" + (product).Category.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("状態：" + product.Status.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("配送方法：" + product.FinalLogisticWay + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area.Name + "\r\n"); 
-                    this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay.Name + "\r\n");
-                    this.rtxtConfirmInfo.AppendText("\r\n\r\n");
+                    AddImage(image);
                 }
+                StringBuilder builder = new StringBuilder();
+                builder.AppendLine(product.Username + ":");
+                this.rtxtConfirmInfo.AppendText("\r\n");
+                this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
+                this.rtxtConfirmInfo.AppendText("商品説明：" + product.Description + "\r\n");
+                this.rtxtConfirmInfo.AppendText("カテゴリ：" + (product).Category.Name + "\r\n");
+                this.rtxtConfirmInfo.AppendText("状態：" + product.Status.Name + "\r\n");
+                this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao.Name + "\r\n");
+                this.rtxtConfirmInfo.AppendText("配送方法：" + product.FinalLogisticWay + "\r\n");
+                this.rtxtConfirmInfo.AppendText("出品地域：" + product.Area.Name + "\r\n");
+                this.rtxtConfirmInfo.AppendText("発送日の目安：" + product.LogisticDay.Name + "\r\n");
+                this.rtxtConfirmInfo.AppendText("\r\n\r\n");
             }
             this.rtxtConfirmInfo.ReadOnly = true;
         }
@@ -101,16 +95,14 @@ namespace ShopTool
 
         private void FormConfirm_Shown(object sender, EventArgs e)
         {
-            foreach (OneUserBatch oneUserBatch in this.Batches)
+            foreach (Product product in Products)
             {
-                HttpUtil.LoginToShopWebsite(oneUserBatch.Username, oneUserBatch.Password);
-                foreach (Product product in oneUserBatch.Products)
-                {
-                    List<string> uploadPicturesResult = HttpUtil.UploadPictureToWebsite(product.Pictures);
-                    product.PictureUrls = uploadPicturesResult;
-                }
-                this.btnUpload.Enabled = true;
+                HttpUtil.LoginToShopWebsite(product.Username, product.Password);
+                List<string> uploadPicturesResult = HttpUtil.UploadPictureToWebsite(product.Pictures);
+                product.PictureUrls = uploadPicturesResult;
+                MyHttpClient.Dispose();
             }
+            this.btnUpload.Enabled = true;
         }
     }
 }

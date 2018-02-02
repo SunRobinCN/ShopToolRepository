@@ -204,9 +204,8 @@ namespace ShopTool
                 return;
             }
             SaveProduct();
-            List<OneUserBatch> batches = AssebleBatches();
             FormConfirm frmConfirm = new FormConfirm();
-            frmConfirm.Batches = batches;
+            frmConfirm.Products = _products;
             frmConfirm.Show();
         }
 

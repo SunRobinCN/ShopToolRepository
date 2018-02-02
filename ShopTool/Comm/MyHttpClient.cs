@@ -27,6 +27,7 @@ namespace ShopTool
         public new static void Dispose()
         {
             ((HttpMessageInvoker) _instance)?.Dispose();
+            _instance = null;
         }
     }
 }

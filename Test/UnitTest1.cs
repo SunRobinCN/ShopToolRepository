@@ -60,7 +60,6 @@ namespace Test
             product.Pictures.Add(image.Clone() as Image);
             product.Pictures.Add(image.Clone() as Image);
             product.Pictures.Add(image.Clone() as Image);
-            HttpUtil.UploadBatchesToWebsite(batches);
         }
     }
 }
