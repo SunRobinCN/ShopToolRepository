@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ShopTool.Comm;
+using ShopTool.Model;
 
 namespace ShopTool
 {
@@ -23,6 +25,15 @@ namespace ShopTool
 
         private void btnUploadNew_Click(object sender, EventArgs e)
         {
+            FormProduct product = new FormProduct();
+            product.Show();
+            this.Hide();
+        }
+
+        private void FrmStart_Load(object sender, EventArgs e)
+        {
+            List<Product> products = TextUtil.GetProducts();
+            this.dataGridView.DataSource = products;
         }
     }
 }

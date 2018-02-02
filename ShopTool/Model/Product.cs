@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using ShopTool.Comm;
@@ -8,8 +9,10 @@ namespace ShopTool.Model
     public class Product
     {
         public string Username { get; set; }
+        [System.ComponentModel.Browsable(false)]
         public string Password { get; set; }
         public string Name { get; set; }
+        public DateTime UploaDateTime { get; set; }
         public string Description { get; set; }
         public string Price { get; set; }
         public ConnectedComboInfo Category { get; set; }
@@ -25,6 +28,8 @@ namespace ShopTool.Model
         public string UploadResult { get; set; }
         public string UploadFailedReson { get; set; }
 
+        
+
         public Product()
         {
             this.Pictures = new List<Image>();
@@ -36,12 +41,15 @@ namespace ShopTool.Model
             get
             {
                 StringBuilder builder = new StringBuilder();
-                foreach (Info info in LogisticWay)
+                foreach (Info info in LogisticWay ?? new List<Info>())
                 {
                     builder.Append(info.Name + ", ");
                 }
-                builder.Remove(builder.Length - 1, 1);
-                builder.Remove(builder.Length - 1, 1);
+                if (builder.Length > 2)
+                {
+                    builder.Remove(builder.Length - 1, 1);
+                    builder.Remove(builder.Length - 1, 1);
+                }
                 return builder.ToString();
             }
         }

@@ -27,6 +27,13 @@ namespace ShopTool
             }
 
             FormDone formDone = new FormDone();
+            StringBuilder builder = new StringBuilder();
+            foreach (Product product in Products)
+            {
+                builder.AppendLine("Username: " + product.Username + ", Product: " + product.Name + ", Result: " +
+                                   product.UploadResult);
+            }
+            formDone.UploadResultMessage = builder.ToString();
             formDone.Show();
         }
 

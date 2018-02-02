@@ -39,6 +39,7 @@
             this.myTransparentPanel.Name = "myTransparentPanel";
             this.myTransparentPanel.Size = new System.Drawing.Size(939, 567);
             this.myTransparentPanel.TabIndex = 1;
+            this.myTransparentPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.myTransparentPanel_Paint);
             // 
             // FormExecute
             // 

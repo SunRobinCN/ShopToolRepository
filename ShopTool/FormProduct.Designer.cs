@@ -172,7 +172,7 @@
             this.cmbLogisticDay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLogisticDay.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbLogisticDay.FormattingEnabled = true;
-            this.cmbLogisticDay.Location = new System.Drawing.Point(556, 451);
+            this.cmbLogisticDay.Location = new System.Drawing.Point(550, 451);
             this.cmbLogisticDay.Name = "cmbLogisticDay";
             this.cmbLogisticDay.Size = new System.Drawing.Size(294, 24);
             this.cmbLogisticDay.TabIndex = 21;
@@ -182,7 +182,7 @@
             this.cmbProductArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProductArea.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbProductArea.FormattingEnabled = true;
-            this.cmbProductArea.Location = new System.Drawing.Point(556, 416);
+            this.cmbProductArea.Location = new System.Drawing.Point(550, 416);
             this.cmbProductArea.Name = "cmbProductArea";
             this.cmbProductArea.Size = new System.Drawing.Size(294, 24);
             this.cmbProductArea.TabIndex = 22;
@@ -439,7 +439,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1241, 616);
+            this.ClientSize = new System.Drawing.Size(1241, 639);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.cmbLogisticLiao);
             this.Controls.Add(this.label6);
@@ -473,6 +473,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProduct";

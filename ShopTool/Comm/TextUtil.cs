@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Log;
 using Newtonsoft.Json;
 using ShopTool.Model;
 
@@ -13,46 +14,57 @@ namespace ShopTool.Comm
         {
             string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase +  @"\Config\user.data";
             var json = JsonConvert.SerializeObject(users);
-            WriteToFile(path, json);
+            ReWriteToFile(path, json);
         }
 
         public static List<User> GetUsers()
         {
-            string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase +  @"\Config\user.data";
-            List<User> list;
-            if (!File.Exists(path))
+            List<User> list = null;
+            try
             {
-                Stream fileStream = null;
-                try
+                string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config\user.data";
+                if (!File.Exists(path))
                 {
-                    fileStream = File.Create(path);
+                    Stream fileStream = null;
+                    try
+                    {
+                        fileStream = File.Create(path);
+                    }
+                    catch (Exception)
+                    {
+                        if (fileStream != null) fileStream.Close();
+                    }
+                    finally
+                    {
+                        fileStream?.Close();
+                    }
                 }
-                catch (Exception)
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
                 {
-                    if (fileStream != null) fileStream.Close();
-                    throw;
-                }
-                finally
-                {
-                    fileStream?.Close();
+                    string content = reader.ReadToEnd();
+                    list = JsonConvert.DeserializeObject<List<User>>(content);
                 }
             }
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
+            catch (Exception e)
             {
-                string content = reader.ReadToEnd();
-                list = JsonConvert.DeserializeObject<List<User>>(content);
+                FileLog.Error("GetUsers", e, LogType.Error);
             }
             return list ?? new List<User>();
         }
 
-        public static void ArchiveProducts(List<Product> list)
+        public static void ArchiveProduct(Product p)
         {
-            string path = "";
-            var json = JsonConvert.SerializeObject(list);
-            WriteToFile(path, json);
+            string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config\products.data";
+            if (File.Exists(path) == false)
+            {
+                File.Create(path);
+            }
+            p.Pictures = null;
+            var json = JsonConvert.SerializeObject(p);
+            AppendToFile(path, json + ","); 
         }
 
-        public static void WriteToFile(string path, string message)
+        public static void ReWriteToFile(string path, string message)
         {
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
@@ -62,31 +74,52 @@ namespace ShopTool.Comm
             }
         }
 
+        public static void AppendToFile(string path, string message)
+        {
+            using (FileStream fs = new FileStream(path, FileMode.Append))
+            {
+                StreamWriter writer = new StreamWriter(fs, Encoding.UTF8);
+                writer.Write(message);
+                writer.Close();
+            }
+        }
+
         public static List<Product> GetProducts()
         {
-            string path = "";
-            List<Product> list;
-            if (!File.Exists(path))
+            string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config\products.data";
+            List<Product> list = null;
+            try
             {
-                Stream fileStream = null;
-                try
+                if (!File.Exists(path))
                 {
-                    fileStream = File.Create(path);
+                    Stream fileStream = null;
+                    try
+                    {
+                        fileStream = File.Create(path);
+                    }
+                    catch (Exception)
+                    {
+                        if (fileStream != null) fileStream.Close();
+                    }
+                    finally
+                    {
+                        fileStream?.Close();
+                    }
                 }
-                catch (Exception)
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
                 {
-                    if (fileStream != null) fileStream.Close();
-                    throw;
-                }
-                finally
-                {
-                    fileStream?.Close();
+                    string content = reader.ReadToEnd();
+                    if (content.EndsWith(","))
+                    {
+                        content = content.Remove(content.Length - 1);
+                    }
+                    content = "[" + content + "]";
+                    list = JsonConvert.DeserializeObject<List<Product>>(content);
                 }
             }
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
+            catch (Exception e)
             {
-                string content = reader.ReadToEnd();
-                list = JsonConvert.DeserializeObject<List<Product>>(content);
+                FileLog.Error("GetProducts", e, LogType.Error);
             }
             return list ?? new List<Product>();
         }

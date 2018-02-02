@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using Log;
 using ShopTool.Comm;
 using ShopTool.Model;
 
@@ -24,13 +25,6 @@ namespace ShopTool
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
-
-            this.myTransparentPanel.BackColor = Color.FromArgb(25, Color.Black);
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.DrawLine(Pens.Yellow, 0, 0, 100, 100);
         }
 
         private void FormExecute_Load(object sender, EventArgs e)
@@ -168,6 +162,9 @@ namespace ShopTool
                     }
                     if (p.Url.EndsWith("b=write-item_end"))
                     {
+                        Product.UploadResult = "Success!";
+                        Product.UploaDateTime = DateTime.Now;
+                        TextUtil.ArchiveProduct(Product);
                         Thread.Sleep(INTERVAL * 6);
                         browser?.Dispose();
                         this.Close();
@@ -194,18 +191,20 @@ namespace ShopTool
             });
         }
 
-        void OnLoadError(object sender, EventArgs e)
+        void OnLoadError(object sender, LoadErrorEventArgs e)
         {
-            
+            FileLog.Error("OnLoadError", new Exception(e.ErrorText), LogType.Error);
         }
 
         void OnConsoleMessage(object sender, ConsoleMessageEventArgs e)
         {
-            Debug.WriteLine(e.Message);
             if (e.Message.Contains("Uncaught"))
             {
                 //Product.UploadResult = "Failed";
                 //Product.UploadFailedReson = e.Message;
+                Product.UploaDateTime = DateTime.Now;
+                TextUtil.ArchiveProduct(Product);
+                FileLog.Error("OnConsoleMessage", new Exception(e.Message + "\r\n" + e.Source), LogType.Error);
                 ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
                 browser?.Dispose();
             }
@@ -220,5 +219,9 @@ namespace ShopTool
             }
         }
 
+        private void myTransparentPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

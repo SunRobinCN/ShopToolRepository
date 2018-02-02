@@ -17,16 +17,9 @@ namespace Test
         [TestMethod]
         public void TestMethod3()
         {
-            List<OneUserBatch> batches = new List<OneUserBatch>();
-            OneUserBatch batch = new OneUserBatch()
-            {
-                Username = "outam1984@yahoo.co.jp",
-                Password = "X8u813"
-            };
             Product product = new Product();
-            batches.Add(batch);
-            batch.Products.Add(product);
-
+            product.Username = "myname";
+            product.Password = "mypassword";
             product.Name = "test12";
             product.Description = "test1 desc";
             product.Price = "3333";
@@ -55,11 +48,14 @@ namespace Test
                 Name = ""
             };
 
-            System.Drawing.Image image = Image.FromFile(@"C:\Users\robin.sun\Desktop\t.jpg");
-            product.Pictures.Add(image);
-            product.Pictures.Add(image.Clone() as Image);
-            product.Pictures.Add(image.Clone() as Image);
-            product.Pictures.Add(image.Clone() as Image);
+            product.UploaDateTime = DateTime.Now;
+
+            TextUtil.ArchiveProduct(product);
+            for (int i = 0; i < 105; i++)
+            {
+                TextUtil.ArchiveProduct(product);
+            }
+            List<Product> list = TextUtil.GetProducts();
         }
     }
 }

@@ -1224,6 +1224,11 @@ namespace ShopTool.Comm
     {
         public string ID { get; set; }
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public class ConnectedComboInfo
@@ -1240,6 +1245,11 @@ namespace ShopTool.Comm
         public ConnectedComboInfo()
         {
             this.Children = new List<ConnectedComboInfo>();
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 

@@ -43,9 +43,10 @@
             // 
             // btnUploadNew
             // 
-            this.btnUploadNew.Location = new System.Drawing.Point(525, 166);
+            this.btnUploadNew.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUploadNew.Location = new System.Drawing.Point(691, 201);
             this.btnUploadNew.Name = "btnUploadNew";
-            this.btnUploadNew.Size = new System.Drawing.Size(139, 23);
+            this.btnUploadNew.Size = new System.Drawing.Size(212, 45);
             this.btnUploadNew.TabIndex = 0;
             this.btnUploadNew.Text = "上传新的商品";
             this.btnUploadNew.UseVisualStyleBackColor = true;
@@ -53,9 +54,10 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(525, 265);
+            this.btnExit.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Location = new System.Drawing.Point(691, 463);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(139, 23);
+            this.btnExit.Size = new System.Drawing.Size(212, 43);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "退出";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -69,7 +71,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(769, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(946, 25);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -110,7 +112,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(420, 310);
+            this.dataGridView.Size = new System.Drawing.Size(628, 529);
             this.dataGridView.TabIndex = 3;
             // 
             // label1
@@ -127,16 +129,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 453);
+            this.ClientSize = new System.Drawing.Size(946, 685);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUploadNew);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmStart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SP小工具";
+            this.Load += new System.EventHandler(this.FrmStart_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
