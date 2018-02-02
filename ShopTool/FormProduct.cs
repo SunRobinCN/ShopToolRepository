@@ -106,6 +106,10 @@ namespace ShopTool
 
         private void btnNextProduct_Click(object sender, EventArgs e)
         {
+            if (CheckInput() == false)
+            {
+                return;
+            }
             SaveProduct();
             SaveUser();
             ClearAll();
