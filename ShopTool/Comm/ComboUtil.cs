@@ -1236,9 +1236,13 @@ namespace ShopTool.Comm
         public string ID { get; set; }
         public string Name { get; set; }
 
-        public string LevelOne { get; set; }
-        public string LevelTwo { get; set; }
-        public string LevelThree { get; set; }
+        public string LevelOneID { get; set; }
+        public string LevelTwoID { get; set; }
+        public string LevelThreeID { get; set; }
+
+        public string LevelOneName { get; set; }
+        public string LevelTwoName { get; set; }
+        public string LevelThreeName { get; set; }
 
         public List<ConnectedComboInfo> Children { get; set; }
 
@@ -1249,7 +1253,7 @@ namespace ShopTool.Comm
 
         public override string ToString()
         {
-            return Name;
+            return LevelOneName + ">" + LevelTwoName + ">" + LevelThreeName;
         }
     }
 
@@ -1260,6 +1264,11 @@ namespace ShopTool.Comm
         public LogisticLiaoInfo()
         {
             this.ChildrenLogisticWay = new List<Info>();
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

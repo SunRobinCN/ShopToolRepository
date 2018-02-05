@@ -16,7 +16,7 @@ namespace ShopTool
 {
     public partial class FormExecute : Form
     {
-        public const int INTERVAL = 5000;
+        public const int INTERVAL = 500;
 
         public Product Product { get; set; }
         public bool Failed { get; set; }
@@ -25,12 +25,16 @@ namespace ShopTool
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
+            //this.myTransparentPanel.Hide();
         }
 
         private void FormExecute_Load(object sender, EventArgs e)
         {
-            var settings = new CefSettings();
-            CefSharp.Cef.Initialize(settings);
+            if (Cef.IsInitialized == false)
+            {
+                var settings = new CefSettings();
+                CefSharp.Cef.Initialize(settings);
+            }
             ChromiumWebBrowser browser = new ChromiumWebBrowser("")
             {
                 Location = new Point(0, 0),
@@ -45,7 +49,7 @@ namespace ShopTool
             browser.JsDialogHandler = new JsDialogHandler();
         }
 
-        void OnFrameLoadEnd2(object sender, EventArgs e)
+        void OnFrameLoadEnd(object sender, EventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -56,103 +60,27 @@ namespace ShopTool
                 {
                     if ((p.Url == "https://shoppies.jp/write-item_sp"))
                     {
-                        jscript = "$('#changeLogin').click();" +
-                                  "$(\"input[name=\'loginid\']\").val(\'outam1984@yahoo.co.jp\');" +
-                                  "$(\"input[name=\'password\']\").val(\'X8u813\');";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = "$(\"input[name=\'loginbtn\']\").click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                        //这里根据是否登录了，执行两种情况
+                        Task<CefSharp.JavascriptResponse> task = browser.EvaluateScriptAsync("$(\"#changeLogin\").length;");
+                        Task.WaitAll(task);
+                        if (task.Result.Result != null && Convert.ToInt32(task.Result.Result) > 0)
+                        {
+                            jscript = "$('#changeLogin').click();" +
+                                      "$(\"input[name=\'loginid\']\").val(\'outam1984@yahoo.co.jp\');" +
+                                      "$(\"input[name=\'password\']\").val(\'X8u813\');";
+                            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                            Thread.Sleep(INTERVAL);
+                            jscript = "$(\"input[name=\'loginbtn\']\").click();";
+                            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                        }
+                        else
+                        {
+                            Execute(browser);
+                        }
                     }
                     if (p.Url == "https://shoppies.jp/?jb=write-item_sp")
                     {
-                        jscript = $"$(\'#picUrl0\').val(\'{Product.PictureUrls[0]}\');" +
-                                  $"$(\'#picUrl1\').val(\'{Product.PictureUrls[1]}\');" +
-                                  $"$(\'#picUrl2\').val(\'{Product.PictureUrls[2]}\');" +
-                                  $"$(\'#picUrl3\').val(\'{Product.PictureUrls[3]}\');";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-
-                        jscript = $"$(\'#inputPrice\').val(\'{Product.Price}\');";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        jscript = $"$(\'#titleInput\').val(\'{Product.Name}\');";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        jscript = $"$(\'#explanation\').val(\'{Product.Description}\');";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        jscript = "$(\'.writeItemCategory .tempArrowLink\').click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = "$(\"#mCSB_1_container .tempArrowLink\").eq(0).click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = string.Format(
-                            "$(\"#mCSB_2_container .tempLinkWrap.subCategory >  .tempArrowLink.cateLinks.categoryInput2.noArrow\").eq({0}).click();",
-                            Product.CategoryDetailInfo.LevelTwo);
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = string.Format("$(\"nav [alt = \'{0}\']\").click();",
-                            Product.CategoryDetailInfo.LevelThree);
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        jscript = string.Format("$(\'.writeItemStatus .tempArrowLink\').click();");
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = string.Format("$(\'#{0}\').click();",Product.Status.ID);
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        jscript = string.Format("$(\'.writeItemCarry .tempArrowLink\').click();");
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = $"$(\'#{Product.LogisticLiao.ID}\').click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        StringBuilder builder = new StringBuilder();
-                        builder.Append("$(\'.writeItemSendMethod .tempArrowLink\').click();");
-                        foreach (Info info in Product.LogisticWay)
-                        {
-                            string s = string.Format("$(\'#{0}\').click();", info.ID);
-                            builder.Append(s);
-                        }
-                        jscript = builder.ToString();
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL*3);
-                        jscript = "$(\'#sendMethodFin\').click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        jscript = string.Format("$(\'#areaChoice\').click();");
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = string.Format("$(\'#{0}\').click();", Product.Area.ID);
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-
-
-                        jscript = string.Format("$(\'#sendDateChoice\').click();");
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL);
-                        jscript = string.Format("$(\'#{0}\').click();", Product.LogisticDay.ID);
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL*5);
-
-
-                        jscript = "$(\'#tes\').click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                        Execute(browser);
                     }
                     if (p.Url == "https://shoppies.jp/write-item_conf")
                     {
@@ -166,6 +94,9 @@ namespace ShopTool
                         Product.UploaDateTime = DateTime.Now;
                         TextUtil.ArchiveProduct(Product);
                         Thread.Sleep(INTERVAL * 6);
+                        jscript = "$(\"#prof_header > a\").last().click();";
+                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                        Thread.Sleep(INTERVAL * 16);
                         browser?.Dispose();
                         this.Close();
                         this.Dispose();
@@ -174,7 +105,94 @@ namespace ShopTool
             });
         }
 
-        void OnFrameLoadEnd(object sender, EventArgs e)
+        private void Execute(ChromiumWebBrowser browser)
+        {
+            string jscript;
+            jscript = $"$(\'#picUrl0\').val(\'{Product.PictureUrls[0]}\');" +
+                      $"$(\'#picUrl1\').val(\'{Product.PictureUrls[1]}\');" +
+                      $"$(\'#picUrl2\').val(\'{Product.PictureUrls[2]}\');" +
+                      $"$(\'#picUrl3\').val(\'{Product.PictureUrls[3]}\');";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+
+            jscript = $"$(\'#inputPrice\').val(\'{Product.Price}\');";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+
+
+            jscript = $"$(\'#titleInput\').val(\'{Product.Name}\');";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+
+
+            jscript = $"$(\'#explanation\').val(\'{Product.Description}\');";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+
+            jscript = "$(\'.writeItemCategory .tempArrowLink\').click();";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            jscript = "$(\"#mCSB_1_container .tempArrowLink\").eq(0).click();";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            jscript = string.Format(
+                "$(\"#mCSB_2_container .tempLinkWrap.subCategory >  .tempArrowLink.cateLinks.categoryInput2.noArrow\").eq({0}).click();",
+                Product.CategoryDetailInfo.LevelTwoID);
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            jscript = string.Format("$(\"nav [alt = \'{0}\']\").click();",
+                Product.CategoryDetailInfo.LevelThreeID);
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+
+
+            jscript = string.Format("$(\'.writeItemStatus .tempArrowLink\').click();");
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+            jscript = string.Format("$(\'#{0}\').click();", Product.Status.ID);
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+
+
+            jscript = string.Format("$(\'.writeItemCarry .tempArrowLink\').click();");
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+            jscript = $"$(\'#{Product.LogisticLiao.ID}\').click();";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append("$(\'.writeItemSendMethod .tempArrowLink\').click();");
+            foreach (Info info in Product.LogisticWay)
+            {
+                string s = string.Format("$(\'#{0}\').click();", info.ID);
+                builder.Append(s);
+            }
+            jscript = builder.ToString();
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL * 3);
+            jscript = "$(\'#sendMethodFin\').click();";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+
+
+            jscript = string.Format("$(\'#areaChoice\').click();");
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+            jscript = string.Format("$(\'#{0}\').click();", Product.Area.ID);
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+
+
+            jscript = string.Format("$(\'#sendDateChoice\').click();");
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL);
+            jscript = string.Format("$(\'#{0}\').click();", Product.LogisticDay.ID);
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+            Thread.Sleep(INTERVAL * 5);
+
+
+            jscript = "$(\'#tes\').click();";
+            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+        }
+
+        void OnFrameLoadEnd2(object sender, EventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -186,6 +204,19 @@ namespace ShopTool
                     {
                         jscript = "";
                         browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+
+                        Task<CefSharp.JavascriptResponse> task = browser.EvaluateScriptAsync("$(\"#changeLogin\").length;");
+                        // 等待js 方法执行完后，获取返回值
+                        Task.WaitAll(task);
+                        // t.Result 是 CefSharp.JavascriptResponse 对象
+                        // t.Result.Result 是一个 object 对象，来自js的 callTest2() 方法的返回值
+                        if (task.Result.Result != null)
+                        {
+                            int i = Convert.ToInt32(task.Result.Result);
+                            MessageBox.Show(task.Result.Result.ToString());
+                        }
+
+
                     }
                 }
             });
@@ -198,15 +229,17 @@ namespace ShopTool
 
         void OnConsoleMessage(object sender, ConsoleMessageEventArgs e)
         {
-            if (e.Message.Contains("Uncaught"))
+            if (e.Message.Contains("Uncaught") && (e.Message.Contains("modori") == false)
+                && (e.Message.Contains("setPostLink") == false))
             {
-                //Product.UploadResult = "Failed";
-                //Product.UploadFailedReson = e.Message;
+                Product.UploadResult = "Failed";
+                Product.UploadFailedReson = e.Message;
                 Product.UploaDateTime = DateTime.Now;
                 TextUtil.ArchiveProduct(Product);
                 FileLog.Error("OnConsoleMessage", new Exception(e.Message + "\r\n" + e.Source), LogType.Error);
                 ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
                 browser?.Dispose();
+                this.Dispose();
             }
         }
 

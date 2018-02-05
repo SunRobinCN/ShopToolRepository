@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Log;
 using ShopTool.Comm;
 using ShopTool.Model;
 
@@ -12,29 +15,82 @@ namespace ShopTool
     public partial class FormConfirm : Form
     {
         public List<Product> Products { get; set; }
+        public FormDone FormDoneInfo { get; set; }
 
         public FormConfirm()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
+            FormDoneInfo = new FormDone();
         }
 
         private void btnUploadProduct_Click(object sender, EventArgs e)
         {
+            this.btnUpload.Text = "正在上传中...";
+            this.btnUpload.Enabled = false;
+            //foreach (Product product in Products)
+            //{
+            //    this.ShowExecute(product);
+            //}
+
             foreach (Product product in Products)
             {
                 FormExecute formExecute = new FormExecute { Product = product };
-                formExecute.Show();
+                formExecute.ShowDialog();
+                Thread.Sleep(1000*1);
             }
 
-            FormDone formDone = new FormDone();
-            StringBuilder builder = new StringBuilder();
+            Task.Factory.StartNew(() =>
+            {
+                bool singal = true;
+                while (singal)
+                {
+                    if (CheckWhetherAllProductsUploaded() == true)
+                    {
+                        StringBuilder builder = new StringBuilder();
+                        foreach (Product product in Products)
+                        {
+                            builder.AppendLine("Username: " + product.Username + ", Product: " + product.Name +
+                                               ", Result: " +
+                                               product.UploadResult + "\r\n");
+                        }
+                        FormDoneInfo.UploadResultMessage = builder.ToString();
+
+                        MethodInvoker mi = new MethodInvoker(this.ShowResult);
+                        this.BeginInvoke(mi);
+                        singal = false;
+                        //this.Hide();
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000 * 10);
+                    }
+                }
+            });
+        }
+
+        private void ShowResult()
+        {
+            FormDoneInfo.ShowDialog();
+        }
+
+        private void ShowExecute(Product product)
+        {
+            FormExecute formExecute = new FormExecute { Product = product };
+            formExecute.Show();
+        }
+
+        private bool CheckWhetherAllProductsUploaded()
+        {
+            bool result = true;
             foreach (Product product in Products)
             {
-                builder.AppendLine("Username: " + product.Username + ", Product: " + product.Name + ", Result: " +
-                                   product.UploadResult);
+                if (string.IsNullOrEmpty(product.UploadResult))
+                {
+                    result = false;
+                }
             }
-            formDone.UploadResultMessage = builder.ToString();
-            formDone.Show();
+            return result;
         }
 
         private void InitializeBatchesInfo()
@@ -48,9 +104,10 @@ namespace ShopTool
                 StringBuilder builder = new StringBuilder();
                 builder.AppendLine(product.Username + ":");
                 this.rtxtConfirmInfo.AppendText("\r\n");
+                this.rtxtConfirmInfo.AppendText("用户名：" + product.Username + "\r\n");
                 this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
                 this.rtxtConfirmInfo.AppendText("商品説明：" + product.Description + "\r\n");
-                this.rtxtConfirmInfo.AppendText("カテゴリ：" + (product).Category.Name + "\r\n");
+                this.rtxtConfirmInfo.AppendText("カテゴリ：" + (product).CategoryDetailInfo.ToString() + "\r\n");
                 this.rtxtConfirmInfo.AppendText("状態：" + product.Status.Name + "\r\n");
                 this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao.Name + "\r\n");
                 this.rtxtConfirmInfo.AppendText("配送方法：" + product.FinalLogisticWay + "\r\n");
@@ -59,6 +116,7 @@ namespace ShopTool
                 this.rtxtConfirmInfo.AppendText("\r\n\r\n");
             }
             this.rtxtConfirmInfo.ReadOnly = true;
+            rtxtConfirmInfo.Select(0, 0);
         }
 
         private void AddImage(Image picture)
@@ -92,9 +150,8 @@ namespace ShopTool
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
-            
+
             return newbm;
         }
 
@@ -105,14 +162,31 @@ namespace ShopTool
 
         private void FormConfirm_Shown(object sender, EventArgs e)
         {
-            foreach (Product product in Products)
+            Task.Factory.StartNew(() =>
             {
-                HttpUtil.LoginToShopWebsite(product.Username, product.Password);
-                List<string> uploadPicturesResult = HttpUtil.UploadPictureToWebsite(product.Pictures);
-                product.PictureUrls = uploadPicturesResult;
-                MyHttpClient.Dispose();
-            }
-            this.btnUpload.Enabled = true;
+                try
+                {
+                    foreach (Product product in Products)
+                    {
+                        HttpUtil.LoginToShopWebsite(product.Username, product.Password);
+                        List<string> uploadPicturesResult = HttpUtil.UploadPictureToWebsite(product.Pictures);
+                        product.PictureUrls = uploadPicturesResult;
+                        MyHttpClient.Dispose();
+                    }
+                    this.btnUpload.Text = "确认无误并且上传";
+                    this.btnUpload.Enabled = true;
+                }
+                catch (Exception exception)
+                {
+                    FileLog.Error("FormConfirm_Shown", exception, LogType.Error);
+                    MessageBox.Show("上传图片时出现问题，请查看网络连接情况！如还有其他问题，联系开发者.");
+                }
+            });
+        }
+
+        private void rtxtConfirmInfo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

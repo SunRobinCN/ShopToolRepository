@@ -97,7 +97,7 @@
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(205, 48);
             this.btnUpload.TabIndex = 34;
-            this.btnUpload.Text = "确认无误并且上传";
+            this.btnUpload.Text = "正在加载...";
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUploadProduct_Click);
             // 
@@ -109,6 +109,7 @@
             this.rtxtConfirmInfo.Size = new System.Drawing.Size(630, 446);
             this.rtxtConfirmInfo.TabIndex = 35;
             this.rtxtConfirmInfo.Text = "";
+            this.rtxtConfirmInfo.TextChanged += new System.EventHandler(this.rtxtConfirmInfo_TextChanged);
             // 
             // FormConfirm
             // 
@@ -119,6 +120,7 @@
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormConfirm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormConfirm";

@@ -26,6 +26,8 @@ namespace ShopTool
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            this.Close();
+            Application.Exit();
             System.Environment.Exit(0);
         }
     }

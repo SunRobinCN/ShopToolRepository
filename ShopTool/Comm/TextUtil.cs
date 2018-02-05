@@ -76,12 +76,25 @@ namespace ShopTool.Comm
 
         public static void AppendToFile(string path, string message)
         {
-            using (FileStream fs = new FileStream(path, FileMode.Append))
+            bool signal = true;
+            do
             {
-                StreamWriter writer = new StreamWriter(fs, Encoding.UTF8);
-                writer.Write(message);
-                writer.Close();
-            }
+                try
+                {
+                    using (FileStream fs = new FileStream(path, FileMode.Append))
+                    {
+                        StreamWriter writer = new StreamWriter(fs, Encoding.UTF8);
+                        writer.Write(message);
+                        writer.Flush();
+                        writer.Close();
+                        signal = false;
+                    }
+                }
+                catch (System.IO.IOException e)
+                {
+                    FileLog.Error("AppendToFile", e, LogType.Error);
+                }
+            } while (signal);
         }
 
         public static List<Product> GetProducts()

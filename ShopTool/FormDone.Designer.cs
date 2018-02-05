@@ -37,7 +37,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(119, 70);
+            this.label1.Location = new System.Drawing.Point(246, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(296, 16);
             this.label1.TabIndex = 1;
@@ -56,7 +56,7 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(154, 183);
+            this.btnExit.Location = new System.Drawing.Point(268, 213);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(205, 48);
             this.btnExit.TabIndex = 35;
@@ -68,11 +68,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(546, 338);
+            this.ClientSize = new System.Drawing.Size(797, 338);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormDone";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormDone";
             this.Load += new System.EventHandler(this.FormDone_Load);
             this.ResumeLayout(false);

@@ -13,6 +13,8 @@ namespace ShopTool
 {
     public partial class FrmStart : Form
     {
+        private const int HisotryInterval = 3;
+
         public FrmStart()
         {
             InitializeComponent();
@@ -33,7 +35,17 @@ namespace ShopTool
         private void FrmStart_Load(object sender, EventArgs e)
         {
             List<Product> products = TextUtil.GetProducts();
-            this.dataGridView.DataSource = products;
+            this.dataGridView.DataSource = products.Where(p => (DateTime.Now - p.UploaDateTime).Days < HisotryInterval).ToList();
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

@@ -13,8 +13,11 @@ namespace ShopTool.Model
         public string Password { get; set; }
         public string Name { get; set; }
         public DateTime UploaDateTime { get; set; }
+        public string UploadResult { get; set; }
+        public string UploadFailedReson { get; set; }
         public string Description { get; set; }
         public string Price { get; set; }
+        [System.ComponentModel.Browsable(false)]
         public ConnectedComboInfo Category { get; set; }
         public ConnectedComboInfo CategoryDetailInfo { get; set; }
         public Info Status { get; set; }
@@ -24,11 +27,6 @@ namespace ShopTool.Model
         public Info LogisticDay { get; set; }
         public List<Image> Pictures { get; set; }
         public List<string> PictureUrls { get; set; }
-
-        public string UploadResult { get; set; }
-        public string UploadFailedReson { get; set; }
-
-        
 
         public Product()
         {

@@ -73,6 +73,9 @@ namespace ShopTool
 
         private void InitailizeComboCatogery()
         {
+            this.cmbCategory1.DataSource = null;
+            this.cmbCategory2.DataSource = null;
+            this.cmbCategory3.DataSource = null;
             List<ConnectedComboInfo> list = ComboUtil.GetDatatSourceForCategory();
             this.cmbCategory1.ValueMember = "Id";
             this.cmbCategory1.DisplayMember = "Name";
@@ -81,18 +84,44 @@ namespace ShopTool
 
         private void cmbCategory1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.cmbCategory2.DataSource = null;
+            this.cmbCategory3.DataSource = null;
             ConnectedComboInfo result = this.cmbCategory1.SelectedItem as ConnectedComboInfo;
             this.cmbCategory2.ValueMember = "Id";
             this.cmbCategory2.DisplayMember = "Name";
-            this.cmbCategory2.DataSource = (result.Children);
+            if (result != null) this.cmbCategory2.DataSource = (result.Children);
         }
 
         private void cmbCategory2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.cmbCategory3.DataSource = null;
             ConnectedComboInfo result = this.cmbCategory2.SelectedItem as ConnectedComboInfo;
             this.cmbCategory3.ValueMember = "Id";
             this.cmbCategory3.DisplayMember = "Name";
-            this.cmbCategory3.DataSource = (result.Children);
+            if (result != null) this.cmbCategory3.DataSource = (result.Children);
+        }
+
+        private void cmbCategory3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CategoryDetailInfo = new ConnectedComboInfo();
+            ConnectedComboInfo info1 = this.cmbCategory1.SelectedItem as ConnectedComboInfo;
+            ConnectedComboInfo info2 = this.cmbCategory2.SelectedItem as ConnectedComboInfo;
+            ConnectedComboInfo info3 = this.cmbCategory3.SelectedItem as ConnectedComboInfo;
+            if (info1 != null)
+            {
+                CategoryDetailInfo.LevelOneID = info1.ID;
+                CategoryDetailInfo.LevelOneName = info1.Name;
+            }
+            if (info2 != null)
+            {
+                CategoryDetailInfo.LevelTwoID = (Convert.ToInt32(info2.ID) - 1).ToString();
+                CategoryDetailInfo.LevelTwoName = info2.Name;
+            }
+            if (info3 != null)
+            {
+                CategoryDetailInfo.LevelThreeID = info3.ID;
+                CategoryDetailInfo.LevelThreeName = info3.Name;
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -211,6 +240,7 @@ namespace ShopTool
             FormConfirm frmConfirm = new FormConfirm();
             frmConfirm.Products = _products;
             frmConfirm.Show();
+            this.Hide();
         }
 
 
@@ -237,17 +267,6 @@ namespace ShopTool
             {
                 pictureBox4.Image = Image.FromFile(d.FileName);
             }
-        }
-
-        private void cmbCategory3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CategoryDetailInfo = new ConnectedComboInfo();
-            ConnectedComboInfo info1 = this.cmbCategory1.SelectedItem as ConnectedComboInfo;
-            ConnectedComboInfo info2 = this.cmbCategory2.SelectedItem as ConnectedComboInfo;
-            ConnectedComboInfo info3 = this.cmbCategory3.SelectedItem as ConnectedComboInfo;
-            CategoryDetailInfo.LevelOne = info1.ID;
-            CategoryDetailInfo.LevelTwo = (Convert.ToInt32(info2.ID)-1).ToString();
-            CategoryDetailInfo.LevelThree = info3.ID;
         }
 
         private void cmbLogisticLiao_SelectedIndexChanged(object sender, EventArgs e)
@@ -375,5 +394,13 @@ namespace ShopTool
             return true;
         }
 
+        private void FormProduct_Shown(object sender, EventArgs e)
+        {
+            //this.txtProductName.Text = new Random().Next(1, 6) + "rr";
+            //this.txtProductDesc.Text = "aaaa";
+            //this.txtProductPrice.Text = "5555";
+            //this.cmbProductArea.SelectedIndex = 3;
+            //this.cmbCategory1.SelectedIndex = 1;
+        }
     }
 }
