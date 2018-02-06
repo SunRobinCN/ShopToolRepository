@@ -16,7 +16,7 @@ namespace ShopTool
 {
     public partial class FormExecute : Form
     {
-        public const int INTERVAL = 500;
+        public const int INTERVAL = 1000;
 
         public Product Product { get; set; }
         public bool Failed { get; set; }
@@ -90,7 +90,20 @@ namespace ShopTool
                     }
                     if (p.Url.EndsWith("b=write-item_end"))
                     {
-                        Product.UploadResult = "Success!";
+                        string html = "";
+                        browser.GetSourceAsync().ContinueWith(taskHtml =>
+                        {
+                            html = taskHtml.Result;
+                        });
+                        if (html.Contains("負荷調整") == false)
+                        {
+                            Product.UploadResult = "Success!";
+                        }
+                        else
+                        {
+                            Product.UploadResult = "Failed!";
+                            Product.UploadFailedReson = "上传产品时间间隔太近";
+                        }
                         Product.UploaDateTime = DateTime.Now;
                         TextUtil.ArchiveProduct(Product);
                         Thread.Sleep(INTERVAL * 6);

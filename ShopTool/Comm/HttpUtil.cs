@@ -36,6 +36,10 @@ namespace ShopTool.Comm
             var parameters = new Dictionary<string, string> { { "ses_id", sessionID }, { "loginid", username }, { "password", password }, { "loginforid", "1" }, { "loginbtn", "%83%8D%83O%83C%83%93" } };
             var encodedContent = new FormUrlEncodedContent(parameters);
             var result = InvokePostByHttpUtil(url, encodedContent);
+            if (result.Contains("#changeLogin"))
+            {
+                throw new Exception("用户名与密码出现问题！");
+            }
         }
 
         private static string GetSessionIDFromHeaders(string content)

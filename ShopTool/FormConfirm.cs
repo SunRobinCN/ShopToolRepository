@@ -22,6 +22,7 @@ namespace ShopTool
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
             FormDoneInfo = new FormDone();
+            this.Closed += CloseApplicaiton;
         }
 
         private void btnUploadProduct_Click(object sender, EventArgs e)
@@ -179,6 +180,7 @@ namespace ShopTool
                 catch (Exception exception)
                 {
                     FileLog.Error("FormConfirm_Shown", exception, LogType.Error);
+                    MessageBox.Show(exception.Message);
                     MessageBox.Show("上传图片时出现问题，请查看网络连接情况！如还有其他问题，联系开发者.");
                 }
             });
@@ -187,6 +189,11 @@ namespace ShopTool
         private void rtxtConfirmInfo_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void CloseApplicaiton(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
