@@ -93,7 +93,7 @@
             // 
             this.btnUpload.Enabled = false;
             this.btnUpload.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUpload.Location = new System.Drawing.Point(244, 581);
+            this.btnUpload.Location = new System.Drawing.Point(267, 575);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(205, 48);
             this.btnUpload.TabIndex = 34;

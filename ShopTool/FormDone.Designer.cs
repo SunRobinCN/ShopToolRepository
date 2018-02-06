@@ -56,7 +56,7 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(268, 213);
+            this.btnExit.Location = new System.Drawing.Point(307, 215);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(205, 48);
             this.btnExit.TabIndex = 35;

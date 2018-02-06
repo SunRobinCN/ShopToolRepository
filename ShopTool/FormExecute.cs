@@ -65,11 +65,10 @@ namespace ShopTool
                         Task.WaitAll(task);
                         if (task.Result.Result != null && Convert.ToInt32(task.Result.Result) > 0)
                         {
-                            jscript = "$('#changeLogin').click();" +
-                                      "$(\"input[name=\'loginid\']\").val(\'outam1984@yahoo.co.jp\');" +
-                                      "$(\"input[name=\'password\']\").val(\'X8u813\');";
+                            jscript = string.Format("$('#changeLogin').click();" +
+                                                    "$(\"input[name=\'loginid\']\").val(\'{0}\');" +
+                                                    "$(\"input[name=\'password\']\").val(\'{1}\');", Product.Username, Product.Password);
                             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                            Thread.Sleep(INTERVAL);
                             jscript = "$(\"input[name=\'loginbtn\']\").click();";
                             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
                         }
@@ -106,7 +105,7 @@ namespace ShopTool
                         }
                         Product.UploaDateTime = DateTime.Now;
                         TextUtil.ArchiveProduct(Product);
-                        Thread.Sleep(INTERVAL * 6);
+                        Thread.Sleep(INTERVAL * 1);
                         jscript = "$(\"#prof_header > a\").last().click();";
                         browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
                         Thread.Sleep(INTERVAL * 16);
@@ -140,7 +139,8 @@ namespace ShopTool
             jscript = $"$(\'#explanation\').val(\'{Product.Description}\');";
             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
 
-            jscript = "$(\'.writeItemCategory .tempArrowLink\').click();";
+            jscript = "$(\'.writeItemCategory .tempArrowLink\').click();" +
+                      "$(\"html,body\").animate({scrollTop:$(\"#titleInput\").offset().top},100);";
             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
             jscript = "$(\"#mCSB_1_container .tempArrowLink\").eq(0).click();";
             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
@@ -162,7 +162,8 @@ namespace ShopTool
             Thread.Sleep(INTERVAL);
 
 
-            jscript = string.Format("$(\'.writeItemCarry .tempArrowLink\').click();");
+            jscript = string.Format("$(\'.writeItemCarry .tempArrowLink\').click();" +
+                                    "$(\"html,body\").animate({{scrollTop:$(\"#selectedCarry\").offset().top}},1000);");
             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
             Thread.Sleep(INTERVAL);
             jscript = $"$(\'#{Product.LogisticLiao.ID}\').click();";
@@ -238,6 +239,7 @@ namespace ShopTool
         void OnLoadError(object sender, LoadErrorEventArgs e)
         {
             FileLog.Error("OnLoadError", new Exception(e.ErrorText), LogType.Error);
+            MessageBox.Show("OnLoadError!");
         }
 
         void OnConsoleMessage(object sender, ConsoleMessageEventArgs e)
@@ -261,13 +263,52 @@ namespace ShopTool
             if (sender is ChromiumWebBrowser browser && browser.IsBrowserInitialized)
             {
                 browser.Load("https://shoppies.jp/write-item_sp");
-                browser.ShowDevTools();
+                //browser.ShowDevTools();
             }
         }
 
         private void myTransparentPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void FormExecute_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            switch (e.CloseReason)
+            {
+                //应用程序要求关闭窗口
+                case CloseReason.ApplicationExitCall:
+                    e.Cancel = false; //不拦截，响应操作
+                    break;
+                //自身窗口上的关闭按钮
+                case CloseReason.FormOwnerClosing:
+                    MessageBox.Show("执行期间不能关闭！");
+                    e.Cancel = true;//拦截，不响应操作
+                    break;
+                //MDI窗体关闭事件
+                case CloseReason.MdiFormClosing:
+                    MessageBox.Show("执行期间不能关闭！");
+                    e.Cancel = true;//拦截，不响应操作
+                    break;
+                //不明原因的关闭
+                case CloseReason.None:
+                    break;
+                //任务管理器关闭进程
+                case CloseReason.TaskManagerClosing:
+                    e.Cancel = false;//不拦截，响应操作
+                    break;
+                //用户通过UI关闭窗口或者通过Alt+F4关闭窗口
+                case CloseReason.UserClosing:
+                    MessageBox.Show("执行期间不能关闭！");
+                    e.Cancel = true;//拦截，不响应操作
+                    break;
+                //操作系统准备关机
+                case CloseReason.WindowsShutDown:
+                    e.Cancel = false;//不拦截，响应操作
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
