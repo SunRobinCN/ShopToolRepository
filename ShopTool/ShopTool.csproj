@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CefFilters\FindReplaceResponseFilter.cs" />
+    <Compile Include="Comm\ShutDownUtil.cs" />
     <Compile Include="CookieVisitor.cs" />
     <Compile Include="FormDone.cs">
       <SubType>Form</SubType>

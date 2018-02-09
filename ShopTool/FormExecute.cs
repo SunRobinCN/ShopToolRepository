@@ -277,35 +277,35 @@ namespace ShopTool
             switch (e.CloseReason)
             {
                 //应用程序要求关闭窗口
-                case CloseReason.ApplicationExitCall:
-                    e.Cancel = false; //不拦截，响应操作
-                    break;
+                //case CloseReason.ApplicationExitCall:
+                //    e.Cancel = false; //不拦截，响应操作
+                //    break;
                 //自身窗口上的关闭按钮
                 case CloseReason.FormOwnerClosing:
                     MessageBox.Show("执行期间不能关闭！");
                     e.Cancel = true;//拦截，不响应操作
                     break;
                 //MDI窗体关闭事件
-                case CloseReason.MdiFormClosing:
-                    MessageBox.Show("执行期间不能关闭！");
-                    e.Cancel = true;//拦截，不响应操作
-                    break;
-                //不明原因的关闭
-                case CloseReason.None:
-                    break;
-                //任务管理器关闭进程
-                case CloseReason.TaskManagerClosing:
-                    e.Cancel = false;//不拦截，响应操作
-                    break;
-                //用户通过UI关闭窗口或者通过Alt+F4关闭窗口
-                case CloseReason.UserClosing:
-                    MessageBox.Show("执行期间不能关闭！");
-                    e.Cancel = true;//拦截，不响应操作
-                    break;
-                //操作系统准备关机
-                case CloseReason.WindowsShutDown:
-                    e.Cancel = false;//不拦截，响应操作
-                    break;
+                //case CloseReason.MdiFormClosing:
+                //    MessageBox.Show("执行期间不能关闭！");
+                //    e.Cancel = true;//拦截，不响应操作
+                //    break;
+                ////不明原因的关闭
+                //case CloseReason.None:
+                //    break;
+                ////任务管理器关闭进程
+                //case CloseReason.TaskManagerClosing:
+                //    e.Cancel = false;//不拦截，响应操作
+                //    break;
+                ////用户通过UI关闭窗口或者通过Alt+F4关闭窗口
+                //case CloseReason.UserClosing:
+                //    MessageBox.Show("执行期间不能关闭！");
+                //    e.Cancel = true;//拦截，不响应操作
+                //    break;
+                ////操作系统准备关机
+                //case CloseReason.WindowsShutDown:
+                //    e.Cancel = false;//不拦截，响应操作
+                //    break;
                 default:
                     break;
             }

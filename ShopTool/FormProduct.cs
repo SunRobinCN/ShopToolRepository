@@ -227,6 +227,13 @@ namespace ShopTool
             this.txtProductName.Text = "";
             this.txtProductDesc.Text = "";
             this.txtProductPrice.Text = "";
+
+            this.pictureBox1.Image = global::ShopTool.Properties.Resources.embedbyrobin1;
+            this.pictureBox2.Image = global::ShopTool.Properties.Resources.embedbyrobin2;
+            this.pictureBox3.Image = global::ShopTool.Properties.Resources.embedbyrobin2;
+            this.pictureBox4.Image = global::ShopTool.Properties.Resources.embedbyrobin2;
+
+
             InitializeComboboxes();
         }
 
@@ -316,8 +323,8 @@ namespace ShopTool
                 ImageEquals(originalImage3, this.pictureBox3.Image) ||
                 ImageEquals(originalImage4, this.pictureBox4.Image))
             {
-                //MessageBox.Show("请输入4张图片！");
-                //return false;
+                MessageBox.Show("请输入4张图片！");
+                return false;
             }
             if (this.cmbCategory3.SelectedItem == null)
             {
@@ -401,6 +408,11 @@ namespace ShopTool
             //this.txtProductPrice.Text = "5555";
             //this.cmbProductArea.SelectedIndex = 3;
             //this.cmbCategory1.SelectedIndex = 1;
+        }
+
+        private void FormProduct_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ShutDownUtil.ShutDown();
         }
     }
 }

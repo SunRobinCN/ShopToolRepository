@@ -9,14 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Log;
+using ShopTool.Comm;
 
 namespace ShopTool
 {
     public partial class FormDone : Form
     {
-        private string browserProcessName = "CefSharp.BrowserSubprocess";
-        private string thisProcessName = "ShopTool";
-
         public string UploadResultMessage { get; set; }
 
         public FormDone()
@@ -31,30 +29,9 @@ namespace ShopTool
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            KillBrowserProcess(browserProcessName);
-            KillBrowserProcess(thisProcessName);
-            this.Close();
-            Application.Exit();
-            System.Environment.Exit(0);
+            ShutDownUtil.ShutDown();
         }
 
-        private void KillBrowserProcess(string name)
-        {
-            try
-            {
-                Process[] processes = Process.GetProcesses();
-                foreach (Process p in processes)
-                {
-                    if (p.ProcessName == name)
-                    {
-                        p.Kill();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                FileLog.Error("KillBrowserProcess", ex, LogType.Error);
-            }
-        }
+        
     }
 }
