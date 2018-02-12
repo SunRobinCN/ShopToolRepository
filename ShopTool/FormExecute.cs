@@ -108,7 +108,7 @@ namespace ShopTool
                         Thread.Sleep(INTERVAL * 1);
                         jscript = "$(\"#prof_header > a\").last().click();";
                         browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL * 16);
+                        Thread.Sleep(INTERVAL * 1);
                         browser?.Dispose();
                         this.Close();
                         this.Dispose();

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using ShopTool.Model;
 
 namespace ShopTool.Comm
@@ -22,7 +23,7 @@ namespace ShopTool.Comm
             return result;
         }
 
-        public static string InvokePostByHttpUtil(string url, FormUrlEncodedContent parameters)
+        public static string InvokePostByHttpUtil(string url, MyFormUrlEncodedContent parameters)
         {
             MyHttpClient myHttpClient = MyHttpClient.GetInstance();
             Task<HttpResponseMessage> task = myHttpClient.PostAsync(url, parameters);
@@ -34,7 +35,7 @@ namespace ShopTool.Comm
         private static void LoginByHttpUtil(string url, string username, string password, string sessionID)
         {
             var parameters = new Dictionary<string, string> { { "ses_id", sessionID }, { "loginid", username }, { "password", password }, { "loginforid", "1" }, { "loginbtn", "%83%8D%83O%83C%83%93" } };
-            var encodedContent = new FormUrlEncodedContent(parameters);
+            var encodedContent = new MyFormUrlEncodedContent(parameters);
             var result = InvokePostByHttpUtil(url, encodedContent);
             if (result.Contains("#changeLogin"))
             {
@@ -66,7 +67,9 @@ namespace ShopTool.Comm
                 string base64PictrueStr = GetBase64FromImage(pictureImage);
                 parameters.Add("dataUrl", base64PictrueStr);
                 parameters.Add("block", "0");
-                var encodedContent = new FormUrlEncodedContent(parameters);
+
+                var encodedContent = new MyFormUrlEncodedContent(parameters);
+
                 string result = InvokePostByHttpUtil(Url.UPLOAD_IMAGE, encodedContent);
                 string imageUrl = GetImageUrlFromResponse(result);
                 list.Add(imageUrl);
@@ -100,5 +103,43 @@ namespace ShopTool.Comm
             MyHttpClient.Dispose();
         }
 
+    }
+
+
+    public class MyFormUrlEncodedContent : ByteArrayContent
+    {
+        public MyFormUrlEncodedContent(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
+            : base(MyFormUrlEncodedContent.GetContentByteArray(nameValueCollection))
+        {
+            base.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+        }
+        private static byte[] GetContentByteArray(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
+        {
+            if (nameValueCollection == null)
+            {
+                throw new ArgumentNullException("nameValueCollection");
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (KeyValuePair<string, string> current in nameValueCollection)
+            {
+                if (stringBuilder.Length > 0)
+                {
+                    stringBuilder.Append('&');
+                }
+
+                stringBuilder.Append(MyFormUrlEncodedContent.Encode(current.Key));
+                stringBuilder.Append('=');
+                stringBuilder.Append(MyFormUrlEncodedContent.Encode(current.Value));
+            }
+            return Encoding.Default.GetBytes(stringBuilder.ToString());
+        }
+        private static string Encode(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return string.Empty;
+            }
+            return System.Net.WebUtility.UrlEncode(data).Replace("%20", "+");
+        }
     }
 }

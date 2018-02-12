@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -17,45 +18,29 @@ namespace Test
         [TestMethod]
         public void TestMethod3()
         {
-            Product product = new Product();
-            product.Username = "myname";
-            product.Password = "mypassword";
-            product.Name = "test12";
-            product.Description = "test1 desc";
-            product.Price = "3333";
-            product.Area = new Info()
-            {
-                Name = "秋田県"
-            };
-            product.Category = new ConnectedComboInfo()
-            {
-                ID = "9105",
-                Name = "ゲーム"
-            };
-            product.Status = new Info()
-            {
-                ID = "6",
-                Name = ""
-            };
-            product.LogisticLiao = new Info()
-            {
-                ID = "1",
-                Name = ""
-            };
-            product.LogisticDay = new Info()
-            {
-                ID = "0",
-                Name = ""
-            };
+            List<string> pathList = new List<string>();
+            pathList.Add(@"C:\Users\robin.sun\Desktop\1.jpg");
+            pathList.Add(@"C:\Users\robin.sun\Desktop\2.jpg");
+            pathList.Add(@"C:\Users\robin.sun\Desktop\3.jpg");
+            pathList.Add(@"C:\Users\robin.sun\Desktop\4.jpg");
 
-            product.UploaDateTime = DateTime.Now;
+            Image image = Image.FromFile(pathList[2]);
+            List<Image> list = new List<Image>();
+            list.Add(image);
 
-            TextUtil.ArchiveProduct(product);
-            for (int i = 0; i < 105; i++)
+            HttpUtil.LoginToShopWebsite("ueda_mohei@yahoo.co.jp", "P5e530");
+            HttpUtil.UploadPictureToWebsite(list);
+
+            List<string> resultList= new List<string>();
+
+            foreach (var path in pathList)
             {
-                TextUtil.ArchiveProduct(product);
+                
+                string ext = new ImageFormatConverter().ConvertToString(image.RawFormat);
+                resultList.Add(ext);
             }
-            List<Product> list = TextUtil.GetProducts();
+
+            Debug.WriteLine(resultList);
         }
     }
 }
