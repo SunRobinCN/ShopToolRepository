@@ -16,7 +16,7 @@ namespace ShopTool
 {
     public partial class FormExecute : Form
     {
-        public const int INTERVAL = 1000;
+        public const int INTERVAL = 500;
 
         public Product Product { get; set; }
         public bool Failed { get; set; }
@@ -93,25 +93,25 @@ namespace ShopTool
                         browser.GetSourceAsync().ContinueWith(taskHtml =>
                         {
                             html = taskHtml.Result;
+                            if (html.Contains("負荷調整") == false)
+                            {
+                                Product.UploadResult = "Success!";
+                            }
+                            else
+                            {
+                                Product.UploadResult = "Failed!";
+                                Product.UploadFailedReson = "上传产品时间间隔太近";
+                            }
+                            Product.UploaDateTime = DateTime.Now;
+                            TextUtil.ArchiveProduct(Product);
+                            Thread.Sleep(INTERVAL * 1);
+                            jscript = "$(\"#prof_header > a\").last().click();";
+                            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                            Thread.Sleep(INTERVAL * 1);
+                            browser?.Dispose();
+                            this.Close();
+                            this.Dispose();
                         });
-                        if (html.Contains("負荷調整") == false)
-                        {
-                            Product.UploadResult = "Success!";
-                        }
-                        else
-                        {
-                            Product.UploadResult = "Failed!";
-                            Product.UploadFailedReson = "上传产品时间间隔太近";
-                        }
-                        Product.UploaDateTime = DateTime.Now;
-                        TextUtil.ArchiveProduct(Product);
-                        Thread.Sleep(INTERVAL * 1);
-                        jscript = "$(\"#prof_header > a\").last().click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        Thread.Sleep(INTERVAL * 1);
-                        browser?.Dispose();
-                        this.Close();
-                        this.Dispose();
                     }
                 }
             });
@@ -135,7 +135,7 @@ namespace ShopTool
             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
             Thread.Sleep(INTERVAL);
 
-
+            Product.Description = Product.Description.Replace("\r", "").Replace("\n", "\\n");
             jscript = $"$(\'#explanation\').val(\'{Product.Description}\');";
             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
 

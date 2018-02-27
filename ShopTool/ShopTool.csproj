@@ -52,6 +52,10 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Khendys.Controls.ExRichTextBox, Version=1.0.6632.19422, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Khendys.Controls.ExRichTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
@@ -111,7 +115,7 @@
     <Compile Include="Comm\MyHttpClient.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="MyControl.cs">
+    <Compile Include="MyControlPannel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -145,9 +149,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="Config\user.data">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Config\user.data" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -168,6 +170,7 @@
   <ItemGroup>
     <Content Include="c.ico" />
     <Content Include="Config\c.ico" />
+    <Content Include="Lib\Khendys.Controls.ExRichTextBox.dll" />
     <Content Include="logo.ico" />
     <Content Include="Lib\Newtonsoft.Json.dll" />
     <Content Include="ShopScript.js" />

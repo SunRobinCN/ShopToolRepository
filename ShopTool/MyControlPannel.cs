@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ShopTool
 {
-    public class MyControl : System.Windows.Forms.Panel
+    public class MyControlPannel : System.Windows.Forms.Panel
     {
         protected override CreateParams CreateParams
         {

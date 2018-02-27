@@ -44,6 +44,7 @@ namespace ShopTool
             this.cmbUsername.ValueMember = "Password";
             this.cmbUsername.DisplayMember = "Username";
             this.cmbUsername.DataSource = users;
+            this.cmbUsername.SelectedIndex = -1;
 
             this.cmbProductSatus.ValueMember = "Id";
             this.cmbProductSatus.DisplayMember = "Name";
@@ -200,26 +201,29 @@ namespace ShopTool
         {
             string username = this.cmbUsername.Text;
             string password = this.txtPassword.Text;
-            List<User> users = TextUtil.GetUsers();
-            bool existed = false;
-            foreach (User user in users)
+            if (username != "" && password != "")
             {
-                if (user.Username == username)
+                List<User> users = TextUtil.GetUsers();
+                bool existed = false;
+                foreach (User user in users)
                 {
-                    user.Password = password;
-                    existed = true;
+                    if (user.Username == username)
+                    {
+                        user.Password = password;
+                        existed = true;
+                    }
                 }
-            }
-            if (existed == false)
-            {
-                User newUser = new User()
+                if (existed == false)
                 {
-                    Username = username,
-                    Password = password
-                };
-                users.Add(newUser);
+                    User newUser = new User()
+                    {
+                        Username = username,
+                        Password = password
+                    };
+                    users.Add(newUser);
+                }
+                TextUtil.ArchiveUsers(users);
             }
-            TextUtil.ArchiveUsers(users);
         }
 
         private void ClearAll()
@@ -227,6 +231,7 @@ namespace ShopTool
             this.txtProductName.Text = "";
             this.txtProductDesc.Text = "";
             this.txtProductPrice.Text = "";
+            this.cmbUsername.SelectedIndex = -1;
 
             this.pictureBox1.Image = global::ShopTool.Properties.Resources.embedbyrobin1;
             this.pictureBox2.Image = global::ShopTool.Properties.Resources.embedbyrobin2;
@@ -253,9 +258,15 @@ namespace ShopTool
 
         private void cmbUsername_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<User> users = TextUtil.GetUsers();
-            User user = this.cmbUsername.SelectedItem as User;
-            this.txtPassword.Text = user.Password;
+            if (this.cmbUsername.SelectedIndex >= 0)
+            {
+                User user = this.cmbUsername.SelectedItem as User;
+                this.txtPassword.Text = user.Password;
+            }
+            else
+            {
+                this.txtPassword.Text = "";
+            }
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -323,8 +334,8 @@ namespace ShopTool
                 ImageEquals(originalImage3, this.pictureBox3.Image) ||
                 ImageEquals(originalImage4, this.pictureBox4.Image))
             {
-                MessageBox.Show("请输入4张图片！");
-                return false;
+                //MessageBox.Show("请输入4张图片！");
+                //return false;
             }
             if (this.cmbCategory3.SelectedItem == null)
             {

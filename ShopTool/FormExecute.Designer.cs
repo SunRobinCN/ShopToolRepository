@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.myTransparentPanel = new ShopTool.MyControl();
+            this.myTransparentPanel = new ShopTool.MyControlPannel();
             this.SuspendLayout();
             // 
             // myTransparentPanel
@@ -61,6 +61,6 @@
 
         #endregion
 
-        private MyControl myTransparentPanel;
+        private MyControlPannel myTransparentPanel;
     }
 }

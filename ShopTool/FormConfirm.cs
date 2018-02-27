@@ -107,7 +107,7 @@ namespace ShopTool
                 this.rtxtConfirmInfo.AppendText("\r\n");
                 this.rtxtConfirmInfo.AppendText("用户名：" + product.Username + "\r\n");
                 this.rtxtConfirmInfo.AppendText("商品名：" + product.Name + "\r\n");
-                this.rtxtConfirmInfo.AppendText("商品説明：" + product.Description + "\r\n");
+                this.rtxtConfirmInfo.AppendText("商品説明：\r\n" + product.Description + "\r\n");
                 this.rtxtConfirmInfo.AppendText("カテゴリ：" + (product).CategoryDetailInfo.ToString() + "\r\n");
                 this.rtxtConfirmInfo.AppendText("状態：" + product.Status.Name + "\r\n");
                 this.rtxtConfirmInfo.AppendText("配送料：" + product.LogisticLiao.Name + "\r\n");
@@ -125,12 +125,14 @@ namespace ShopTool
             Bitmap bmp = new Bitmap(picture);
             double resizeTimes = bmp.Height / 110d;
             Bitmap resizedBmp = GetResizeImage(bmp, resizeTimes);
-            var obj = Clipboard.GetDataObject();
-            Clipboard.SetDataObject(resizedBmp);
+            //var obj = Clipboard.GetDataObject();
+            //Clipboard.SetDataObject(resizedBmp);
             DataFormats.Format format = DataFormats.GetFormat(DataFormats.Bitmap);
+            rtxtConfirmInfo.InsertImage(resizedBmp);
             if (rtxtConfirmInfo.CanPaste(format))
-                rtxtConfirmInfo.Paste();
-            Clipboard.SetDataObject(obj);
+            {
+            }
+            //Clipboard.SetDataObject(obj);
         }
 
         private Bitmap GetResizeImage(Bitmap bm, double times)

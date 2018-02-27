@@ -35,7 +35,7 @@
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.联系我们ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnUpload = new System.Windows.Forms.Button();
-            this.rtxtConfirmInfo = new System.Windows.Forms.RichTextBox();
+            this.rtxtConfirmInfo = new Khendys.Controls.ExRichTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,6 +142,6 @@
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 联系我们ToolStripMenuItem;
         private System.Windows.Forms.Button btnUpload;
-        private System.Windows.Forms.RichTextBox rtxtConfirmInfo;
+        private Khendys.Controls.ExRichTextBox rtxtConfirmInfo;
     }
 }
