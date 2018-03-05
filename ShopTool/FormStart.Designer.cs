@@ -37,6 +37,7 @@
             this.联系我们ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnUploadExistedProduct = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -109,6 +110,7 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(22, 98);
+            this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
@@ -127,17 +129,29 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "最近7天产品上传记录：";
             // 
+            // btnUploadExistedProduct
+            // 
+            this.btnUploadExistedProduct.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUploadExistedProduct.Location = new System.Drawing.Point(691, 333);
+            this.btnUploadExistedProduct.Name = "btnUploadExistedProduct";
+            this.btnUploadExistedProduct.Size = new System.Drawing.Size(212, 45);
+            this.btnUploadExistedProduct.TabIndex = 5;
+            this.btnUploadExistedProduct.Text = "上传已有商品";
+            this.btnUploadExistedProduct.UseVisualStyleBackColor = true;
+            this.btnUploadExistedProduct.Click += new System.EventHandler(this.btnUploadExistedProduct_Click);
+            // 
             // FrmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 685);
+            this.Controls.Add(this.btnUploadExistedProduct);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUploadNew);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmStart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -162,6 +176,7 @@
         private System.Windows.Forms.ToolStripMenuItem 联系我们ToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnUploadExistedProduct;
     }
 }
 

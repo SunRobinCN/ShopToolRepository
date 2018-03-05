@@ -16,8 +16,10 @@ namespace ShopTool
     public partial class FormProduct : Form
     {
 
-        private List<Product> _products = new List<Product>();
+        private readonly List<Product> _products = new List<Product>();
         public ConnectedComboInfo CategoryDetailInfo { get; set; }
+
+        public Product ExistedProduct { get; set; }
 
         public FormProduct()
         {
@@ -36,20 +38,54 @@ namespace ShopTool
         private void FormProduct_Load(object sender, EventArgs e)
         {
             InitializeComboboxes();
+            InitializeUser();
         }
 
-        private void InitializeComboboxes()
+        private void FullFillExistedProductInfo()
+        {
+            if (ExistedProduct != null)
+            {
+                this.cmbUsername.Text = ExistedProduct.Username;
+                this.txtPassword.Text = ExistedProduct.Password;
+                this.txtProductName.Text = ExistedProduct.Name;
+                this.txtProductDesc.Text = ExistedProduct.Description;
+                this.txtProductPrice.Text = ExistedProduct.Price;
+
+                this.cmbCategory1.SelectedText = ExistedProduct.CategoryDetailInfo.LevelOneName;
+                this.cmbCategory2.SelectedText = ExistedProduct.CategoryDetailInfo.LevelTwoName;
+                this.cmbCategory3.SelectedText = ExistedProduct.CategoryDetailInfo.LevelThreeName;
+
+                this.pictureBox1.ImageLocation = ExistedProduct.ImagePaths[0];
+                if (ExistedProduct.ImagePaths.Count > 1)
+                {
+                    this.pictureBox2.ImageLocation = ExistedProduct.ImagePaths[1];
+                }
+                if (ExistedProduct.ImagePaths.Count > 2)
+                {
+                    this.pictureBox3.ImageLocation = ExistedProduct.ImagePaths[2];
+                }
+                if (ExistedProduct.ImagePaths.Count > 3)
+                {
+                    this.pictureBox4.ImageLocation = ExistedProduct.ImagePaths[3];
+                }
+            }
+        }
+
+        private void InitializeUser()
         {
             List<User> users = TextUtil.GetUsers();
             this.cmbUsername.ValueMember = "Password";
             this.cmbUsername.DisplayMember = "Username";
             this.cmbUsername.DataSource = users;
             this.cmbUsername.SelectedIndex = -1;
+        }
 
+        private void InitializeComboboxes()
+        {
             this.cmbProductSatus.ValueMember = "Id";
             this.cmbProductSatus.DisplayMember = "Name";
             this.cmbProductSatus.DataSource = ComboUtil.GetDatatSourceForStatus();
-            this.cmbProductSatus.SelectedIndex = 2;
+            this.cmbProductSatus.SelectedIndex = 0;
 
             this.cmbLogisticLiao.ValueMember = "Id";
             this.cmbLogisticLiao.DisplayMember = "Name";
@@ -62,12 +98,12 @@ namespace ShopTool
             this.cmbProductArea.ValueMember = "Id";
             this.cmbProductArea.DisplayMember = "Name";
             this.cmbProductArea.DataSource = ComboUtil.GetDatatSourceForArea();
-            this.cmbProductArea.SelectedIndex = 0;
+            this.cmbProductArea.SelectedIndex = 27;
 
             this.cmbLogisticDay.ValueMember = "Id";
             this.cmbLogisticDay.DisplayMember = "Name";
             this.cmbLogisticDay.DataSource = ComboUtil.GetDatatSourceForDelierDate();
-            this.cmbLogisticDay.SelectedIndex = 0;
+            this.cmbLogisticDay.SelectedIndex = 3;
 
             InitailizeComboCatogery();
         }
@@ -81,6 +117,7 @@ namespace ShopTool
             this.cmbCategory1.ValueMember = "Id";
             this.cmbCategory1.DisplayMember = "Name";
             this.cmbCategory1.DataSource = list;
+            this.cmbCategory1.SelectedIndex = 1;
         }
 
         private void cmbCategory1_SelectedIndexChanged(object sender, EventArgs e)
@@ -162,10 +199,30 @@ namespace ShopTool
                 LogisticDay = cmbLogisticDay.SelectedItem as Info,
                 CategoryDetailInfo = CategoryDetailInfo
             };
-            product.Pictures.Add(this.pictureBox1.Image);
-            product.Pictures.Add(this.pictureBox2.Image);
-            product.Pictures.Add(this.pictureBox3.Image);
-            product.Pictures.Add(this.pictureBox4.Image);
+
+            Image originalImage1 = Resources.embedbyrobin1;
+            Image originalImage2 = Resources.embedbyrobin2;
+            Image originalImage3 = Resources.embedbyrobin2;
+            Image originalImage4 = Resources.embedbyrobin2;
+
+
+            if (ImageEquals(originalImage1, this.pictureBox1.Image) == false)
+            {
+                product.Pictures.Add(this.pictureBox1.Image);
+            }
+            if (ImageEquals(originalImage2, this.pictureBox2.Image) == false)
+            {
+                product.Pictures.Add(this.pictureBox2.Image);
+            }
+            if (ImageEquals(originalImage3, this.pictureBox3.Image) == false)
+            {
+                product.Pictures.Add(this.pictureBox3.Image);
+            }
+            if (ImageEquals(originalImage4, this.pictureBox4.Image) == false)
+            {
+                product.Pictures.Add(this.pictureBox4.Image);
+            }
+
             _products.Add(product);
         }
 
@@ -231,7 +288,7 @@ namespace ShopTool
             this.txtProductName.Text = "";
             this.txtProductDesc.Text = "";
             this.txtProductPrice.Text = "";
-            this.cmbUsername.SelectedIndex = -1;
+            //this.cmbUsername.SelectedIndex = -1;
 
             this.pictureBox1.Image = global::ShopTool.Properties.Resources.embedbyrobin1;
             this.pictureBox2.Image = global::ShopTool.Properties.Resources.embedbyrobin2;
@@ -299,6 +356,7 @@ namespace ShopTool
             {
                 this.cmbLogisticWay.SetItemChecked(i, false);
             }
+            this.cmbLogisticWay.SetItemChecked(0, true);
         }
 
         private void cmbLogisticWay_SelectedIndexChanged(object sender, EventArgs e)
@@ -329,13 +387,13 @@ namespace ShopTool
             Image originalImage2 = Resources.embedbyrobin2;
             Image originalImage3 = Resources.embedbyrobin2;
             Image originalImage4 = Resources.embedbyrobin2;
-            if (ImageEquals(originalImage1, this.pictureBox1.Image) ||
-                ImageEquals(originalImage2, this.pictureBox2.Image) ||
-                ImageEquals(originalImage3, this.pictureBox3.Image) ||
+            if (ImageEquals(originalImage1, this.pictureBox1.Image) &&
+                ImageEquals(originalImage2, this.pictureBox2.Image) &&
+                ImageEquals(originalImage3, this.pictureBox3.Image) &&
                 ImageEquals(originalImage4, this.pictureBox4.Image))
             {
-                //MessageBox.Show("请输入4张图片！");
-                //return false;
+                MessageBox.Show("请输入至少1张图片！");
+                return false;
             }
             if (this.cmbCategory3.SelectedItem == null)
             {

@@ -343,6 +343,7 @@
             this.txtProductDesc.Location = new System.Drawing.Point(550, 218);
             this.txtProductDesc.Multiline = true;
             this.txtProductDesc.Name = "txtProductDesc";
+            this.txtProductDesc.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtProductDesc.Size = new System.Drawing.Size(294, 114);
             this.txtProductDesc.TabIndex = 39;
             // 
@@ -473,7 +474,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "FormProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProduct";

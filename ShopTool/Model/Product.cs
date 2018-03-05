@@ -27,11 +27,15 @@ namespace ShopTool.Model
         public Info LogisticDay { get; set; }
         public List<Image> Pictures { get; set; }
         public List<string> PictureUrls { get; set; }
+        public List<string> ImagePaths { get; set; }
+        public string Id { get; set; }
 
         public Product()
         {
             this.Pictures = new List<Image>();
             this.PictureUrls = new List<string>();
+            this.ImagePaths = new List<string>();
+            Id = Guid.NewGuid().ToString();
         }
 
         public string FinalLogisticWay

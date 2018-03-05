@@ -36,6 +36,7 @@ namespace ShopTool.Comm
 
             ShutDownUtil.KillBrowserProcess(browserProcessName);
             ShutDownUtil.KillBrowserProcess(thisProcessName);
+            FileLog.Info("ShutDown done!", LogType.Info);
         }
     }
 }

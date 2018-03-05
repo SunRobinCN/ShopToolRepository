@@ -14,6 +14,7 @@ namespace ShopTool
     public partial class FrmStart : Form
     {
         private const int HisotryInterval = 3;
+        readonly List<Product> _products = TextUtil.GetProducts();
 
         public FrmStart()
         {
@@ -34,8 +35,11 @@ namespace ShopTool
 
         private void FrmStart_Load(object sender, EventArgs e)
         {
-            List<Product> products = TextUtil.GetProducts();
-            this.dataGridView.DataSource = products.Where(p => (DateTime.Now - p.UploaDateTime).Days < HisotryInterval).ToList();
+            foreach (Product product in _products)
+            {
+                product.Description.Replace(@"\n", "");
+            }
+            this.dataGridView.DataSource = _products.Where(p => (DateTime.Now - p.UploaDateTime).Days < HisotryInterval).ToList();
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -46,6 +50,35 @@ namespace ShopTool
         private void dataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
 
+        }
+
+        private void btnUploadExistedProduct_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("请选择一个已有的产品！");
+                return;
+            }
+
+            Product p = GetSelectedProduct();
+            FormProduct formProduct = new FormProduct();
+            formProduct.ExistedProduct = p;
+            formProduct.Show();
+            this.Hide();
+        }
+
+        private Product GetSelectedProduct()
+        {
+            DataGridViewRow row = this.dataGridView.SelectedRows[0];
+            string id = row.Cells["Id"].ToString();
+            foreach (Product product in _products)
+            {
+                if (product.Id == id)
+                {
+                    return product;
+                }
+            }
+            return null;
         }
     }
 }

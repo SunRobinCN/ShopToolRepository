@@ -104,11 +104,13 @@
             // rtxtConfirmInfo
             // 
             this.rtxtConfirmInfo.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rtxtConfirmInfo.HiglightColor = Khendys.Controls.RtfColor.White;
             this.rtxtConfirmInfo.Location = new System.Drawing.Point(45, 88);
             this.rtxtConfirmInfo.Name = "rtxtConfirmInfo";
             this.rtxtConfirmInfo.Size = new System.Drawing.Size(630, 446);
             this.rtxtConfirmInfo.TabIndex = 35;
             this.rtxtConfirmInfo.Text = "";
+            this.rtxtConfirmInfo.TextColor = Khendys.Controls.RtfColor.Black;
             this.rtxtConfirmInfo.TextChanged += new System.EventHandler(this.rtxtConfirmInfo_TextChanged);
             // 
             // FormConfirm
@@ -120,7 +122,7 @@
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "FormConfirm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormConfirm";

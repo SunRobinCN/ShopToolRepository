@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log", "Log\Log.csproj", "{4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{5C91B8B4-914E-403E-8661-2BD9C9094F4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckProcesses", "CheckProcesses\CheckProcesses.csproj", "{2FAE0D51-00C0-49ED-8724-344F8FE2964F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,14 @@ Global
 		{5C91B8B4-914E-403E-8661-2BD9C9094F4C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C91B8B4-914E-403E-8661-2BD9C9094F4C}.Release|x64.ActiveCfg = Release|Any CPU
 		{5C91B8B4-914E-403E-8661-2BD9C9094F4C}.Release|x64.Build.0 = Release|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Debug|x64.Build.0 = Debug|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Release|x64.ActiveCfg = Release|Any CPU
+		{2FAE0D51-00C0-49ED-8724-344F8FE2964F}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

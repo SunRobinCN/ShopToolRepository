@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using Log;
@@ -12,9 +13,28 @@ namespace ShopTool.Comm
     {
         public static void ArchiveUsers(List<User> users)
         {
-            string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase +  @"\Config\user.data";
+            string folderpath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config";
+            string filepath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase +  @"\Config\user.data";
+            if (!Directory.Exists(folderpath))
+                Directory.CreateDirectory(folderpath);
+            if (!File.Exists(filepath))
+            {
+                Stream fileStream = null;
+                try
+                {
+                    fileStream = File.Create(filepath);
+                }
+                catch (Exception)
+                {
+                    if (fileStream != null) fileStream.Close();
+                }
+                finally
+                {
+                    fileStream?.Close();
+                }
+            }
             var json = JsonConvert.SerializeObject(users);
-            ReWriteToFile(path, json);
+            ReWriteToFile(filepath, json);
         }
 
         public static List<User> GetUsers()
@@ -23,22 +43,6 @@ namespace ShopTool.Comm
             try
             {
                 string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config\user.data";
-                if (!File.Exists(path))
-                {
-                    Stream fileStream = null;
-                    try
-                    {
-                        fileStream = File.Create(path);
-                    }
-                    catch (Exception)
-                    {
-                        if (fileStream != null) fileStream.Close();
-                    }
-                    finally
-                    {
-                        fileStream?.Close();
-                    }
-                }
                 using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
                 {
                     string content = reader.ReadToEnd();
@@ -54,14 +58,70 @@ namespace ShopTool.Comm
 
         public static void ArchiveProduct(Product p)
         {
-            string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config\products.data";
-            if (File.Exists(path) == false)
+            string folderpath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config";
+            string filepath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config\products.data";
+            if (!Directory.Exists(folderpath))
+                Directory.CreateDirectory(folderpath);
+            if (!File.Exists(filepath))
             {
-                File.Create(path);
+                Stream fileStream = null;
+                try
+                {
+                    fileStream = File.Create(filepath);
+                }
+                catch (Exception)
+                {
+                    if (fileStream != null) fileStream.Close();
+                }
+                finally
+                {
+                    fileStream?.Close();
+                }
             }
             p.Pictures = null;
             var json = JsonConvert.SerializeObject(p);
-            AppendToFile(path, json + ","); 
+            ArchiveProductImage(p);
+            AppendToFile(filepath, json + ","); 
+        }
+
+        private static void ArchiveProductImage(Product product)
+        {
+            List<Image> images = product.Pictures;
+            int count = 0;
+            foreach (Image image in images?? new List<Image>())
+            {
+                string format = "";
+                GetImageFormat(image, out format);
+                string fullPath = "/Images/" + DateTime.Now.ToString("yyyy_mm_dd") + "/" + product.Id + "_" + count++ + format;
+                image.Save(fullPath);
+                product.ImagePaths.Add(fullPath);
+            }
+        }
+
+        private static System.Drawing.Imaging.ImageFormat GetImageFormat(Image _img, out string format)
+        {
+            if (_img.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
+            {
+                format = ".jpg";
+                return System.Drawing.Imaging.ImageFormat.Jpeg;
+            }
+            if (_img.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Gif))
+            {
+                format = ".gif";
+                return System.Drawing.Imaging.ImageFormat.Gif;
+            }
+            if (_img.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Png))
+            {
+                format = ".png";
+                return System.Drawing.Imaging.ImageFormat.Png;
+            }
+            if (_img.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Bmp))
+            {
+                format = ".bmp";
+                return System.Drawing.Imaging.ImageFormat.Bmp;
+            }
+            format = string.Empty;
+            return null;
         }
 
         public static void ReWriteToFile(string path, string message)
@@ -103,22 +163,6 @@ namespace ShopTool.Comm
             List<Product> list = null;
             try
             {
-                if (!File.Exists(path))
-                {
-                    Stream fileStream = null;
-                    try
-                    {
-                        fileStream = File.Create(path);
-                    }
-                    catch (Exception)
-                    {
-                        if (fileStream != null) fileStream.Close();
-                    }
-                    finally
-                    {
-                        fileStream?.Close();
-                    }
-                }
                 using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
                 {
                     string content = reader.ReadToEnd();
