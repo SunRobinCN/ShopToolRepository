@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using ShopTool.Comm;
@@ -24,15 +27,6 @@ namespace ShopTool
         public FormProduct()
         {
             InitializeComponent();
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog d = new OpenFileDialog();
-            if (DialogResult.OK == d.ShowDialog())
-            {
-                pictureBox2.Image = Image.FromFile(d.FileName);
-            }
         }
 
         private void FormProduct_Load(object sender, EventArgs e)
@@ -55,7 +49,10 @@ namespace ShopTool
                 this.cmbCategory2.SelectedText = ExistedProduct.CategoryDetailInfo.LevelTwoName;
                 this.cmbCategory3.SelectedText = ExistedProduct.CategoryDetailInfo.LevelThreeName;
 
-                this.pictureBox1.ImageLocation = ExistedProduct.ImagePaths[0];
+                if (ExistedProduct.ImagePaths.Count > 0)
+                {
+                    this.pictureBox1.ImageLocation = ExistedProduct.ImagePaths[0];
+                }
                 if (ExistedProduct.ImagePaths.Count > 1)
                 {
                     this.pictureBox2.ImageLocation = ExistedProduct.ImagePaths[1];
@@ -162,15 +159,6 @@ namespace ShopTool
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog d = new OpenFileDialog();
-            if (DialogResult.OK == d.ShowDialog())
-            {
-                pictureBox1.Image = Image.FromFile(d.FileName);
-            }
-        }
-
         private void btnNextProduct_Click(object sender, EventArgs e)
         {
             if (CheckInput() == false)
@@ -178,7 +166,6 @@ namespace ShopTool
                 return;
             }
             SaveProduct();
-            SaveUser();
             ClearAll();
         }
 
@@ -305,6 +292,7 @@ namespace ShopTool
             {
                 return;
             }
+            SaveUser();
             SaveProduct();
             FormConfirm frmConfirm = new FormConfirm();
             frmConfirm.Products = _products;
@@ -323,6 +311,64 @@ namespace ShopTool
             else
             {
                 this.txtPassword.Text = "";
+            }
+        }
+
+        public static Image CreateNonIndexedImage(string path)
+        {
+            using (var sourceImage = Image.FromFile(path))
+            {
+                var targetImage = new Bitmap(sourceImage.Width, sourceImage.Height,
+                    PixelFormat.Format32bppArgb);
+                using (var canvas = Graphics.FromImage(targetImage))
+                {
+                    canvas.DrawImageUnscaled(sourceImage, 0, 0);
+                }
+                return targetImage;
+            }
+        }
+
+        [DllImport("Kernel32.dll", EntryPoint = "CopyMemory")]
+        private extern static void CopyMemory(IntPtr dest, IntPtr src, uint length);
+
+        public static Image CreateIndexedImage(string path)
+        {
+            using (var sourceImage = (Bitmap)Image.FromFile(path))
+            {
+                var targetImage = new Bitmap(sourceImage.Width, sourceImage.Height,
+                    sourceImage.PixelFormat);
+                var sourceData = sourceImage.LockBits(
+                    new Rectangle(0, 0, sourceImage.Width, sourceImage.Height),
+                    ImageLockMode.ReadOnly, sourceImage.PixelFormat);
+                var targetData = targetImage.LockBits(
+                    new Rectangle(0, 0, sourceImage.Width, sourceImage.Height),
+                    ImageLockMode.WriteOnly, targetImage.PixelFormat);
+                CopyMemory(targetData.Scan0, sourceData.Scan0,
+                    (uint)sourceData.Stride * (uint)sourceData.Height);
+                sourceImage.UnlockBits(sourceData);
+                targetImage.UnlockBits(targetData);
+                targetImage.Palette = sourceImage.Palette;
+                return targetImage;
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            if (DialogResult.OK == d.ShowDialog())
+            {
+                Image img = CreateNonIndexedImage(d.FileName);
+                pictureBox1.Image = img;
+                //original.Dispose();
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            if (DialogResult.OK == d.ShowDialog())
+            {
+                pictureBox2.Image = Image.FromFile(d.FileName);
             }
         }
 
@@ -472,11 +518,7 @@ namespace ShopTool
 
         private void FormProduct_Shown(object sender, EventArgs e)
         {
-            //this.txtProductName.Text = new Random().Next(1, 6) + "rr";
-            //this.txtProductDesc.Text = "aaaa";
-            //this.txtProductPrice.Text = "5555";
-            //this.cmbProductArea.SelectedIndex = 3;
-            //this.cmbCategory1.SelectedIndex = 1;
+            FullFillExistedProductInfo();
         }
 
         private void FormProduct_FormClosing(object sender, FormClosingEventArgs e)

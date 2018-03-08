@@ -38,7 +38,7 @@ namespace ShopTool
             {
                 FormExecute formExecute = new FormExecute { Product = product };
                 formExecute.ShowDialog();
-                Thread.Sleep(1000*1);
+                Thread.Sleep(1000 * 1);
             }
 
             Task.Factory.StartNew(() =>
@@ -46,7 +46,7 @@ namespace ShopTool
                 bool singal = true;
                 while (singal)
                 {
-                    if (CheckWhetherAllProductsUploaded() == true)
+                    if (CheckWhetherAllProductsUploaded(Products) == true)
                     {
                         StringBuilder builder = new StringBuilder();
                         foreach (Product product in Products)
@@ -70,6 +70,80 @@ namespace ShopTool
             });
         }
 
+        //private void btnUploadProduct_Click(object sender, EventArgs e)
+        //{
+        //    this.btnUpload.Text = "正在上传中...";
+        //    this.btnUpload.Enabled = false;
+        //    //foreach (Product product in Products)
+        //    //{
+        //    //    this.ShowExecute(product);
+        //    //}
+
+        //    foreach (Product product in Products)
+        //    {
+        //        FormExecute formExecute = new FormExecute { Product = product };
+        //        formExecute.ShowDialog();
+        //        //Thread.Sleep(1000*1);
+        //    }
+
+        //    Task.Factory.StartNew(() =>
+        //    {
+        //        bool singal = true;
+        //        while (singal)
+        //        {
+        //            if (CheckWhetherAllProductsUploaded(Products) == true)
+        //            {
+        //                singal = false;
+        //                List<Product> failedList = new List<Product>();
+        //                //上传产品时间间隔太近
+        //                foreach (Product p in Products)
+        //                {
+        //                    if (p.UploadFailedReson == "上传产品时间间隔太近")
+        //                    {
+        //                        failedList.Add(p);
+        //                    }
+        //                }
+
+        //                foreach (Product product in failedList)
+        //                {
+        //                    product.UploadResult = "";
+        //                    product.UploadFailedReson = "";
+        //                    FormExecute formExecute = new FormExecute { Product = product };
+        //                    formExecute.ShowDialog();
+        //                    //Thread.Sleep(1000*1);
+        //                }
+
+        //                Task.Factory.StartNew(() =>
+        //                {
+        //                    bool s = true;
+        //                    while (s)
+        //                    {
+        //                        if (CheckWhetherAllProductsUploaded(Products) == true)
+        //                        {
+        //                            s = false;
+        //                            StringBuilder builder = new StringBuilder();
+        //                            foreach (Product product in Products)
+        //                            {
+        //                                builder.AppendLine("Username: " + product.Username + ", Product: " + product.Name +
+        //                                                   ", Result: " +
+        //                                                   product.UploadResult + "\r\n");
+        //                            }
+        //                            FormDoneInfo.UploadResultMessage = builder.ToString();
+
+        //                            MethodInvoker mi = new MethodInvoker(this.ShowResult);
+        //                            this.BeginInvoke(mi);
+        //                        }
+        //                    }
+        //                });
+        //            }
+        //            else
+        //            {
+        //                Thread.Sleep(1000 * 10);
+        //            }
+        //        }
+        //    });
+        //}
+
         private void ShowResult()
         {
             FormDoneInfo.ShowDialog();
@@ -78,13 +152,13 @@ namespace ShopTool
         private void ShowExecute(Product product)
         {
             FormExecute formExecute = new FormExecute { Product = product };
-            formExecute.Show();
+            formExecute.ShowDialog();
         }
 
-        private bool CheckWhetherAllProductsUploaded()
+        private bool CheckWhetherAllProductsUploaded(List<Product> list)
         {
             bool result = true;
-            foreach (Product product in Products)
+            foreach (Product product in list)
             {
                 if (string.IsNullOrEmpty(product.UploadResult))
                 {
@@ -125,14 +199,8 @@ namespace ShopTool
             Bitmap bmp = new Bitmap(picture);
             double resizeTimes = bmp.Height / 110d;
             Bitmap resizedBmp = GetResizeImage(bmp, resizeTimes);
-            //var obj = Clipboard.GetDataObject();
-            //Clipboard.SetDataObject(resizedBmp);
             DataFormats.Format format = DataFormats.GetFormat(DataFormats.Bitmap);
             rtxtConfirmInfo.InsertImage(resizedBmp);
-            if (rtxtConfirmInfo.CanPaste(format))
-            {
-            }
-            //Clipboard.SetDataObject(obj);
         }
 
         private Bitmap GetResizeImage(Bitmap bm, double times)
@@ -178,6 +246,8 @@ namespace ShopTool
                     }
                     this.btnUpload.Text = "确认无误并且上传";
                     this.btnUpload.Enabled = true;
+                    btnUploadProduct_Click(null, null);
+                    this.Hide();
                 }
                 catch (Exception exception)
                 {

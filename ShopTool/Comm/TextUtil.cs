@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Windows.Forms.VisualStyles;
 using Log;
 using Newtonsoft.Json;
 using ShopTool.Model;
@@ -78,9 +79,9 @@ namespace ShopTool.Comm
                     fileStream?.Close();
                 }
             }
+            ArchiveProductImage(p);
             p.Pictures = null;
             var json = JsonConvert.SerializeObject(p);
-            ArchiveProductImage(p);
             AppendToFile(filepath, json + ","); 
         }
 
@@ -92,8 +93,16 @@ namespace ShopTool.Comm
             {
                 string format = "";
                 GetImageFormat(image, out format);
-                string fullPath = "/Images/" + DateTime.Now.ToString("yyyy_mm_dd") + "/" + product.Id + "_" + count++ + format;
-                image.Save(fullPath);
+                string folderPath = System.Environment.CurrentDirectory + "/Images/" + DateTime.Now.ToString("yyyy_MM_dd") + "/";
+                if (Directory.Exists(folderPath) == false)
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = product.Id + "_" + count++ + format;
+                string fullPath = folderPath + fileName;
+                //image.Save(fullPath);
+                Bitmap bitmap = new Bitmap(image);
+                bitmap.Save(fullPath);
                 product.ImagePaths.Add(fullPath);
             }
         }

@@ -70,7 +70,7 @@ namespace ShopTool
         private Product GetSelectedProduct()
         {
             DataGridViewRow row = this.dataGridView.SelectedRows[0];
-            string id = row.Cells["Id"].ToString();
+            string id = row.Cells["Id"].Value.ToString();
             foreach (Product product in _products)
             {
                 if (product.Id == id)

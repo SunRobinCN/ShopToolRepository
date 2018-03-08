@@ -16,7 +16,7 @@ namespace ShopTool
 {
     public partial class FormExecute : Form
     {
-        public const int INTERVAL = 500;
+        public const int INTERVAL = 5;
 
         public Product Product { get; set; }
         public bool Failed { get; set; }
@@ -53,77 +53,96 @@ namespace ShopTool
         {
             Task.Factory.StartNew(() =>
             {
-                ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
-                string jscript = "";
-                CefSharp.FrameLoadEndEventArgs p = e as CefSharp.FrameLoadEndEventArgs;
-                if (p != null)
+                try
                 {
-                    if ((p.Url == "https://shoppies.jp/write-item_sp"))
+                    ChromiumWebBrowser browser = sender as ChromiumWebBrowser;
+                    string jscript = "";
+                    CefSharp.FrameLoadEndEventArgs p = e as CefSharp.FrameLoadEndEventArgs;
+                    if (p != null)
                     {
-                        //这里根据是否登录了，执行两种情况
-                        Task<CefSharp.JavascriptResponse> task = browser.EvaluateScriptAsync("$(\"#changeLogin\").length;");
-                        Task.WaitAll(task);
-                        if (task.Result.Result != null && Convert.ToInt32(task.Result.Result) > 0)
+                        if ((p.Url == "https://shoppies.jp/write-item_sp"))
                         {
-                            jscript = string.Format("$('#changeLogin').click();" +
-                                                    "$(\"input[name=\'loginid\']\").val(\'{0}\');" +
-                                                    "$(\"input[name=\'password\']\").val(\'{1}\');", Product.Username, Product.Password);
-                            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                            jscript = "$(\"input[name=\'loginbtn\']\").click();";
-                            browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                        }
-                        else
-                        {
-                            Execute(browser);
-                        }
-                    }
-                    if (p.Url == "https://shoppies.jp/?jb=write-item_sp")
-                    {
-                        Execute(browser);
-                    }
-                    if (p.Url == "https://shoppies.jp/write-item_conf")
-                    {
-                        Thread.Sleep(INTERVAL * 5);
-                        jscript = "$(\'.gbl-submitBtnMini\').click();";
-                        browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                    }
-                    if (p.Url.EndsWith("b=write-item_end"))
-                    {
-                        string html = "";
-                        browser.GetSourceAsync().ContinueWith(taskHtml =>
-                        {
-                            html = taskHtml.Result;
-                            if (html.Contains("負荷調整") == false)
+                            //这里根据是否登录了，执行两种情况
+                            Task<CefSharp.JavascriptResponse> task = browser.EvaluateScriptAsync("$(\"#changeLogin\").length;");
+                            Task.WaitAll(task);
+                            if (task.Result.Result != null && Convert.ToInt32(task.Result.Result) > 0)
                             {
-                                Product.UploadResult = "Success!";
+                                jscript = string.Format("$('#changeLogin').click();" +
+                                                        "$(\"input[name=\'loginid\']\").val(\'{0}\');" +
+                                                        "$(\"input[name=\'password\']\").val(\'{1}\');", Product.Username, Product.Password);
+                                browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                                jscript = "$(\"input[name=\'loginbtn\']\").click();";
+                                browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
                             }
                             else
                             {
-                                Product.UploadResult = "Failed!";
-                                Product.UploadFailedReson = "上传产品时间间隔太近";
+                                Execute(browser);
                             }
-                            Product.UploaDateTime = DateTime.Now;
-                            TextUtil.ArchiveProduct(Product);
-                            Thread.Sleep(INTERVAL * 1);
-                            jscript = "$(\"#prof_header > a\").last().click();";
+                        }
+                        if (p.Url == "https://shoppies.jp/?jb=write-item_sp")
+                        {
+                            Execute(browser);
+                        }
+                        if (p.Url == "https://shoppies.jp/write-item_conf")
+                        {
+                            Thread.Sleep(INTERVAL * 5);
+                            jscript = "$(\'.gbl-submitBtnMini\').click();";
                             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
-                            Thread.Sleep(INTERVAL * 1);
-                            browser?.Dispose();
-                            this.Close();
-                            this.Dispose();
-                        });
+                        }
+                        if (p.Url.EndsWith("b=write-item_end"))
+                        {
+                            string html = "";
+                            browser.GetSourceAsync().ContinueWith(taskHtml =>
+                            {
+                                html = taskHtml.Result;
+                                if (html.Contains("負荷調整") == false)
+                                {
+                                    Product.UploadResult = "Success!";
+                                }
+                                else
+                                {
+                                    Product.UploadResult = "Failed!";
+                                    Product.UploadFailedReson = "上传产品时间间隔太近";
+                                }
+                                Product.UploaDateTime = DateTime.Now;
+                                TextUtil.ArchiveProduct(Product);
+                                Thread.Sleep(INTERVAL * 1);
+                                jscript = "$(\"#prof_header > a\").last().click();";
+                                browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
+                                Thread.Sleep(INTERVAL * 1);
+                                browser?.Dispose();
+                                this.Close();
+                                this.Dispose();
+                            });
+                        }
                     }
                 }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Error! " + exception.Message);
+                    FileLog.Error("OnFrameLoadEnd", exception, LogType.Error);
+                }
+                
             });
         }
 
         private void Execute(ChromiumWebBrowser browser)
         {
-            string jscript;
-            jscript = $"$(\'#picUrl0\').val(\'{Product.PictureUrls[0]}\');" +
-                      $"$(\'#picUrl1\').val(\'{Product.PictureUrls[1]}\');" +
-                      $"$(\'#picUrl2\').val(\'{Product.PictureUrls[2]}\');" +
-                      $"$(\'#picUrl3\').val(\'{Product.PictureUrls[3]}\');";
+            StringBuilder jscriptbuilder = new StringBuilder();
+            jscriptbuilder.Append($"$(\'#picUrl0\').val(\'{Product.PictureUrls[0]}\');");
+            if (Product.PictureUrls.Count > 1)
+            {
+                jscriptbuilder.Append($"$(\'#picUrl1\').val(\'{Product.PictureUrls[1]}\');");
+            }
+            if (Product.Pictures.Count > 2)
+            {
+                jscriptbuilder.Append($"$(\'#picUrl2\').val(\'{Product.PictureUrls[2]}\');");
+            }
+            if (Product.Pictures.Count > 3)
+            {
+                jscriptbuilder.Append($"$(\'#picUrl3\').val(\'{Product.PictureUrls[3]}\');");
+            }
+            var jscript = jscriptbuilder.ToString();
             browser.GetMainFrame().ExecuteJavaScriptAsync(jscript);
 
             jscript = $"$(\'#inputPrice\').val(\'{Product.Price}\');";
@@ -229,8 +248,6 @@ namespace ShopTool
                             int i = Convert.ToInt32(task.Result.Result);
                             MessageBox.Show(task.Result.Result.ToString());
                         }
-
-
                     }
                 }
             });
@@ -247,6 +264,7 @@ namespace ShopTool
             if (e.Message.Contains("Uncaught") && (e.Message.Contains("modori") == false)
                 && (e.Message.Contains("setPostLink") == false))
             {
+                MessageBox.Show("OnConsoleMessageError!");
                 Product.UploadResult = "Failed";
                 Product.UploadFailedReson = e.Message;
                 Product.UploaDateTime = DateTime.Now;
