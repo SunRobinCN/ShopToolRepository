@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +57,7 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(307, 215);
+            this.btnExit.Location = new System.Drawing.Point(461, 215);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(205, 48);
             this.btnExit.TabIndex = 35;
@@ -64,11 +65,23 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnBack
+            // 
+            this.btnBack.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBack.Location = new System.Drawing.Point(159, 215);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(205, 48);
+            this.btnBack.TabIndex = 36;
+            this.btnBack.Text = "回到主页";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // FormDone
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 338);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -87,5 +100,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnBack;
     }
 }
