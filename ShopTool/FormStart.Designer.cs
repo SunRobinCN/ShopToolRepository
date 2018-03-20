@@ -38,6 +38,12 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnUploadExistedProduct = new System.Windows.Forms.Button();
+            this.btnBatchUpload = new System.Windows.Forms.Button();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +51,7 @@
             // btnUploadNew
             // 
             this.btnUploadNew.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUploadNew.Location = new System.Drawing.Point(691, 201);
+            this.btnUploadNew.Location = new System.Drawing.Point(691, 139);
             this.btnUploadNew.Name = "btnUploadNew";
             this.btnUploadNew.Size = new System.Drawing.Size(212, 45);
             this.btnUploadNew.TabIndex = 0;
@@ -56,7 +62,7 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(691, 463);
+            this.btnExit.Location = new System.Drawing.Point(691, 434);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(212, 43);
             this.btnExit.TabIndex = 1;
@@ -110,12 +116,11 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(22, 98);
-            this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(628, 529);
+            this.dataGridView.Size = new System.Drawing.Size(628, 448);
             this.dataGridView.TabIndex = 3;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
@@ -133,7 +138,7 @@
             // btnUploadExistedProduct
             // 
             this.btnUploadExistedProduct.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUploadExistedProduct.Location = new System.Drawing.Point(691, 333);
+            this.btnUploadExistedProduct.Location = new System.Drawing.Point(691, 236);
             this.btnUploadExistedProduct.Name = "btnUploadExistedProduct";
             this.btnUploadExistedProduct.Size = new System.Drawing.Size(212, 45);
             this.btnUploadExistedProduct.TabIndex = 5;
@@ -141,11 +146,71 @@
             this.btnUploadExistedProduct.UseVisualStyleBackColor = true;
             this.btnUploadExistedProduct.Click += new System.EventHandler(this.btnUploadExistedProduct_Click);
             // 
+            // btnBatchUpload
+            // 
+            this.btnBatchUpload.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBatchUpload.Location = new System.Drawing.Point(359, 582);
+            this.btnBatchUpload.Name = "btnBatchUpload";
+            this.btnBatchUpload.Size = new System.Drawing.Size(212, 45);
+            this.btnBatchUpload.TabIndex = 6;
+            this.btnBatchUpload.Text = "批量上传已有商品";
+            this.btnBatchUpload.UseVisualStyleBackColor = true;
+            this.btnBatchUpload.Click += new System.EventHandler(this.btnBatchUpload_Click);
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(109, 612);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(194, 21);
+            this.txtPassword.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(50, 615);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "密码：";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(109, 576);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(194, 21);
+            this.txtUsername.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(50, 579);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "用户名：";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDelete.Location = new System.Drawing.Point(691, 334);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(212, 45);
+            this.btnDelete.TabIndex = 11;
+            this.btnDelete.Text = "批量删除已有商品";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // FrmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 685);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnBatchUpload);
             this.Controls.Add(this.btnUploadExistedProduct);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
@@ -178,6 +243,12 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnUploadExistedProduct;
+        private System.Windows.Forms.Button btnBatchUpload;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

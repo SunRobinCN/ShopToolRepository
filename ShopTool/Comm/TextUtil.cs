@@ -57,6 +57,22 @@ namespace ShopTool.Comm
             return list ?? new List<User>();
         }
 
+        public static void RefreshProducts(List<Product> list)
+        {
+            string folderpath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config";
+            string filepath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config\products.data";
+            if (!Directory.Exists(folderpath))
+                Directory.CreateDirectory(folderpath);
+            if (File.Exists(filepath))
+            {
+                File.Delete(filepath);
+            }
+            foreach (Product product in list)
+            {
+                ArchiveProduct(product);
+            }
+        }
+
         public static void ArchiveProduct(Product p)
         {
             string folderpath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"\Config";
@@ -87,6 +103,10 @@ namespace ShopTool.Comm
 
         private static void ArchiveProductImage(Product product)
         {
+            if (product.ImagePaths.Count > 0)
+            {
+                return;
+            }
             List<Image> images = product.Pictures;
             int count = 0;
             foreach (Image image in images?? new List<Image>())
@@ -103,7 +123,10 @@ namespace ShopTool.Comm
                 //image.Save(fullPath);
                 Bitmap bitmap = new Bitmap(image);
                 bitmap.Save(fullPath);
-                product.ImagePaths.Add(fullPath);
+                if (product.ImagePaths.Count < product.Pictures.Count)
+                {
+                    product.ImagePaths.Add(fullPath);
+                }
             }
         }
 

@@ -104,7 +104,7 @@ namespace ShopTool
                                     Product.UploadResult = "Failed!";
                                     Product.UploadFailedReson = "上传产品时间间隔太近";
                                 }
-                                Product.UploaDateTime = DateTime.Now;
+                                Product.UploadDateTime = DateTime.Now;
                                 TextUtil.ArchiveProduct(Product);
                                 Thread.Sleep(INTERVAL * 1);
                                 jscript = "$(\"#prof_header > a\").last().click();";
@@ -267,7 +267,7 @@ namespace ShopTool
                 MessageBox.Show("OnConsoleMessageError!");
                 Product.UploadResult = "Failed";
                 Product.UploadFailedReson = e.Message;
-                Product.UploaDateTime = DateTime.Now;
+                Product.UploadDateTime = DateTime.Now;
                 TextUtil.ArchiveProduct(Product);
                 FileLog.Error("OnConsoleMessage", new Exception(e.Message + "\r\n" + e.Source), LogType.Error);
                 ChromiumWebBrowser browser = sender as ChromiumWebBrowser;

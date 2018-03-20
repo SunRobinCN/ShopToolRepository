@@ -12,7 +12,7 @@ namespace ShopTool.Model
         [System.ComponentModel.Browsable(false)]
         public string Password { get; set; }
         public string Name { get; set; }
-        public DateTime UploaDateTime { get; set; }
+        public DateTime UploadDateTime { get; set; }
         public string UploadResult { get; set; }
         public string UploadFailedReson { get; set; }
         public string Description { get; set; }
@@ -36,6 +36,11 @@ namespace ShopTool.Model
             this.PictureUrls = new List<string>();
             this.ImagePaths = new List<string>();
             Id = Guid.NewGuid().ToString();
+
+            Name = "";
+            Description = "";
+            UploadResult = "";
+            UploadFailedReson = "";
         }
 
         public string FinalLogisticWay
