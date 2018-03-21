@@ -51,6 +51,11 @@ namespace ShopTool
 
         void OnFrameLoadEnd(object sender, EventArgs e)
         {
+            ChromiumWebBrowser browserT = sender as ChromiumWebBrowser;
+            if (browserT.CanExecuteJavascriptInMainFrame == false)
+            {
+                Thread.Sleep(1000 * 30);
+            }
             Task.Factory.StartNew(() =>
             {
                 try
@@ -62,6 +67,9 @@ namespace ShopTool
                     {
                         if ((p.Url == "https://shoppies.jp/write-item_sp"))
                         {
+
+                            //browser.CanExecuteJavascriptInMainFrame
+
                             //这里根据是否登录了，执行两种情况
                             Task<CefSharp.JavascriptResponse> task = browser.EvaluateScriptAsync("$(\"#changeLogin\").length;");
                             Task.WaitAll(task);
