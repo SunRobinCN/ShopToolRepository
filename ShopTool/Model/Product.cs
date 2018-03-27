@@ -8,6 +8,8 @@ namespace ShopTool.Model
 {
     public class Product
     {
+        public int Index { get; set; }
+
         public string Username { get; set; }
         [System.ComponentModel.Browsable(false)]
         public string Password { get; set; }

@@ -166,6 +166,7 @@ namespace ShopTool
                 return;
             }
             SaveProduct();
+            SaveUser();
             ClearAll();
         }
 
@@ -485,6 +486,22 @@ namespace ShopTool
         private void FormProduct_FormClosing(object sender, FormClosingEventArgs e)
         {
             ShutDownUtil.ShutDown();
+        }
+
+        private void btnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            string username = this.cmbUsername.Text;
+            List<User> oldList = TextUtil.GetUsers();
+            List<User> newList = new List<User>();
+            foreach (User user in oldList)
+            {
+                if (user.Username != username)
+                {
+                    newList.Add(user);
+                }
+            }
+            TextUtil.ArchiveUsers(newList);
+            InitializeUser();
         }
     }
 }

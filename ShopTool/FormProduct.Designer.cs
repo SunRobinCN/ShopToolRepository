@@ -66,6 +66,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.btnDeleteAccount = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -147,7 +148,7 @@
             // btnFinish
             // 
             this.btnFinish.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnFinish.Location = new System.Drawing.Point(693, 545);
+            this.btnFinish.Location = new System.Drawing.Point(759, 545);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(295, 48);
             this.btnFinish.TabIndex = 9;
@@ -239,7 +240,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1241, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1343, 25);
             this.menuStrip1.TabIndex = 31;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -276,7 +277,7 @@
             this.cmbCategory1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbCategory1.FormattingEnabled = true;
-            this.cmbCategory1.Location = new System.Drawing.Point(880, 132);
+            this.cmbCategory1.Location = new System.Drawing.Point(946, 132);
             this.cmbCategory1.Name = "cmbCategory1";
             this.cmbCategory1.Size = new System.Drawing.Size(161, 24);
             this.cmbCategory1.TabIndex = 33;
@@ -286,7 +287,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(877, 103);
+            this.label9.Location = new System.Drawing.Point(943, 103);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 16);
             this.label9.TabIndex = 32;
@@ -297,7 +298,7 @@
             this.cmbCategory2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbCategory2.FormattingEnabled = true;
-            this.cmbCategory2.Location = new System.Drawing.Point(1047, 132);
+            this.cmbCategory2.Location = new System.Drawing.Point(1113, 132);
             this.cmbCategory2.Name = "cmbCategory2";
             this.cmbCategory2.Size = new System.Drawing.Size(156, 24);
             this.cmbCategory2.TabIndex = 34;
@@ -308,7 +309,7 @@
             this.cmbCategory3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbCategory3.FormattingEnabled = true;
-            this.cmbCategory3.Location = new System.Drawing.Point(880, 173);
+            this.cmbCategory3.Location = new System.Drawing.Point(946, 173);
             this.cmbCategory3.Name = "cmbCategory3";
             this.cmbCategory3.Size = new System.Drawing.Size(323, 24);
             this.cmbCategory3.TabIndex = 35;
@@ -389,7 +390,7 @@
             this.cmbLogisticWay.CheckOnClick = true;
             this.cmbLogisticWay.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbLogisticWay.FormattingEnabled = true;
-            this.cmbLogisticWay.Location = new System.Drawing.Point(881, 303);
+            this.cmbLogisticWay.Location = new System.Drawing.Point(947, 303);
             this.cmbLogisticWay.Name = "cmbLogisticWay";
             this.cmbLogisticWay.Size = new System.Drawing.Size(322, 166);
             this.cmbLogisticWay.TabIndex = 45;
@@ -400,7 +401,7 @@
             this.cmbLogisticLiao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLogisticLiao.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbLogisticLiao.FormattingEnabled = true;
-            this.cmbLogisticLiao.Location = new System.Drawing.Point(947, 218);
+            this.cmbLogisticLiao.Location = new System.Drawing.Point(1013, 218);
             this.cmbLogisticLiao.Name = "cmbLogisticLiao";
             this.cmbLogisticLiao.Size = new System.Drawing.Size(256, 24);
             this.cmbLogisticLiao.TabIndex = 48;
@@ -410,7 +411,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(877, 266);
+            this.label6.Location = new System.Drawing.Point(943, 266);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 16);
             this.label6.TabIndex = 47;
@@ -420,7 +421,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(878, 221);
+            this.label5.Location = new System.Drawing.Point(944, 221);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 16);
             this.label5.TabIndex = 46;
@@ -436,11 +437,23 @@
             this.label13.TabIndex = 49;
             this.label13.Text = "商品写真：";
             // 
+            // btnDeleteAccount
+            // 
+            this.btnDeleteAccount.Font = new System.Drawing.Font("宋体", 10F);
+            this.btnDeleteAccount.Location = new System.Drawing.Point(845, 100);
+            this.btnDeleteAccount.Name = "btnDeleteAccount";
+            this.btnDeleteAccount.Size = new System.Drawing.Size(78, 24);
+            this.btnDeleteAccount.TabIndex = 50;
+            this.btnDeleteAccount.Text = "删除";
+            this.btnDeleteAccount.UseVisualStyleBackColor = true;
+            this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
+            // 
             // FormProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1241, 639);
+            this.ClientSize = new System.Drawing.Size(1343, 639);
+            this.Controls.Add(this.btnDeleteAccount);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.cmbLogisticLiao);
             this.Controls.Add(this.label6);
@@ -531,5 +544,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnDeleteAccount;
     }
 }

@@ -208,7 +208,7 @@ namespace ShopTool.Comm
             }
             catch (Exception e)
             {
-                FileLog.Error("GetProducts", e, LogType.Error);
+                FileLog.Info("GetProducts not find related file!", LogType.Info);
             }
             return list ?? new List<Product>();
         }

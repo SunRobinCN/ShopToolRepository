@@ -44,6 +44,9 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.btnUploadTimer = new System.Windows.Forms.Button();
+            this.txtSetTime = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -131,9 +134,9 @@
             this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(19, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 16);
+            this.label1.Size = new System.Drawing.Size(152, 16);
             this.label1.TabIndex = 4;
-            this.label1.Text = "最近7天产品上传记录：";
+            this.label1.Text = "所有产品上传记录：";
             // 
             // btnUploadExistedProduct
             // 
@@ -149,17 +152,17 @@
             // btnBatchUpload
             // 
             this.btnBatchUpload.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBatchUpload.Location = new System.Drawing.Point(359, 582);
+            this.btnBatchUpload.Location = new System.Drawing.Point(322, 598);
             this.btnBatchUpload.Name = "btnBatchUpload";
-            this.btnBatchUpload.Size = new System.Drawing.Size(212, 45);
+            this.btnBatchUpload.Size = new System.Drawing.Size(192, 45);
             this.btnBatchUpload.TabIndex = 6;
-            this.btnBatchUpload.Text = "批量上传已有商品";
+            this.btnBatchUpload.Text = "立即批量上传";
             this.btnBatchUpload.UseVisualStyleBackColor = true;
             this.btnBatchUpload.Click += new System.EventHandler(this.btnBatchUpload_Click);
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(109, 612);
+            this.txtPassword.Location = new System.Drawing.Point(104, 628);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(194, 21);
             this.txtPassword.TabIndex = 10;
@@ -167,7 +170,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 615);
+            this.label2.Location = new System.Drawing.Point(45, 631);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 9;
@@ -175,7 +178,7 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(109, 576);
+            this.txtUsername.Location = new System.Drawing.Point(104, 592);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(194, 21);
             this.txtUsername.TabIndex = 8;
@@ -183,7 +186,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 579);
+            this.label3.Location = new System.Drawing.Point(45, 595);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 7;
@@ -200,11 +203,45 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.CustomFormat = "";
+            this.dateTimePicker.Location = new System.Drawing.Point(271, 44);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.ShowUpDown = true;
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker.TabIndex = 12;
+            this.dateTimePicker.Visible = false;
+            // 
+            // btnUploadTimer
+            // 
+            this.btnUploadTimer.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUploadTimer.Location = new System.Drawing.Point(486, 47);
+            this.btnUploadTimer.Name = "btnUploadTimer";
+            this.btnUploadTimer.Size = new System.Drawing.Size(212, 45);
+            this.btnUploadTimer.TabIndex = 13;
+            this.btnUploadTimer.Text = "定时批量上传";
+            this.btnUploadTimer.UseVisualStyleBackColor = true;
+            this.btnUploadTimer.Visible = false;
+            this.btnUploadTimer.Click += new System.EventHandler(this.btnUploadTimer_Click);
+            // 
+            // txtSetTime
+            // 
+            this.txtSetTime.Location = new System.Drawing.Point(271, 71);
+            this.txtSetTime.Name = "txtSetTime";
+            this.txtSetTime.ReadOnly = true;
+            this.txtSetTime.Size = new System.Drawing.Size(200, 21);
+            this.txtSetTime.TabIndex = 14;
+            this.txtSetTime.Visible = false;
+            // 
             // FrmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 685);
+            this.Controls.Add(this.txtSetTime);
+            this.Controls.Add(this.btnUploadTimer);
+            this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
@@ -249,6 +286,9 @@
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.Button btnUploadTimer;
+        private System.Windows.Forms.TextBox txtSetTime;
     }
 }
 

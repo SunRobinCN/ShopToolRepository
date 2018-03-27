@@ -31,7 +31,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c1_3_0 = new ConnectedComboInfo();
             c1_3_0.ID = "3";
             c1_3_0.Name = "ワンピース";
-            //c1_0_0.Children.Add(c1_3_0);
+            c1_0_0.Children.Add(c1_3_0);
 
             ConnectedComboInfo c1_4_0 = new ConnectedComboInfo();
             c1_4_0.ID = "4";
@@ -267,10 +267,10 @@ namespace ShopTool.Comm
             //c1_2_19.Name = "ダウンコート";
             //c1_2_0.Children.Add(c1_2_19);
 
-            ConnectedComboInfo c1_3_1 = new ConnectedComboInfo();
-            c1_3_1.ID = "0301";
-            c1_3_1.Name = "ミニワンピース";
-            c1_3_0.Children.Add(c1_3_1);
+            //ConnectedComboInfo c1_3_1 = new ConnectedComboInfo();
+            //c1_3_1.ID = "0301";
+            //c1_3_1.Name = "ミニワンピース";
+            //c1_3_0.Children.Add(c1_3_1);
             ConnectedComboInfo c1_3_2 = new ConnectedComboInfo();
             c1_3_2.ID = "0302";
             c1_3_2.Name = "ひざ丈ワンピース";
@@ -280,18 +280,18 @@ namespace ShopTool.Comm
             c1_3_3.Name = "ロングワンピース";
             c1_3_0.Children.Add(c1_3_3);
 
-            //ConnectedComboInfo c1_4_1 = new ConnectedComboInfo();
-            //c1_4_1.ID = "0401";
-            //c1_4_1.Name = "ハイヒール / パンプス";
-            //c1_4_0.Children.Add(c1_4_1);
-            //ConnectedComboInfo c1_4_2 = new ConnectedComboInfo();
-            //c1_4_2.ID = "0402";
-            //c1_4_2.Name = "ブーツ";
-            //c1_4_0.Children.Add(c1_4_2);
-            //ConnectedComboInfo c1_4_3 = new ConnectedComboInfo();
-            //c1_4_3.ID = "0403";
-            //c1_4_3.Name = "サンダル";
-            //c1_4_0.Children.Add(c1_4_3);
+            ConnectedComboInfo c1_4_1 = new ConnectedComboInfo();
+            c1_4_1.ID = "0401";
+            c1_4_1.Name = "ハイヒール / パンプス";
+            c1_4_0.Children.Add(c1_4_1);
+            ConnectedComboInfo c1_4_2 = new ConnectedComboInfo();
+            c1_4_2.ID = "0402";
+            c1_4_2.Name = "ブーツ";
+            c1_4_0.Children.Add(c1_4_2);
+            ConnectedComboInfo c1_4_3 = new ConnectedComboInfo();
+            c1_4_3.ID = "0403";
+            c1_4_3.Name = "サンダル";
+            c1_4_0.Children.Add(c1_4_3);
             ConnectedComboInfo c1_4_4 = new ConnectedComboInfo();
             c1_4_4.ID = "0404";
             c1_4_4.Name = "スニーカー";
@@ -424,10 +424,10 @@ namespace ShopTool.Comm
             //c1_8_9.ID = "0810";
             //c1_8_9.Name = "メッセンジャーバッグ";
             //c1_8_0.Children.Add(c1_8_9);
-            //ConnectedComboInfo c1_8_10 = new ConnectedComboInfo();
-            //c1_8_10.ID = "0811";
-            //c1_8_10.Name = "旅行用バッグ / キャリーバッグ";
-            //c1_8_0.Children.Add(c1_8_10);
+            ConnectedComboInfo c1_8_10 = new ConnectedComboInfo();
+            c1_8_10.ID = "0811";
+            c1_8_10.Name = "旅行用バッグ / キャリーバッグ";
+            c1_8_0.Children.Add(c1_8_10);
             //ConnectedComboInfo c1_8_11 = new ConnectedComboInfo();
             //c1_8_11.ID = "0812";
             //c1_8_11.Name = "ショップ袋";
@@ -496,18 +496,18 @@ namespace ShopTool.Comm
             c1_12_1.ID = "1201";
             c1_12_1.Name = "ソックス";
             c1_12_0.Children.Add(c1_12_1);
-            ConnectedComboInfo c1_12_2 = new ConnectedComboInfo();
-            c1_12_2.ID = "1202";
-            c1_12_2.Name = "レギンス / スパッツ";
-            c1_12_0.Children.Add(c1_12_2);
-            ConnectedComboInfo c1_12_3 = new ConnectedComboInfo();
-            c1_12_3.ID = "1203";
-            c1_12_3.Name = "タイツ / ストッキング";
-            c1_12_0.Children.Add(c1_12_3);
-            ConnectedComboInfo c1_12_4 = new ConnectedComboInfo();
-            c1_12_4.ID = "1204";
-            c1_12_4.Name = "レッグウォーマー"; 
-            c1_12_0.Children.Add(c1_12_4);
+            //ConnectedComboInfo c1_12_2 = new ConnectedComboInfo();
+            //c1_12_2.ID = "1202";
+            //c1_12_2.Name = "レギンス / スパッツ";
+            //c1_12_0.Children.Add(c1_12_2);
+            //ConnectedComboInfo c1_12_3 = new ConnectedComboInfo();
+            //c1_12_3.ID = "1203";
+            //c1_12_3.Name = "タイツ / ストッキング";
+            //c1_12_0.Children.Add(c1_12_3);
+            //ConnectedComboInfo c1_12_4 = new ConnectedComboInfo();
+            //c1_12_4.ID = "1204";
+            //c1_12_4.Name = "レッグウォーマー"; 
+            //c1_12_0.Children.Add(c1_12_4);
 
             ConnectedComboInfo c1_13_1 = new ConnectedComboInfo();
             c1_13_1.ID = "1301";
@@ -530,14 +530,14 @@ namespace ShopTool.Comm
             //c1_13_5.Name = "キャスケット";
             //c1_13_0.Children.Add(c1_13_5);
 
-            ConnectedComboInfo c1_14_1 = new ConnectedComboInfo();
-            c1_14_1.ID = "1401";
-            c1_14_1.Name = "小物 / アクセサリー";
-            c1_14_0.Children.Add(c1_14_1);
-            ConnectedComboInfo c1_14_2 = new ConnectedComboInfo();
-            c1_14_2.ID = "1402";
-            c1_14_2.Name = "素材 / パーツ";
-            c1_14_0.Children.Add(c1_14_2);
+            //ConnectedComboInfo c1_14_1 = new ConnectedComboInfo();
+            //c1_14_1.ID = "1401";
+            //c1_14_1.Name = "小物 / アクセサリー";
+            //c1_14_0.Children.Add(c1_14_1);
+            //ConnectedComboInfo c1_14_2 = new ConnectedComboInfo();
+            //c1_14_2.ID = "1402";
+            //c1_14_2.Name = "素材 / パーツ";
+            //c1_14_0.Children.Add(c1_14_2);
 
             ConnectedComboInfo c1_15_1 = new ConnectedComboInfo();
             c1_15_1.ID = "1501";
@@ -619,10 +619,10 @@ namespace ShopTool.Comm
             //c1_15_20.ID = "1520";
             //c1_15_20.Name = "傘";
             //c1_15_0.Children.Add(c1_15_20);
-            //ConnectedComboInfo c1_15_21 = new ConnectedComboInfo();
-            //c1_15_21.ID = "1521";
-            //c1_15_21.Name = "小物その他";
-            //c1_15_0.Children.Add(c1_15_21);
+            ConnectedComboInfo c1_15_21 = new ConnectedComboInfo();
+            c1_15_21.ID = "1521";
+            c1_15_21.Name = "小物その他";
+            c1_15_0.Children.Add(c1_15_21);
 
             ConnectedComboInfo c1_16_1 = new ConnectedComboInfo();
             c1_16_1.ID = "1601";
@@ -814,7 +814,7 @@ namespace ShopTool.Comm
             ConnectedComboInfo c4_0_0 = new ConnectedComboInfo();
             c4_0_0.ID = "";
             c4_0_0.Name = "ぬいぐるみ・キャラクターグッズ・おもちゃ";
-            //list.Add(c4_0_0);
+            list.Add(c4_0_0);
             ConnectedComboInfo c4_1_0 = new ConnectedComboInfo();
             c4_1_0.ID = "9201";
             c4_1_0.Name = "おもちゃ";
@@ -823,10 +823,10 @@ namespace ShopTool.Comm
             c4_2_0.ID = "9202";
             c4_2_0.Name = "ぬいぐるみ";
             c4_0_0.Children.Add(c4_2_0);
-            ConnectedComboInfo c4_3_0 = new ConnectedComboInfo();
-            c4_3_0.ID = "9203";
-            c4_3_0.Name = "キャラクターグッズ";
-            c4_0_0.Children.Add(c4_3_0);
+            //ConnectedComboInfo c4_3_0 = new ConnectedComboInfo();
+            //c4_3_0.ID = "9203";
+            //c4_3_0.Name = "キャラクターグッズ";
+            //c4_0_0.Children.Add(c4_3_0);
 
             ConnectedComboInfo c5_0_0 = new ConnectedComboInfo();
             c5_0_0.ID = "";

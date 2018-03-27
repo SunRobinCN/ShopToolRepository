@@ -5,15 +5,16 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Windows.Forms;
 using ShopTool.Comm;
 using ShopTool.Model;
+using Timer = System.Timers.Timer;
 
 namespace ShopTool
 {
     public partial class FrmStart : Form
     {
-        private const int HisotryInterval = 3;
 
         public string NewUsername { get; set; }
         public string NewPasswrod { get; set; }
@@ -40,10 +41,11 @@ namespace ShopTool
         private void RefreshDataGrid()
         {
             List<Product> allProducts = TextUtil.GetProducts();
-            //foreach (Product product in allProducts)
-            //{
-            //    product.Description.Replace(@"\n", "");
-            //}
+            int count = 1;
+            foreach (Product product in allProducts)
+            {
+                product.Index = count++;
+            }
             this.dataGridView.DataSource = allProducts;
             this.dataGridView.ClearSelection();
         }
@@ -51,6 +53,8 @@ namespace ShopTool
         private void FrmStart_Load(object sender, EventArgs e)
         {
             RefreshDataGrid();
+            this.dateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -196,6 +200,34 @@ namespace ShopTool
                 }
             }
             return false;
+        }
+
+        private void btnUploadTimer_Click(object sender, EventArgs e)
+        {
+            if (this.dateTimePicker.Value < DateTime.Now)
+            {
+                MessageBox.Show(@"请选择大于当前系统时间的时间段！");
+                return;
+            }
+            if (CheckMutipleUploadParameters() == false)
+            {
+                return;
+            }
+            this.txtSetTime.Text = this.dateTimePicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            Timer timer = new Timer();
+            timer.Elapsed += new ElapsedEventHandler(ExecuteWarpper);
+            timer.Interval = 1000;
+            timer.Start();
+        }
+
+        private void ExecuteWarpper(object source, ElapsedEventArgs args)
+        {
+            if (args.SignalTime.ToString("yyyy-MM-dd HH:mm:ss") == this.txtSetTime.Text)
+            {
+                Timer timer = source as Timer;
+                timer?.Stop();
+                MessageBox.Show("a");
+            }
         }
     }
 }
