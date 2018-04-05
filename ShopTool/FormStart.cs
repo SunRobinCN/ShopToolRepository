@@ -226,7 +226,7 @@ namespace ShopTool
             {
                 Timer timer = source as Timer;
                 timer?.Stop();
-                MessageBox.Show("a");
+                btnBatchUpload_Click(null, null);
             }
         }
     }
