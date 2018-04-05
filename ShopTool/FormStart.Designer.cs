@@ -152,9 +152,9 @@
             // btnBatchUpload
             // 
             this.btnBatchUpload.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBatchUpload.Location = new System.Drawing.Point(322, 598);
+            this.btnBatchUpload.Location = new System.Drawing.Point(300, 598);
             this.btnBatchUpload.Name = "btnBatchUpload";
-            this.btnBatchUpload.Size = new System.Drawing.Size(192, 45);
+            this.btnBatchUpload.Size = new System.Drawing.Size(146, 45);
             this.btnBatchUpload.TabIndex = 6;
             this.btnBatchUpload.Text = "立即批量上传";
             this.btnBatchUpload.UseVisualStyleBackColor = true;
@@ -164,7 +164,7 @@
             // 
             this.txtPassword.Location = new System.Drawing.Point(104, 628);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(194, 21);
+            this.txtPassword.Size = new System.Drawing.Size(175, 21);
             this.txtPassword.TabIndex = 10;
             // 
             // label2
@@ -180,7 +180,7 @@
             // 
             this.txtUsername.Location = new System.Drawing.Point(104, 592);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(194, 21);
+            this.txtUsername.Size = new System.Drawing.Size(175, 21);
             this.txtUsername.TabIndex = 8;
             // 
             // label3
@@ -206,33 +206,30 @@
             // dateTimePicker
             // 
             this.dateTimePicker.CustomFormat = "";
-            this.dateTimePicker.Location = new System.Drawing.Point(271, 44);
+            this.dateTimePicker.Location = new System.Drawing.Point(469, 595);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.ShowUpDown = true;
             this.dateTimePicker.Size = new System.Drawing.Size(200, 21);
             this.dateTimePicker.TabIndex = 12;
-            this.dateTimePicker.Visible = false;
             // 
             // btnUploadTimer
             // 
             this.btnUploadTimer.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUploadTimer.Location = new System.Drawing.Point(486, 47);
+            this.btnUploadTimer.Location = new System.Drawing.Point(691, 598);
             this.btnUploadTimer.Name = "btnUploadTimer";
             this.btnUploadTimer.Size = new System.Drawing.Size(212, 45);
             this.btnUploadTimer.TabIndex = 13;
             this.btnUploadTimer.Text = "定时批量上传";
             this.btnUploadTimer.UseVisualStyleBackColor = true;
-            this.btnUploadTimer.Visible = false;
             this.btnUploadTimer.Click += new System.EventHandler(this.btnUploadTimer_Click);
             // 
             // txtSetTime
             // 
-            this.txtSetTime.Location = new System.Drawing.Point(271, 71);
+            this.txtSetTime.Location = new System.Drawing.Point(469, 628);
             this.txtSetTime.Name = "txtSetTime";
             this.txtSetTime.ReadOnly = true;
             this.txtSetTime.Size = new System.Drawing.Size(200, 21);
             this.txtSetTime.TabIndex = 14;
-            this.txtSetTime.Visible = false;
             // 
             // FrmStart
             // 
