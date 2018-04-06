@@ -15,7 +15,6 @@ namespace ShopTool
 {
     public partial class FrmStart : Form
     {
-
         public string NewUsername { get; set; }
         public string NewPasswrod { get; set; }
         public List<Product> SelectedProducts { get; set; }
@@ -24,6 +23,8 @@ namespace ShopTool
         {
             InitializeComponent();
             SelectedProducts = new List<Product>();
+
+            InitializeUser();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -102,7 +103,7 @@ namespace ShopTool
             return null;
         }
 
-        private void btnBatchUpload_Click(object sender, EventArgs e)
+        private void BatchUpload()
         {
             if (CheckMutipleUploadParameters() == false)
             {
@@ -110,8 +111,9 @@ namespace ShopTool
             }
             NewUsername = this.txtUsername.Text.Trim();
             NewPasswrod = this.txtPassword.Text.Trim();
+            SaveUser();
 
-            SelectedProducts.Clear(); 
+            SelectedProducts.Clear();
             for (int i = 0; i < dataGridView.SelectedRows.Count; i++)
             {
                 Product p = dataGridView.SelectedRows[i].DataBoundItem as Product;
@@ -138,6 +140,11 @@ namespace ShopTool
             frmConfirm.Products = SelectedProducts;
             frmConfirm.Show();
             this.Hide();
+        }
+
+        private void btnBatchUpload_Click(object sender, EventArgs e)
+        {
+            BatchUpload();
         }
 
         private bool CheckMutipleUploadParameters()
@@ -226,7 +233,83 @@ namespace ShopTool
             {
                 Timer timer = source as Timer;
                 timer?.Stop();
-                btnBatchUpload_Click(null, null);
+
+                MethodInvoker mi = new MethodInvoker(this.BatchUpload);
+                this.BeginInvoke(mi);
+            }
+        }
+
+        private void btnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            string username = this.cmbUsername.Text;
+            List<User> oldList = TextUtil.GetUsers();
+            List<User> newList = new List<User>();
+            foreach (User user in oldList)
+            {
+                if (user.Username != username)
+                {
+                    newList.Add(user);
+                }
+            }
+            TextUtil.ArchiveUsers(newList);
+            InitializeUser();
+        }
+
+        private void InitializeUser()
+        {
+            List<User> users = TextUtil.GetUsers();
+            this.cmbUsername.ValueMember = "Password";
+            this.cmbUsername.DisplayMember = "Username";
+            this.cmbUsername.DataSource = users;
+            this.cmbUsername.SelectedIndex = -1;
+            this.txtBatchPassword.Text = "";
+        }
+
+        private void SaveUser()
+        {
+            string username = this.cmbUsername.Text;
+            string password = this.txtBatchPassword.Text;
+            if (username != "" && password != "")
+            {
+                List<User> users = TextUtil.GetUsers();
+                bool existed = false;
+                foreach (User user in users)
+                {
+                    if (user.Username == username)
+                    {
+                        user.Password = password;
+                        existed = true;
+                    }
+                }
+                if (existed == false)
+                {
+                    User newUser = new User()
+                    {
+                        Username = username,
+                        Password = password
+                    };
+                    users.Add(newUser);
+                }
+                TextUtil.ArchiveUsers(users);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveUser();
+            InitializeUser();
+        }
+
+        private void cmbUsername_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbUsername.SelectedIndex >= 0)
+            {
+                User user = this.cmbUsername.SelectedItem as User;
+                this.txtBatchPassword.Text = user.Password;
+            }
+            else
+            {
+                this.txtBatchPassword.Text = "";
             }
         }
     }
