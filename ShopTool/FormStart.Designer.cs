@@ -39,10 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnUploadExistedProduct = new System.Windows.Forms.Button();
             this.btnBatchUpload = new System.Windows.Forms.Button();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnUploadTimer = new System.Windows.Forms.Button();
@@ -52,7 +48,6 @@
             this.cmbUsername = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -87,7 +82,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(935, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(928, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -166,38 +161,6 @@
             this.btnBatchUpload.UseVisualStyleBackColor = true;
             this.btnBatchUpload.Click += new System.EventHandler(this.btnBatchUpload_Click);
             // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(104, 680);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(175, 20);
-            this.txtPassword.TabIndex = 10;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(45, 684);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "密码：";
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.Location = new System.Drawing.Point(104, 641);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(175, 20);
-            this.txtUsername.TabIndex = 8;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 645);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "用户名：";
-            // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -240,74 +203,56 @@
             // btnDeleteAccount
             // 
             this.btnDeleteAccount.Font = new System.Drawing.Font("SimSun", 10F);
-            this.btnDeleteAccount.Location = new System.Drawing.Point(1280, 543);
+            this.btnDeleteAccount.Location = new System.Drawing.Point(217, 607);
             this.btnDeleteAccount.Name = "btnDeleteAccount";
             this.btnDeleteAccount.Size = new System.Drawing.Size(78, 26);
             this.btnDeleteAccount.TabIndex = 55;
             this.btnDeleteAccount.Text = "删除";
             this.btnDeleteAccount.UseVisualStyleBackColor = true;
-            this.btnDeleteAccount.Visible = false;
             this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
             // 
             // txtBatchPassword
             // 
-            this.txtBatchPassword.Location = new System.Drawing.Point(985, 588);
+            this.txtBatchPassword.Location = new System.Drawing.Point(105, 677);
             this.txtBatchPassword.Name = "txtBatchPassword";
-            this.txtBatchPassword.Size = new System.Drawing.Size(190, 20);
+            this.txtBatchPassword.Size = new System.Drawing.Size(175, 20);
             this.txtBatchPassword.TabIndex = 54;
-            this.txtBatchPassword.Visible = false;
             // 
             // cmbUsername
             // 
             this.cmbUsername.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbUsername.FormattingEnabled = true;
-            this.cmbUsername.Location = new System.Drawing.Point(985, 543);
+            this.cmbUsername.Location = new System.Drawing.Point(105, 645);
             this.cmbUsername.Name = "cmbUsername";
-            this.cmbUsername.Size = new System.Drawing.Size(289, 24);
+            this.cmbUsername.Size = new System.Drawing.Size(175, 24);
             this.cmbUsername.TabIndex = 53;
-            this.cmbUsername.Visible = false;
             this.cmbUsername.SelectedIndexChanged += new System.EventHandler(this.cmbUsername_SelectedIndexChanged);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(877, 587);
+            this.label12.Location = new System.Drawing.Point(27, 677);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(56, 16);
             this.label12.TabIndex = 52;
             this.label12.Text = "密码：";
-            this.label12.Visible = false;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(877, 547);
+            this.label11.Location = new System.Drawing.Point(27, 645);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(72, 16);
             this.label11.TabIndex = 51;
             this.label11.Text = "用户名：";
-            this.label11.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("SimSun", 10F);
-            this.button1.Location = new System.Drawing.Point(1060, 635);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 26);
-            this.button1.TabIndex = 56;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FrmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(935, 742);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(928, 742);
             this.Controls.Add(this.btnDeleteAccount);
             this.Controls.Add(this.txtBatchPassword);
             this.Controls.Add(this.cmbUsername);
@@ -317,10 +262,6 @@
             this.Controls.Add(this.btnUploadTimer);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtUsername);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnBatchUpload);
             this.Controls.Add(this.btnUploadExistedProduct);
             this.Controls.Add(this.label1);
@@ -355,10 +296,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnUploadExistedProduct;
         private System.Windows.Forms.Button btnBatchUpload;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Button btnUploadTimer;
@@ -368,7 +305,6 @@
         private System.Windows.Forms.ComboBox cmbUsername;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button1;
     }
 }
 

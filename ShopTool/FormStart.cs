@@ -109,8 +109,8 @@ namespace ShopTool
             {
                 return;
             }
-            NewUsername = this.txtUsername.Text.Trim();
-            NewPasswrod = this.txtPassword.Text.Trim();
+            NewUsername = this.cmbUsername.Text.Trim();
+            NewPasswrod = this.txtBatchPassword.Text.Trim();
             SaveUser();
 
             SelectedProducts.Clear();
@@ -154,7 +154,7 @@ namespace ShopTool
                 MessageBox.Show("请选择一个或多个已有产品");
                 return false;
             }
-            if (this.txtUsername.Text.Trim() == "" || this.txtPassword.Text.Trim() == "")
+            if (this.cmbUsername.Text.Trim() == "" || this.txtBatchPassword.Text.Trim() == "")
             {
                 MessageBox.Show("请输入用户名与密码");
                 return false;
@@ -292,12 +292,6 @@ namespace ShopTool
                 }
                 TextUtil.ArchiveUsers(users);
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SaveUser();
-            InitializeUser();
         }
 
         private void cmbUsername_SelectedIndexChanged(object sender, EventArgs e)
